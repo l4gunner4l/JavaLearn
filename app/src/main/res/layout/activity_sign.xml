@@ -16,10 +16,10 @@
     <Button
         android:layout_marginBottom="@dimen/margin_16dp"
         android:text="@string/label_sign_in"
-        style="@style/StyleBtnAccentTest.BtnSign" />
+        style="@style/StyleBtnAccent.BtnSign" />
 
     <Button
         android:text="@string/label_sign_up"
-        style="@style/StyleBtnAccentTest.BtnSign"/>
+        style="@style/StyleBtnAccent.BtnSign"/>
 
 </LinearLayout> 

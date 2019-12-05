@@ -5,8 +5,6 @@
     <color name="colorAccent">#ff7315</color>
     <color name="colorAccent2">#15DCFF</color>
     <color name="colorLight">#F4F4F4</color>
-    <color name="colorLight4">#8D4E4E</color>
-    <color name="colorLight5">#203ABD</color>
 
     <!--Colors for texts-->
     <color name="colorTextLight">@color/colorLight</color>
