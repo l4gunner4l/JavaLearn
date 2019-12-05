@@ -13,15 +13,15 @@
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:layout_marginBottom="24dp"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo512"/>
 
     <Button
         android:layout_marginBottom="16dp"
-        android:text="Войти"
+        android:text="@string/label_sign_in"
         style="@style/BtnLoginRegister" />
 
     <Button
-        android:text="Зарегистрироваться"
+        android:text="@string/label_sign_up"
         style="@style/BtnLoginRegister"/>
 
 </LinearLayout>
