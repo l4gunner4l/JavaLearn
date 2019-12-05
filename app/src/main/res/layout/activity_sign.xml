@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@color/colorBackgroundDark">
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_marginBottom="@dimen/margin_16dp"
+        android:src="@drawable/logo512"/>
+
+    <Button
+        android:layout_marginBottom="@dimen/margin_16dp"
+        android:text="@string/label_sign_in"
+        style="@style/StyleBtnAccent.BtnSign" />
+
+    <Button
+        android:text="@string/label_sign_up"
+        style="@style/StyleBtnAccent.BtnSign"/>
+
+</LinearLayout> 
