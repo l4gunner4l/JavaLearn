@@ -8,11 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="StyleBtnAccent.BtnSign">
-        <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">50dp</item>
-    </style>
-
     <style name="StyleBtnAccent">
         <item name="android:elevation">10dp</item>
         <item name="android:background">@drawable/btn_accent</item>
@@ -21,6 +16,20 @@
         <item name="android:textColor">@color/colorTextLight</item>
         <item name="android:textAllCaps">true</item>
     </style>
+    <style name="StyleBtnAccentTest">
+        <item name="android:elevation">10dp</item>
+        <item name="android:background">@drawable/btn_accent</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">@style/Text.Big</item>
+        <item name="android:textColor">@color/colorLight5</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="StyleBtnAccentTest.BtnSign">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+
     <style name="Text">
         <item name="android:fontFamily">sans-serif-condensed-medium</item>
     </style>
