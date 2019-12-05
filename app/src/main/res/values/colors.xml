@@ -7,4 +7,7 @@
 
     <color name="colorTextLight">@color/colorAccent2</color>
     <color name="colorTextDark">@color/colorPrimary</color>
+
+    <color name="colorBackgroundDark">@color/colorPrimaryDark</color>
+    <color name="colorBackgroundLight">@color/colorAccent2</color>
 </resources>

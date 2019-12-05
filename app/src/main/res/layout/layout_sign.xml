@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorBackgroundDark">
 
     <ImageView
         android:layout_width="400dp"
@@ -16,10 +16,10 @@
     <Button
         android:layout_marginBottom="16dp"
         android:text="@string/label_sign_in"
-        style="@style/BtnLoginRegister" />
+        style="@style/BtnSign" />
 
     <Button
         android:text="@string/label_sign_up"
-        style="@style/BtnLoginRegister"/>
+        style="@style/BtnSign"/>
 
 </LinearLayout>
