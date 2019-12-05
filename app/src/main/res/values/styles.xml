@@ -15,7 +15,7 @@
 
     <style name="StyleBtnAccent">
         <item name="android:elevation">10dp</item>
-        <item name="android:background">@drawable/btn_sign</item>
+        <item name="android:background">@drawable/btn_accent</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textAppearance">@style/Text.Big</item>
         <item name="android:textColor">@color/colorTextLight</item>

@@ -1,8 +1,16 @@
-package ru.l4gunner4l.javalearn;
+package ru.l4gunner4l.javalearn.sign;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import ru.l4gunner4l.javalearn.R;
+
+/**
+ * Activity signing up
+ *
+ * Экран для регистрации
+ */
 
 public class SignUpActivity extends AppCompatActivity {
 
