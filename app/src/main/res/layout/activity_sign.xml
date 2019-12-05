@@ -10,16 +10,16 @@
     <ImageView
         android:layout_width="400dp"
         android:layout_height="400dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="@dimen/margin_16dp"
         android:src="@drawable/logo512"/>
 
     <Button
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin_16dp"
         android:text="@string/label_sign_in"
-        style="@style/BtnSign" />
+        style="@style/StyleBtnAccent.BtnSign" />
 
     <Button
         android:text="@string/label_sign_up"
-        style="@style/BtnSign"/>
+        style="@style/StyleBtnAccent.BtnSign"/>
 
 </LinearLayout>

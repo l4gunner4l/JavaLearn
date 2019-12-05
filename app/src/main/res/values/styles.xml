@@ -8,33 +8,37 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="BtnSign">
+    <style name="StyleBtnAccent.BtnSign">
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">50dp</item>
+    </style>
+
+    <style name="StyleBtnAccent">
         <item name="android:elevation">10dp</item>
         <item name="android:background">@drawable/btn_sign</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textAppearance">@style/Text.Big</item>
         <item name="android:textColor">@color/colorTextLight</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="Text.Huge">
+        <item name="android:textSize">@dimen/text_size_20sp</item>
+    </style>
+    <style name="Text.Big">
+        <item name="android:textSize">@dimen/text_size_18sp</item>
+    </style>
+    <style name="Text.Medium">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+    </style>
+    <style name="Text.Small">
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+    </style>
 
     <style name="Text">
         <item name="android:fontFamily">sans-serif-condensed-medium</item>
     </style>
 
-    <style name="Text.Huge">
-        <item name="android:textSize">20sp</item>
-    </style>
-    <style name="Text.Big">
-        <item name="android:textSize">18sp</item>
-    </style>
-    <style name="Text.Medium">
-        <item name="android:textSize">16sp</item>
-    </style>
-    <style name="Text.Small">
-        <item name="android:textSize">14sp</item>
-    </style>
 
 
 </resources>
