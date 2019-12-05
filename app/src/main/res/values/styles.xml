@@ -21,6 +21,9 @@
         <item name="android:textColor">@color/colorTextLight</item>
         <item name="android:textAllCaps">true</item>
     </style>
+    <style name="Text">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+    </style>
 
     <style name="Text.Huge">
         <item name="android:textSize">@dimen/text_size_20sp</item>
@@ -35,9 +38,7 @@
         <item name="android:textSize">@dimen/text_size_14sp</item>
     </style>
 
-    <style name="Text">
-        <item name="android:fontFamily">sans-serif-condensed-medium</item>
-    </style>
+
 
 
 
