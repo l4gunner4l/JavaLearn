@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".mainactivity.MainActivity"
-    android:background="@color/colorBackgroundLight">
+    android:background="@color/colorBackgroundDark">
 
 
     <include android:id="@+id/toolbar"
