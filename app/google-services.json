@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "134974183944",
+    "firebase_url": "https://l4gunner4l-learn-java.firebaseio.com",
+    "project_id": "l4gunner4l-learn-java",
+    "storage_bucket": "l4gunner4l-learn-java.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134974183944:android:0e9e17ccb536f94360cfbd",
+        "android_client_info": {
+          "package_name": "ru.l4gunner4l.javalearn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134974183944-6ktofhtk2qm7vkssk9cjmmg70gna4avi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.l4gunner4l.javalearn",
+            "certificate_hash": "868f42c247f8e33ec9d9ca1955ba243e44ed2d81"
+          }
+        },
+        {
+          "client_id": "134974183944-m7nf30h4fn119efufba3n8c7v52g4s5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg3bjr-D_ajz7tj3O7gYpziDVSdjsVJOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134974183944-m7nf30h4fn119efufba3n8c7v52g4s5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

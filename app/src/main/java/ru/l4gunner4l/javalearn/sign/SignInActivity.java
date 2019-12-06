@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import ru.l4gunner4l.javalearn.R;
+import ru.l4gunner4l.javalearn.mainactivity.MainActivity;
 
 /**
  * Activity signing in
@@ -28,4 +29,9 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void endSignInActivity(View view) { finish(); }
+
+    public void startMainActivity(View view) {
+        startActivity(MainActivity.createNewInstance(this));
+        finish();
+    }
 }
