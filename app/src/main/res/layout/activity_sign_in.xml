@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".sign.SignInActivity">
 
-</LinearLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:src="@drawable/ic_close_light_32dp"
+            android:onClick="endSignInActivity"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enter_your_details"
+            style="@style/Text.Huge"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/toolbar_sign_in"
+        android:background="@color/colorAccent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/toolbar_sign_in"
+        android:layout_marginTop="@dimen/margin_32dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <EditText
+            android:inputType="textEmailAddress"
+            android:hint="@string/hint_email"
+            tools:text="155nimix@mail.ru"
+            style="@style/StyleEditText" />
+        <EditText
+            android:inputType="textPassword"
+            android:hint="@string/hint_password"
+            android:layout_marginTop="@dimen/margin_16dp"
+            tools:text="2920091Ceb7d"
+            style="@style/StyleEditText"/>
+        <Button
+            android:layout_width="150dp"
+            android:layout_marginBottom="@dimen/margin_16dp"
+            android:text="@string/label_sign_in"
+            android:layout_marginTop="@dimen/margin_32dp"
+            style="@style/StyleBtnAccent.BtnSign" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

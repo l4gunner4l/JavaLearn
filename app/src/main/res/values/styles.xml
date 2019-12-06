@@ -6,13 +6,15 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackgroundDark</item>
+
     </style>
 
     <style name="StyleBtnAccent">
         <item name="android:elevation">10dp</item>
-        <item name="android:background">@drawable/btn_accent</item>
+        <item name="android:background">@drawable/btn_orange</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textAppearance">@style/Text.Big</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
         <item name="android:textColor">@color/colorTextLight</item>
         <item name="android:textAllCaps">true</item>
     </style>
@@ -21,6 +23,17 @@
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">50dp</item>
     </style>
+
+    <style name="StyleEditText">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:background">@drawable/edit_text_light</item>
+        <item name="android:padding">@dimen/padding_8dp</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:textColor">@color/colorTextDark</item>
+
+    </style>
+
 
     <style name="Text">
         <item name="android:fontFamily">sans-serif-condensed-medium</item>
@@ -38,7 +51,6 @@
     <style name="Text.Small">
         <item name="android:textSize">@dimen/text_size_14sp</item>
     </style>
-
 
 
 

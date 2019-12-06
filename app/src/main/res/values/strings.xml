@@ -4,4 +4,7 @@
 
     <string name="label_sign_in">Войти</string>
     <string name="label_sign_up">Зарегистрироваться</string>
+    <string name="enter_your_details">Введите ваши данные</string>
+    <string name="hint_email">E-mail</string>
+    <string name="hint_password">Password</string>
 </resources>

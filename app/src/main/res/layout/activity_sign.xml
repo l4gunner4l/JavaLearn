@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:background="@color/colorBackgroundDark">
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="400dp"
@@ -16,7 +15,8 @@
     <Button
         android:layout_marginBottom="@dimen/margin_16dp"
         android:text="@string/label_sign_in"
-        style="@style/StyleBtnAccent.BtnSign" />
+        style="@style/StyleBtnAccent.BtnSign"
+        android:onClick="startSignInActivity"/>
 
     <Button
         android:text="@string/label_sign_up"
