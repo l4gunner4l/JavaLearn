@@ -3,8 +3,19 @@
 
 
     <string name="label_sign_in">Войти</string>
-    <string name="label_sign_up">Зарегистрироваться</string>
-    <string name="enter_your_details">Введите ваши данные</string>
-    <string name="hint_email">E-mail</string>
-    <string name="hint_password">Password</string>
+    <string name="label_to_sign_up">Зарегистрироваться</string>
+
+    <string name="text_sign_up">Регистрация</string>
+    <string name="text_enter_your_details">Введите ваши данные</string>
+
+    <string name="hint_email">e-mail@mail.ru</string>
+    <string name="hint_password">123456abcd</string>
+    <string name="hint_name">Иван</string>
+    <string name="hint_surname">Иванов</string>
+
+    <string name="text_email">Эл. почта:</string>
+    <string name="text_password">Пароль:</string>
+    <string name="text_name">Имя:</string>
+    <string name="text_surname">Фамилия:</string>
+    <string name="text_valid_error">Введены невалидные данные!</string>
 </resources>

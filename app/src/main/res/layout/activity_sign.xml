@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".sign.SignActivity">
 
     <ImageView
         android:layout_width="400dp"
@@ -19,7 +20,8 @@
         android:onClick="startSignInActivity"/>
 
     <Button
-        android:text="@string/label_sign_up"
-        style="@style/StyleBtnAccent.BtnSign"/>
+        android:text="@string/label_to_sign_up"
+        style="@style/StyleBtnAccent.BtnSign"
+        android:onClick="startSignUpActivity"/>
 
 </LinearLayout> 

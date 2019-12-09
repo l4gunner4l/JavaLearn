@@ -8,6 +8,7 @@
 
     <!--Colors for texts-->
     <color name="colorTextLight">@color/colorLight</color>
+    <color name="colorTextGrey">#868686</color>
     <color name="colorTextDark">@color/colorPrimary</color>
 
     <!--Colors for background-->
