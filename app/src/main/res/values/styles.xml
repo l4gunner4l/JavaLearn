@@ -25,15 +25,23 @@
         <item name="android:layout_height">50dp</item>
     </style>
 
+    <style name="StyleTIL">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+        <item name="hintTextAppearance">@style/Text.Medium</item>
+        <item name="android:layout_marginBottom">@dimen/margin_8dp</item>
+    </style>
 
     <style name="StyleEditText">
         <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">42dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:background">@drawable/edit_text_light</item>
         <item name="android:padding">@dimen/padding_8dp</item>
         <item name="android:textAppearance">@style/Text.Medium</item>
         <item name="android:textColor">@color/colorTextDark</item>
-        <item name="android:textColorHint">@color/colorTextGrey</item>
+        <item name="android:singleLine">true</item>
+
     </style>
 
     <style name="StyleTextView">

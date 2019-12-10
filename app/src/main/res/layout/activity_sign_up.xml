@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".sign.SignUpActivity">
 
@@ -40,40 +40,38 @@
         android:layout_marginTop="@dimen/margin_32dp"
         android:gravity="start"
         android:orientation="vertical">
-        <TextView
-            style="@style/StyleTextView"
-            android:text="@string/text_name"/>
-        <EditText
-            android:id="@+id/et_name"
-            android:inputType="textPersonName"
-            android:hint="@string/hint_name"
-            tools:text="Иван"
-            android:layout_marginTop="@dimen/margin_8dp"
-            style="@style/StyleEditText" />
 
-        <TextView
-            style="@style/StyleTextView"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:text="@string/text_email"/>
-        <EditText
-            android:id="@+id/sign_up_et_email"
-            android:inputType="textEmailAddress"
-            android:hint="@string/hint_email"
-            tools:text="155nimix@mail.ru"
-            android:layout_marginTop="@dimen/margin_8dp"
-            style="@style/StyleEditText" />
 
-        <TextView
-            style="@style/StyleTextView"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:text="@string/text_password"/>
-        <EditText
-            android:id="@+id/sign_up_et_password"
-            android:inputType="textPassword"
-            android:hint="@string/hint_password"
-            tools:text="2920091Ceb7d"
-            android:layout_marginTop="@dimen/margin_8dp"
-            style="@style/StyleEditText"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/sign_up_til_name"
+            android:hint="@string/text_name"
+            style="@style/StyleTIL">
+            <com.google.android.material.textfield.TextInputEditText
+                android:inputType="textPersonName"
+                style="@style/StyleEditText"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/sign_up_til_email"
+            android:hint="@string/text_email"
+            style="@style/StyleTIL">
+            <com.google.android.material.textfield.TextInputEditText
+                android:inputType="textEmailAddress"
+                style="@style/StyleEditText"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/sign_up_til_password"
+            android:hint="@string/text_password"
+            style="@style/StyleTIL">
+            <com.google.android.material.textfield.TextInputEditText
+                android:inputType="textPassword"
+                style="@style/StyleEditText"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <Button
             android:id="@+id/sign_up_btn"
             android:layout_width="wrap_content"
