@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#232020</color>
-    <color name="colorPrimaryDark">#3a3535</color>
+    <color name="colorPrimaryDark">#131111</color>
     <color name="colorAccent">#ff7315</color>
     <color name="colorAccent2">#15DCFF</color>
     <color name="colorLight">#F4F4F4</color>
@@ -12,6 +12,6 @@
     <color name="colorTextDark">@color/colorPrimary</color>
 
     <!--Colors for background-->
-    <color name="colorBackgroundDark">@color/colorPrimaryDark</color>
+    <color name="colorBackgroundDark">#332B24</color>
     <color name="colorBackgroundLight">@color/colorLight</color>
 </resources>

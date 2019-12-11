@@ -2,14 +2,11 @@ package ru.l4gunner4l.javalearn.mainactivity
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.Typeface.BOLD
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
-import android.text.style.StyleSpan
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -41,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        toolbar = findViewById(R.id.toolbar_main_your_level)
+        toolbar = findViewById(R.id.toolbar_main)
 
         // TODO: to move this line to method updateUI()
         toolbar.findViewById<TextView>(R.id.tv_your_lvl).text = addLevelText(user.currentLvl.toString())
@@ -56,7 +53,11 @@ class MainActivity : AppCompatActivity() {
         val startIndex = spannable.length-levelStr.length
         val endIndex = spannable.length
         spannable.setSpan(
-                ForegroundColorSpan(Color.RED),
+                ForegroundColorSpan(resources.getColor(R.color.colorAccent)),
+                startIndex, endIndex,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(
+                RelativeSizeSpan(1.25f),
                 startIndex, endIndex,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         return spannable
