@@ -1,10 +1,10 @@
 package ru.l4gunner4l.javalearn.models
 
 data class User(
+        val id: Long,
         var name: String,
-        var surname: String,
         var email: String,
-        var password: String
+        var password: String,
+        var currentLvl: Int = 1
 ) {
-    val id: Long = 0
 }

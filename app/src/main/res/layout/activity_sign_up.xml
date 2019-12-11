@@ -72,6 +72,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/sign_up_til_password_repeat"
+            android:hint="@string/text_password_repeat"
+            style="@style/StyleTIL">
+            <com.google.android.material.textfield.TextInputEditText
+                android:inputType="textPassword"
+                style="@style/StyleEditText"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <Button
             android:id="@+id/sign_up_btn"
             android:layout_width="wrap_content"

@@ -12,10 +12,16 @@
     <string name="text_password">Пароль</string>
     <string name="text_name">Имя</string>
     <string name="text_surname">Фамилия</string>
-    <string name="text_valid_error">Введены невалидные данные!</string>
-    <string name="text_error_fill_field">Заполните поле</string>
-    <string name="text_error_wrong_email">Неверный адрес</string>
-    <string name="text_error_too_little_name">Слишком короткое имя</string>
-    <string name="text_error_too_little_password">Пароль должен быть длиннее 8 символов</string>
-    <string name="text_error_wrong_password">Пароль должен содержать только цифры и лат. буквы</string>
+
+    <string name="text_error_valid">Введены невалидные данные!</string>
+    <string name="text_error_fill_field">Заполните поле!</string>
+    <string name="text_error_wrong_email">Неверный адрес!</string>
+    <string name="text_error_too_little_name">Слишком короткое имя!</string>
+    <string name="text_error_too_little_password">Пароль должен быть длиннее 8 символов!</string>
+    <string name="text_error_wrong_password">Пароль должен содержать только цифры и лат. буквы!</string>
+    <string name="text_error_signed_up">Вы уже зарегистрированы!</string>
+    <string name="text_password_repeat">Повторите пароль</string>
+    <string name="text_error_wrong_repeat_password">Пароли не совпадают</string>
+    <string name="text_error_wrong_auth">Введены неверные данные!</string>
+    <string name="label_your_lvl">Твой уровень:</string>
 </resources>

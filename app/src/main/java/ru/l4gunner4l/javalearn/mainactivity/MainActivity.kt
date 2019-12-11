@@ -2,10 +2,19 @@ package ru.l4gunner4l.javalearn.mainactivity
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface.BOLD
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.StyleSpan
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import ru.l4gunner4l.javalearn.R
+import ru.l4gunner4l.javalearn.models.User
 
 //import android.support.v7.widget.Toolbar;
 /**
@@ -17,19 +26,33 @@ import ru.l4gunner4l.javalearn.R
  */
 class MainActivity : AppCompatActivity() {
 
-    private var toolbar: Toolbar? = null
+    private lateinit var toolbar: Toolbar
+    private lateinit var user: User
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        user = User(0, "Nikola", "qwerty@mail.ru", "qwerty12")
         initToolbar()
     }
 
     private fun initToolbar() {
-        toolbar = findViewById(R.id.toolbar)
-        toolbar?.setTitle(R.string.app_name)
+        toolbar = findViewById(R.id.toolbar_main_your_level)
+        toolbar.findViewById<TextView>(R.id.tv_your_lvl).text = addLevelText(user.currentLvl.toString())
     }
+
+    private fun addLevelText(levelStr: String): SpannableString {
+        val spannable = SpannableString("${resources.getString(R.string.label_your_lvl)} $levelStr")
+        val startIndex = spannable.length-levelStr.length
+        val endIndex = spannable.length
+        spannable.setSpan(
+                ForegroundColorSpan(Color.RED),
+                startIndex, endIndex,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        return spannable
+    }
+
 
     companion object {
         fun createNewInstance(context: Context): Intent {
@@ -39,4 +62,5 @@ class MainActivity : AppCompatActivity() {
             return intent
         }
     }
+
 }
