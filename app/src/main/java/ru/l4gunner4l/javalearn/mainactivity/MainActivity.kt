@@ -33,15 +33,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // TODO: to get from Intent current user's id, also init current user
         user = User(0, "Nikola", "qwerty@mail.ru", "qwerty12")
         initToolbar()
+        // TODO: to add method updateUI()
     }
 
     private fun initToolbar() {
         toolbar = findViewById(R.id.toolbar_main_your_level)
+
+        // TODO: to move this line to method updateUI()
         toolbar.findViewById<TextView>(R.id.tv_your_lvl).text = addLevelText(user.currentLvl.toString())
     }
 
+    /**
+     * Method for creating colored text with user's level
+     * Метод для создания цветного текста с уровнем пользователя
+     */
     private fun addLevelText(levelStr: String): SpannableString {
         val spannable = SpannableString("${resources.getString(R.string.label_your_lvl)} $levelStr")
         val startIndex = spannable.length-levelStr.length

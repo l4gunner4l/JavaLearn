@@ -44,8 +44,12 @@ class SignInActivity : AppCompatActivity() {
     private fun initViews() {
         emailTIL = findViewById(R.id.sign_in_til_email)
         passwordTIL = findViewById(R.id.sign_in_til_password)
+
+        // auto-filling of email and password (temporarily)
+        // автозаполнение email and password (временно)
         emailTIL.editText!!.setText("qwerty@mail.ru")
         passwordTIL.editText!!.setText("qwerty12")
+
         findViewById<Button>(R.id.sign_in_btn).setOnClickListener { startMainActivity() }
     }
 
@@ -58,20 +62,14 @@ class SignInActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val user = auth.currentUser
-                            //updateUI(user)
                             startActivity(MainActivity.createNewInstance(this))
                             finish()
-                        } else {
-                            Toast.makeText(baseContext, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT).show()
-                            //updateUI(null)
-                        }
+                        } else Toast.makeText(baseContext, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT).show()
                     }
         } else Toast.makeText(this, R.string.text_error_valid, Toast.LENGTH_SHORT).show()
     }
 
-    private fun isValidInput(email:String, password:String): Boolean {
-        return isValidEmail(email) && isValidPassword(password)
-    }
+    private fun isValidInput(email:String, password:String) = isValidEmail(email) && isValidPassword(password)
     private fun isValidEmail(emailInput: String): Boolean {
         return if (emailInput.isEmpty()) {
             emailTIL.error = "Заполните поле"

@@ -70,9 +70,9 @@ class SignUpActivity : AppCompatActivity() {
         } else Toast.makeText(this, R.string.text_error_valid, Toast.LENGTH_SHORT).show()
     }
 
-    private fun isValidInput(name:String, email:String, password:String, passwordRepeat:String): Boolean {
-        return isValidName(name) && isValidEmail(email) && isValidPassword(password, passwordRepeat)
-    }
+    private fun isValidInput(name:String, email:String, password:String, passwordRepeat:String) =
+            isValidName(name) && isValidEmail(email) && isValidPassword(password, passwordRepeat)
+
     private fun isValidEmail(emailInput: String): Boolean {
         return if (emailInput.isEmpty()) {
             emailTIL.error = getString(R.string.text_error_fill_field)
