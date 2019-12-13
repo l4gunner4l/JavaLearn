@@ -27,5 +27,6 @@
     <string name="text_password_repeat">Повторите пароль</string>
     <string name="text_error_wrong_repeat_password">Пароли не совпадают</string>
     <string name="text_error_wrong_auth">Введены неверные данные!</string>
+
     <string name="label_your_lvl">Твой уровень: </string>
 </resources>

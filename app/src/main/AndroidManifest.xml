@@ -28,7 +28,10 @@
             android:parentActivityName=".sign.SignActivity"
             android:windowSoftInputMode="stateVisible"/> <!--Открытие клавы сразу при открытии-->
 
-        <activity android:name=".mainactivity.MainActivity"/>
+        <activity
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"/>
 
     </application>
 

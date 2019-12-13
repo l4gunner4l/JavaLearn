@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".mainactivity.MainActivity">
+    tools:context=".main.MainActivity">
 
     <include
         android:id="@+id/toolbar_main"
@@ -30,6 +30,7 @@
         app:itemIconTint="@color/color_nav_view_main"
         app:itemTextColor="@color/color_nav_view_main"
         app:itemIconSize="32dp"
-        app:labelVisibilityMode="unlabeled"/>
+        app:labelVisibilityMode="unlabeled"
+        style="@style/Widget.Design.BottomNavigationView"/>
 
 </RelativeLayout>

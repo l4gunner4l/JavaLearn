@@ -3,8 +3,6 @@ package ru.l4gunner4l.javalearn.sign
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
@@ -13,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.mainactivity.MainActivity
+import ru.l4gunner4l.javalearn.main.MainActivity
 import ru.l4gunner4l.javalearn.utils.Utils
 import java.util.regex.Pattern
 

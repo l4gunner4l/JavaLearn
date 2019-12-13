@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/tv_your_lvl"
-        style="@style/StyleTextView"
+        style="@style/StyleTextView.Light"
         android:layout_gravity="center"
         android:text="@string/label_your_lvl"
         android:textSize="@dimen/text_size_22sp"
