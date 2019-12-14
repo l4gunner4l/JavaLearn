@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // TODO: to get from Intent current user's id, also init current user
         user = User(0, "Nikola", "qwerty@mail.ru", "qwerty12")
         initViews()
         // TODO: to add method updateUI()

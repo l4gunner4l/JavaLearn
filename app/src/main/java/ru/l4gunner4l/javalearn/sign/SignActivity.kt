@@ -14,7 +14,9 @@ import ru.l4gunner4l.javalearn.main.MainActivity
  * Экран для перехода в SignInActivity или SignUpActivity
  */
 class SignActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
         if (FirebaseAuth.getInstance().currentUser != null){
