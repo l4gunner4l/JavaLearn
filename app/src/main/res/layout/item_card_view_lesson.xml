@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.google.android.material.card.MaterialCardView
+<!--<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="140dp"
     android:layout_height="140dp"
-    android:layout_margin="@dimen/margin_8dp"
+    android:layout_margin="@dimen/margin_16dp"
     app:cardBackgroundColor="@color/colorBackgroundLight"
-    app:cardCornerRadius="10dp"
-    android:elevation="15dp">
+    app:cardElevation="@dimen/margin_16dp"
+    app:cardCornerRadius="10dp">-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="140dp"
+    android:layout_height="140dp"
+    android:layout_margin="@dimen/margin_16dp"
+    app:cardBackgroundColor="@color/colorBackgroundLight"
+    app:cardElevation="@dimen/margin_16dp"
+    app:cardCornerRadius="10dp">
 
     <ImageView
         android:id="@+id/item_iv_lesson_bg"
@@ -25,7 +34,7 @@
 
         <TextView
             android:id="@+id/item_tv_lesson_number"
-            android:layout_above="@id/rating"
+            android:layout_above="@id/item_rating_lesson"
             android:layout_centerHorizontal="true"
             style="@style/StyleTextView.Light"
             android:textStyle="bold"
@@ -33,7 +42,7 @@
             android:text="1"/>
 
         <RatingBar
-            android:id="@+id/rating"
+            android:id="@+id/item_rating_lesson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -48,4 +57,4 @@
 
 
 
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

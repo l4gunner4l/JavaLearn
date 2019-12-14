@@ -29,4 +29,5 @@
     <string name="text_error_wrong_auth">Введены неверные данные!</string>
 
     <string name="label_your_lvl">Твой уровень: </string>
+    <string name="text_error_not_available_lesson">Сначала пройдите предыдущие уроки!</string>
 </resources>

@@ -29,7 +29,7 @@
         android:background="@color/colorPrimary"
         app:itemIconTint="@color/color_nav_view_main"
         app:itemTextColor="@color/color_nav_view_main"
-        app:itemIconSize="32dp"
+        app:itemIconSize="28dp"
         app:labelVisibilityMode="unlabeled"
         style="@style/Widget.Design.BottomNavigationView"/>
 
