@@ -7,16 +7,23 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
+import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.main.fragments.LessonsFragment
 import ru.l4gunner4l.javalearn.main.fragments.ProfileFragment
 import ru.l4gunner4l.javalearn.main.fragments.ShopFragment
 import ru.l4gunner4l.javalearn.models.User
+import ru.l4gunner4l.javalearn.sign.SignActivity
 
 //import android.support.v7.widget.Toolbar;
 /**
@@ -48,6 +55,17 @@ class MainActivity : AppCompatActivity() {
         // TODO: to add method updateUI()
     }
 
+    /**
+     * Method for sign out
+     * Метод для выхода из профиля
+     */
+    fun signOut(view: View){
+        FirebaseAuth.getInstance().signOut()
+        startActivity(Intent(this, SignActivity::class.java))
+        finish()
+    }
+
+
     private fun initViews() {
         initToolbar()
 
@@ -56,35 +74,19 @@ class MainActivity : AppCompatActivity() {
         nav.setOnNavigationItemSelectedListener {
             when (it.itemId){
                 R.id.nav_lessons -> {
-                    fm.beginTransaction()
-                            .hide(activeFragment)
-                            .show(lessonsFragment)
-                            .commit()
-                    activeFragment = lessonsFragment
+                    changeFragment(fm, lessonsFragment)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.nav_profile -> {
-                    fm.beginTransaction()
-                            .hide(activeFragment)
-                            .show(profileFragment)
-                            .commit()
-                    activeFragment = profileFragment
+                    changeFragment(fm, profileFragment)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.nav_shop -> {
-                    fm.beginTransaction()
-                            .hide(activeFragment)
-                            .show(shopFragment)
-                            .commit()
-                    activeFragment = shopFragment
+                    changeFragment(fm, shopFragment)
                     return@setOnNavigationItemSelectedListener true
                 }
                 else -> {
-                    fm.beginTransaction()
-                            .hide(activeFragment)
-                            .show(lessonsFragment)
-                            .commit()
-                    activeFragment = lessonsFragment
+                    changeFragment(fm, lessonsFragment)
                     return@setOnNavigationItemSelectedListener false
                 }
             }
@@ -97,12 +99,43 @@ class MainActivity : AppCompatActivity() {
         fm.beginTransaction().add(R.id.fragment_container, activeFragment, "1").commit()
     }
 
+
     private fun initToolbar() {
         toolbar = findViewById(R.id.toolbar_main)
-
+        setSupportActionBar(toolbar)
+        supportActionBar!!.title = null
         // TODO: to move this line to method updateUI()
-        toolbar.findViewById<TextView>(R.id.tv_your_lvl).text = getLevelText(user.currentLvl.toString())
+        toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.currentLvl.toString())
     }
+
+
+    /**
+     * Method for changing active fragment
+     * Метод для изменения фрагмента
+     */
+    private fun changeFragment(fm: FragmentManager, fragment: Fragment) {
+        fm.beginTransaction()
+                .hide(activeFragment)
+                .show(fragment)
+                .commit()
+        activeFragment = fragment
+        when (fragment) {
+            is LessonsFragment -> {
+                toolbar.visibility = VISIBLE
+                toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.currentLvl.toString())
+                toolbar.findViewById<ImageView>(R.id.iv_sign_out).visibility = GONE
+            }
+            is ProfileFragment -> {
+                toolbar.visibility = VISIBLE
+                toolbar.findViewById<TextView>(R.id.tv_title).text = resources.getString(R.string.label_profile)
+                toolbar.findViewById<ImageView>(R.id.iv_sign_out).visibility = VISIBLE
+            }
+            is ShopFragment -> {
+                toolbar.visibility = GONE
+            }
+        }
+    }
+
 
     /**
      * Method for creating colored text with user's level

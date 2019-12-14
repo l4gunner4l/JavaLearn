@@ -5,12 +5,30 @@
     android:layout_width="match_parent"
     android:background="@color/colorPrimary">
 
+    <ImageView
+        android:id="@+id/iv_sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_sign_out_light_32dp"
+        android:onClick="signOut"/>
+
     <TextView
-        android:id="@+id/tv_your_lvl"
+        android:id="@+id/tv_title"
         style="@style/StyleTextView.Light"
         android:layout_gravity="center"
         android:text="@string/label_your_lvl"
         android:textSize="@dimen/text_size_22sp"
         android:textStyle="bold"/>
+
+    <!--<ImageView
+        android:id="@+id/iv_sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/margin_8dp"
+        android:src="@drawable/ic_sign_out_light_32dp"/>-->
 
 </androidx.appcompat.widget.Toolbar>
