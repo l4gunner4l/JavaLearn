@@ -1,10 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:background="#AADAFF">
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ru.l4gunner4l.javalearn.ui.AspectRatioImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/profile_bg"
+            android:scaleType="centerCrop"
+            app:aspectRatio="2.5"/>
+
+        <ImageButton
+            android:id="@+id/btn_sign_out"
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:background="@drawable/btn_circle_orange"
+            android:src="@drawable/ic_sign_out_light_24dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/civ_avatar"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:onClick="signOut"/>
+
+        <ru.l4gunner4l.javalearn.ui.CircleImageView
+            android:id="@+id/civ_avatar"
+            android:layout_width="@dimen/avatar_round_size_112dp"
+            android:layout_height="@dimen/avatar_round_size_112dp"
+            app:cv_borderColor="@color/colorLight"
+            app:cv_borderWidth="@dimen/size_4dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+        
+
+        <ImageButton
+            android:id="@+id/btn_edit"
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:background="@drawable/btn_circle_orange"
+            android:src="@drawable/ic_edit_light_24dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/civ_avatar"
+            android:layout_marginStart="@dimen/margin_16dp"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_avatar_light"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/profile_til_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16dp"
+            android:textColorHint="@color/colorAccent"
+            android:hint="@string/text_name">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_et_name"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:maxLength="30"
+                android:inputType="textPersonName"
+                android:textAppearance="@style/Text.Medium"
+                android:textColor="@color/colorTextDark"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
 
-
-</RelativeLayout>
+</LinearLayout>

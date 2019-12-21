@@ -42,20 +42,20 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/sign_in_til_email"
             android:hint="@string/text_email"
-            style="@style/StyleTIL">
+            style="@style/SignTIL">
             <com.google.android.material.textfield.TextInputEditText
                 android:inputType="textEmailAddress"
-                style="@style/StyleEditText"/>
+                style="@style/SignEditText"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/sign_in_til_password"
             android:hint="@string/text_password"
-            style="@style/StyleTIL">
+            style="@style/SignTIL">
             <com.google.android.material.textfield.TextInputEditText
                 android:inputType="textPassword"
-                style="@style/StyleEditText"/>
+                style="@style/SignEditText"/>
         </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/sign_in_btn"

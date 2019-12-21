@@ -19,6 +19,10 @@ class SignActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
+    }
+
+    override fun onStart() {
+        super.onStart()
         if (FirebaseAuth.getInstance().currentUser != null){
             startActivity(Intent(this, MainActivity::class.java))
         }

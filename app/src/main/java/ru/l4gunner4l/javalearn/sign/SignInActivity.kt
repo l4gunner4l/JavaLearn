@@ -28,11 +28,13 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         initViews()
         auth = FirebaseAuth.getInstance()
+
     }
 
 
@@ -45,8 +47,8 @@ class SignInActivity : AppCompatActivity() {
 
         // auto-filling of email and password (temporarily)
         // автозаполнение email and password (временно)
-        emailTIL.editText!!.setText("qwerty@mail.ru")
-        passwordTIL.editText!!.setText("qwerty12")
+        /*emailTIL.editText!!.setText("qwerty@mail.ru")
+        passwordTIL.editText!!.setText("qwerty12")*/
 
         findViewById<Button>(R.id.sign_in_btn).setOnClickListener { startMainActivity() }
     }
@@ -59,7 +61,6 @@ class SignInActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            val user = auth.currentUser
                             startActivity(MainActivity.createNewInstance(this))
                             finish()
                         } else Toast.makeText(baseContext, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT).show()

@@ -31,7 +31,7 @@
     </style>
 
 
-    <style name="StyleTIL">
+    <style name="SignTIL">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColorHint">@color/colorAccent</item>
@@ -39,7 +39,7 @@
         <item name="android:layout_marginBottom">@dimen/margin_8dp</item>
     </style>
 
-    <style name="StyleEditText">
+    <style name="SignEditText">
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:background">@drawable/edit_text_light</item>

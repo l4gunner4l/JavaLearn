@@ -7,6 +7,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.main.fragments.LessonsFragment
 import ru.l4gunner4l.javalearn.main.fragments.ProfileFragment
@@ -25,7 +27,6 @@ import ru.l4gunner4l.javalearn.main.fragments.ShopFragment
 import ru.l4gunner4l.javalearn.models.User
 import ru.l4gunner4l.javalearn.sign.SignActivity
 
-//import android.support.v7.widget.Toolbar;
 /**
  * Activity with Bottom NavigationView (Profile, Lessons, Shop).
  * It is host for fragments
@@ -42,17 +43,51 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var nav: BottomNavigationView
     private lateinit var toolbar: Toolbar
-    private lateinit var user: User
+    private var user: User = User(id="0", name="-", email="-@mail.ru")
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseDatabase
+    private lateinit var usersDbRef: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        user = User(0, "Nikola", "qwerty@mail.ru", "qwerty12")
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseDatabase.getInstance()
+        usersDbRef = db.reference.child("users")
+
+        usersDbRef.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
+                val userGotten = dataSnapshot.getValue(User::class.java)
+                if (userGotten?.id.equals(auth.currentUser!!.uid)){
+                    user = userGotten ?: throw NullPointerException("gotten user is null")
+                    Log.i("M_MAIN", user.toString())
+                    updateUI()
+                } else Log.i("M_MAIN", "currentUser is not founded")
+            }
+
+            override fun onChildRemoved(p0: DataSnapshot) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.i("M_MAIN", "Failed to read value.", error.toException())
+            }
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
+
         initViews()
-        // TODO: to add method updateUI()
+
     }
+
+
+    fun getUser() = user
 
     /**
      * Method for sign out
@@ -98,13 +133,21 @@ class MainActivity : AppCompatActivity() {
         fm.beginTransaction().add(R.id.fragment_container, activeFragment, "1").commit()
     }
 
+    private fun updateUI() {
+        updateToolbar()
+    }
 
     private fun initToolbar() {
         toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
         supportActionBar!!.title = null
         // TODO: to move this line to method updateUI()
-        toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.currentLvl.toString())
+        updateToolbar()
+    }
+
+    private fun updateToolbar() {
+        toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.level.toString())
+        Log.i("M_MAIN", "getLevelText($user)")
     }
 
 
@@ -121,13 +164,14 @@ class MainActivity : AppCompatActivity() {
         when (fragment) {
             is LessonsFragment -> {
                 toolbar.visibility = VISIBLE
-                toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.currentLvl.toString())
-                toolbar.findViewById<ImageView>(R.id.iv_sign_out).visibility = GONE
+                toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.level.toString())
+                toolbar.findViewById<ImageView>(R.id.iv_settings).visibility = GONE
             }
             is ProfileFragment -> {
                 toolbar.visibility = VISIBLE
                 toolbar.findViewById<TextView>(R.id.tv_title).text = resources.getString(R.string.label_profile)
-                toolbar.findViewById<ImageView>(R.id.iv_sign_out).visibility = VISIBLE
+                toolbar.findViewById<ImageView>(R.id.iv_settings).visibility = VISIBLE
+                fragment.setUser(user)
             }
             is ShopFragment -> {
                 toolbar.visibility = GONE

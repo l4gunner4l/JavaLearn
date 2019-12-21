@@ -10,8 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.main.MainActivity
+import ru.l4gunner4l.javalearn.models.User
 import ru.l4gunner4l.javalearn.utils.Utils
 import java.util.regex.Pattern
 
@@ -29,12 +32,16 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var passwordRepeatTIL: TextInputLayout
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseDatabase
+    private lateinit var dbRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         initViews()
         auth = FirebaseAuth.getInstance()
+        db = FirebaseDatabase.getInstance()
+        dbRef = db.reference.child("users")
     }
 
     fun endSignUpActivity(view: View?) { finish() }
@@ -57,15 +64,13 @@ class SignUpActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            val user = auth.currentUser
-                            //updateUI(user)
+                            val user = User.create(auth.currentUser!!, name)
+                            dbRef.push().setValue(user)
                             startActivity(MainActivity.createNewInstance(this))
                             finish()
-                        } else {
-                            Toast.makeText(baseContext, getString(R.string.text_error_signed_up),
+                        } else Toast.makeText(baseContext, getString(R.string.text_error_signed_up),
                                     Toast.LENGTH_SHORT).show()
-                            //updateUI(null)
-                        }
+
                     }
         } else Toast.makeText(this, R.string.text_error_valid, Toast.LENGTH_SHORT).show()
     }
