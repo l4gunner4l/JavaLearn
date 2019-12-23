@@ -3,6 +3,7 @@ package ru.l4gunner4l.javalearn.sign
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
@@ -41,7 +42,7 @@ class SignUpActivity : AppCompatActivity() {
         initViews()
         auth = FirebaseAuth.getInstance()
         db = FirebaseDatabase.getInstance()
-        dbRef = db.reference.child("users")
+        dbRef = db.getReference("users")
     }
 
     fun endSignUpActivity(view: View?) { finish() }
@@ -64,10 +65,19 @@ class SignUpActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            val user = User.create(auth.currentUser!!, name)
-                            dbRef.push().setValue(user)
-                            startActivity(MainActivity.createNewInstance(this))
-                            finish()
+                            val userId = auth.currentUser!!.uid
+                            Log.i("M_MAIN", "1)SignUpActivity - id=$userId")
+                            val user = User(userId, name, email)
+                            dbRef.child(userId).setValue(user)
+                                    .addOnCompleteListener {
+                                        if (it.isSuccessful){
+                                            Log.i("M_MAIN", "2)SignUpActivity - id=$userId")
+                                            startActivity(MainActivity.createNewInstance(this))
+                                            finish()
+                                        } else Toast.makeText(baseContext, getString(R.string.text_error_signed_up),
+                                                Toast.LENGTH_SHORT).show()
+                                    }
+
                         } else Toast.makeText(baseContext, getString(R.string.text_error_signed_up),
                                     Toast.LENGTH_SHORT).show()
 

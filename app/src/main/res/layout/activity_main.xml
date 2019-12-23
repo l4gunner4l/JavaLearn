@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".main.MainActivity">
 
+
+
     <include
         android:id="@+id/toolbar_main"
         android:layout_height="wrap_content"
@@ -32,5 +34,18 @@
         app:itemIconSize="28dp"
         app:labelVisibilityMode="unlabeled"
         style="@style/Widget.Design.BottomNavigationView"/>
+
+    <ImageView
+        android:id="@+id/iv_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/colorLight"
+        tools:visibility="gone"/>
+    <ProgressBar
+        android:id="@+id/pb_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

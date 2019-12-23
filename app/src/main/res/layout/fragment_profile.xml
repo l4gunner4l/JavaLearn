@@ -52,7 +52,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_16dp"
+        android:layout_marginStart="@dimen/margin_16dp"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="@dimen/size_40dp"
@@ -63,7 +63,9 @@
             android:id="@+id/profile_til_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_16dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            app:hintTextAppearance="@style/Text.Medium"
             android:textColorHint="@color/colorAccent"
             android:hint="@string/text_name">
             <com.google.android.material.textfield.TextInputEditText
@@ -76,6 +78,38 @@
                 android:textColor="@color/colorTextDark"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_email_light"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/profile_til_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:textColorHint="@color/colorAccent"
+            app:hintTextAppearance="@style/Text.Medium"
+            android:hint="@string/text_email">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/profile_et_email"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:maxLength="30"
+                android:inputType="textEmailAddress"
+                android:textAppearance="@style/Text.Medium"
+                android:textColor="@color/colorTextDark"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
 
 
 </LinearLayout>

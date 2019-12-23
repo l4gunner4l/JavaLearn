@@ -50,7 +50,7 @@
             android:numStars="3"
             android:stepSize="1.0"
             android:rating="1.0"
-            android:theme="@style/StyleRatingBar"
+            android:theme="@style/StyleStarsRatingBar"
             style="?android:attr/ratingBarStyleIndicator"/>
 
     </RelativeLayout>

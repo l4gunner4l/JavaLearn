@@ -5,7 +5,7 @@
     <color name="colorAccent">#ff7315</color>
     <color name="colorAccent2">#15DCFF</color>
     <color name="colorLight">#F4F4F4</color>
-    <color name="colorGrey">#868686</color>
+    <color name="colorGrey">#9BA8B9</color>
 
     <!--Colors for texts-->
     <color name="colorTextLight">@color/colorLight</color>

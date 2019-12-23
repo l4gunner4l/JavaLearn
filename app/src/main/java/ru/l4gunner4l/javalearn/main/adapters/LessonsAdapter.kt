@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.models.Lesson
 
-data class LessonsAdapter(val context: Context, val lessons: List<Lesson>)
+data class LessonsAdapter(val context: Context, val starsList: List<Int>, val clickListener: ItemClickListener)
     : RecyclerView.Adapter<LessonsAdapter.ViewHolder>() {
-
-    private var mClickListener: ItemClickListener? = null
 
     // inflates the cell layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,18 +22,22 @@ data class LessonsAdapter(val context: Context, val lessons: List<Lesson>)
 
     // binds the data in each cell
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentLesson = lessons[position]
-        holder.numberTV.text = currentLesson.number.toString()
-        holder.failsRB.rating = currentLesson.starsCount.toFloat()
-        holder.bgIV.setImageDrawable(
-                if (currentLesson.isAvailable)
-                    context.getDrawable(R.drawable.bg_card_lesson_orange)
-                else context.getDrawable(R.drawable.bg_card_lesson_grey)
-        )
+        val lessonNumber = position+1
+        val currentLessonFails: Int
+        if (lessonNumber <= starsList.size) {
+            currentLessonFails = starsList[position]
+            holder.bgIV.setImageDrawable(context.getDrawable(R.drawable.bg_card_lesson_orange))
+        } else {
+            currentLessonFails = 0
+            holder.bgIV.setImageDrawable(context.getDrawable(R.drawable.bg_card_lesson_grey))
+        }
+        holder.numberTV.text = lessonNumber.toString()
+        holder.failsRB.rating = currentLessonFails.toFloat()
+
     }
 
     // total number of cells
-    override fun getItemCount() = lessons.size
+    override fun getItemCount() = 10
 
 
 
@@ -51,7 +53,15 @@ data class LessonsAdapter(val context: Context, val lessons: List<Lesson>)
 
 
         override fun onClick(view: View) {
-            if (mClickListener != null) mClickListener!!.onItemClick(view, adapterPosition)
+            if (adapterPosition+1 <= starsList.size){
+                //Toast.makeText(context, "${adapterPosition+1}) - stars=${starsList[adapterPosition]}", Toast.LENGTH_SHORT).show()
+                clickListener.onItemClick(view, adapterPosition)
+            }
+            else Toast.makeText(
+                        context,
+                        context.resources.getString(R.string.text_error_not_available_lesson),
+                        Toast.LENGTH_SHORT)
+                        .show()
         }
 
         init {
@@ -60,13 +70,7 @@ data class LessonsAdapter(val context: Context, val lessons: List<Lesson>)
     }
 
     // convenience method for getting data at click position
-    fun getItem(id: Int) = lessons[id]
-
-    // allows clicks events to be caught
-    fun setClickListener(itemClickListener: ItemClickListener?) {
-        mClickListener = itemClickListener
-    }
-
+    fun getItem(id: Int) = starsList[id]
 
     // parent activity will implement this method to respond to click events
     interface ItemClickListener {

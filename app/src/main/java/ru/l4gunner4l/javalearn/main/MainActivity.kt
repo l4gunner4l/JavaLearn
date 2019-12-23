@@ -12,6 +12,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -26,6 +27,7 @@ import ru.l4gunner4l.javalearn.main.fragments.ProfileFragment
 import ru.l4gunner4l.javalearn.main.fragments.ShopFragment
 import ru.l4gunner4l.javalearn.models.User
 import ru.l4gunner4l.javalearn.sign.SignActivity
+
 
 /**
  * Activity with Bottom NavigationView (Profile, Lessons, Shop).
@@ -43,11 +45,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var nav: BottomNavigationView
     private lateinit var toolbar: Toolbar
-    private var user: User = User(id="0", name="-", email="-@mail.ru")
+    private var user: User = User("0", "-", "-")
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseDatabase
-    private lateinit var usersDbRef: DatabaseReference
+    private lateinit var userDbRef: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,37 +57,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
+        val userId = auth.currentUser!!.uid
         db = FirebaseDatabase.getInstance()
-        usersDbRef = db.reference.child("users")
+        userDbRef = db.reference.child("users").child(userId)
+        userDbRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                user = User(
+                        dataSnapshot.child("id").value.toString(),
+                        dataSnapshot.child("name").value.toString(),
+                        dataSnapshot.child("email").value.toString(),
+                        mutableListOf(3, 3, 2, 1, 0)
+                )
+                Log.i("M_MAIN", "3MainActivity - user=$user")
+                endLoading()
+            }
+            override fun onCancelled(error: DatabaseError) { Log.i("M_MAIN", "Failed to read value.", error.toException()) }
 
-        usersDbRef.addChildEventListener(object : ChildEventListener {
-            override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
-                val userGotten = dataSnapshot.getValue(User::class.java)
-                if (userGotten?.id.equals(auth.currentUser!!.uid)){
-                    user = userGotten ?: throw NullPointerException("gotten user is null")
-                    Log.i("M_MAIN", user.toString())
-                    updateUI()
-                } else Log.i("M_MAIN", "currentUser is not founded")
-            }
-
-            override fun onChildRemoved(p0: DataSnapshot) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-            override fun onCancelled(error: DatabaseError) {
-                Log.i("M_MAIN", "Failed to read value.", error.toException())
-            }
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
         })
-
         initViews()
-
     }
-
 
     fun getUser() = user
 
@@ -99,6 +89,15 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
+    /**
+     * Method for hiding ProgressBar and background
+     * Метод для скрытия ProgressBar и скрывающего фона
+     */
+    private fun endLoading() {
+        updateUI()
+        findViewById<ProgressBar>(R.id.pb_progress).visibility = GONE
+        findViewById<ImageView>(R.id.iv_splash).visibility = GONE
+    }
 
     private fun initViews() {
         initToolbar()
@@ -134,20 +133,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        updateToolbar()
+        toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.level.toString())
+        profileFragment.setUser(user)
+        lessonsFragment.setUser(user)
     }
 
     private fun initToolbar() {
         toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
         supportActionBar!!.title = null
-        // TODO: to move this line to method updateUI()
-        updateToolbar()
-    }
-
-    private fun updateToolbar() {
-        toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.level.toString())
-        Log.i("M_MAIN", "getLevelText($user)")
     }
 
 
@@ -171,7 +165,6 @@ class MainActivity : AppCompatActivity() {
                 toolbar.visibility = VISIBLE
                 toolbar.findViewById<TextView>(R.id.tv_title).text = resources.getString(R.string.label_profile)
                 toolbar.findViewById<ImageView>(R.id.iv_settings).visibility = VISIBLE
-                fragment.setUser(user)
             }
             is ShopFragment -> {
                 toolbar.visibility = GONE
