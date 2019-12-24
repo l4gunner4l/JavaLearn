@@ -15,69 +15,7 @@
     </style>
 
 
-
-    <style name="StyleBtnAccent">
-        <item name="android:elevation">10dp</item>
-        <item name="android:background">@drawable/btn_orange</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
-        <item name="android:textColor">@color/colorTextLight</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="StyleBtnAccent.BtnSign">
-        <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">50dp</item>
-    </style>
-
-
-    <style name="SignTIL">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColorHint">@color/colorAccent</item>
-        <item name="hintTextAppearance">@style/Text.Medium</item>
-        <item name="android:layout_marginBottom">@dimen/margin_8dp</item>
-    </style>
-
-    <style name="SignEditText">
-        <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:background">@drawable/edit_text_light</item>
-        <item name="android:padding">@dimen/padding_8dp</item>
-        <item name="android:maxLength">30</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
-        <item name="android:textColor">@color/colorTextDark</item>
-        <item name="android:singleLine">true</item>
-
-    </style>
-
-    <style name="StyleTextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
-    </style>
-    <style name="StyleTextView.Light">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
-        <item name="android:textColor">@color/colorTextLight</item>
-    </style>
-    <style name="StyleTextView.Dark">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
-        <item name="android:textColor">@color/colorTextDark</item>
-    </style>
-
-
-    <style name="StyleStarsRatingBar" parent="Theme.AppCompat">
-        <!--<item name="colorControlNormal">@color/colorLight</item>-->
-        <item name="colorControlActivated">@color/colorLight</item>
-    </style>
-
-
-
-
+    <!--TEXT STYLES-->
     <style name="Text">
         <item name="android:fontFamily">sans-serif-condensed-medium</item>
     </style>
@@ -93,6 +31,98 @@
     </style>
     <style name="Text.Small">
         <item name="android:textSize">@dimen/text_size_14sp</item>
+    </style>
+
+
+
+    <!--BUTTON STYLES-->
+    <style name="BtnSignOut">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:paddingStart">@dimen/margin_32dp</item>
+        <item name="android:paddingEnd">@dimen/margin_32dp</item>
+        <item name="android:drawableStart">@drawable/ic_sign_out_light_24dp</item>
+        <item name="android:drawablePadding">@dimen/margin_8dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorTextLight</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:background">@color/colorBtnSignOut</item>
+    </style>
+
+    <style name="BtnAccent">
+        <item name="android:elevation">10dp</item>
+        <item name="android:background">@drawable/btn_orange</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:textColor">@color/colorTextLight</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="BtnAccent.BtnSign">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+
+
+
+
+
+    <style name="TIL">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+        <item name="hintTextAppearance">@style/Text.Medium</item>
+    </style>
+
+    <style name="TIL.Sign">
+        <item name="android:layout_marginBottom">@dimen/margin_8dp</item>
+    </style>
+
+    <style name="TIL.Profile">
+        <item name="android:layout_marginStart">@dimen/margin_16dp</item>
+        <item name="android:layout_marginTop">@dimen/margin_16dp</item>
+    </style>
+
+    <style name="SignEditText">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@drawable/edit_text_light</item>
+        <item name="android:padding">@dimen/padding_8dp</item>
+        <item name="android:maxLength">30</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:textColor">@color/colorTextDark</item>
+        <item name="android:singleLine">true</item>
+
+    </style>
+
+
+
+
+    <!--TEXT VIEW STYLES-->
+    <style name="TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
+    </style>
+    <style name="TextView.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:textColor">@color/colorTextLight</item>
+    </style>
+    <style name="TextView.Dark">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:textColor">@color/colorTextDark</item>
+    </style>
+
+
+
+
+    <style name="StarsRatingBar" parent="Theme.AppCompat">
+        <!--<item name="colorControlNormal">@color/colorLight</item>-->
+        <item name="colorControlActivated">@color/colorLight</item>
     </style>
 
 

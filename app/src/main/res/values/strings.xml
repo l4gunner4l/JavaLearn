@@ -3,7 +3,8 @@
 
 
     <string name="label_sign_in">Войти</string>
-    <string name="label_to_sign_up">Зарегистрироваться</string>
+    <string name="label_sign_up">Зарегистрироваться</string>
+    <string name="label_sign_out">Выйти</string>
 
     <string name="text_sign_up">Регистрация</string>
     <string name="text_enter_your_details">Введите ваши данные</string>

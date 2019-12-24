@@ -36,7 +36,7 @@
             android:id="@+id/item_tv_lesson_number"
             android:layout_above="@id/item_rating_lesson"
             android:layout_centerHorizontal="true"
-            style="@style/StyleTextView.Light"
+            style="@style/TextView.Light"
             android:textStyle="bold"
             android:textSize="80sp"
             android:text="1"/>
@@ -50,7 +50,7 @@
             android:numStars="3"
             android:stepSize="1.0"
             android:rating="1.0"
-            android:theme="@style/StyleStarsRatingBar"
+            android:theme="@style/StarsRatingBar"
             style="?android:attr/ratingBarStyleIndicator"/>
 
     </RelativeLayout>

@@ -15,4 +15,7 @@
     <!--Colors for background-->
     <color name="colorBackgroundDark">#332B24</color>
     <color name="colorBackgroundLight">@color/colorLight</color>
+
+
+    <color name="colorBtnSignOut">#FF3636</color>
 </resources>

@@ -16,12 +16,12 @@
     <Button
         android:layout_marginBottom="@dimen/margin_16dp"
         android:text="@string/label_sign_in"
-        style="@style/StyleBtnAccent.BtnSign"
+        style="@style/BtnAccent.BtnSign"
         android:onClick="startSignInActivity"/>
 
     <Button
-        android:text="@string/label_to_sign_up"
-        style="@style/StyleBtnAccent.BtnSign"
+        android:text="@string/label_sign_up"
+        style="@style/BtnAccent.BtnSign"
         android:onClick="startSignUpActivity"/>
 
 </LinearLayout> 

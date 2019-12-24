@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_enter_your_details"
-            style="@style/StyleTextView.Light"
+            style="@style/TextView.Light"
             android:textAppearance="@style/Text.Huge"/>
     </androidx.appcompat.widget.Toolbar>
 
@@ -42,7 +42,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/sign_in_til_email"
             android:hint="@string/text_email"
-            style="@style/SignTIL">
+            style="@style/TIL.Sign">
             <com.google.android.material.textfield.TextInputEditText
                 android:inputType="textEmailAddress"
                 style="@style/SignEditText"/>
@@ -52,7 +52,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/sign_in_til_password"
             android:hint="@string/text_password"
-            style="@style/SignTIL">
+            style="@style/TIL.Sign">
             <com.google.android.material.textfield.TextInputEditText
                 android:inputType="textPassword"
                 style="@style/SignEditText"/>
@@ -65,7 +65,7 @@
             android:layout_marginBottom="@dimen/margin_16dp"
             android:text="@string/label_sign_in"
             android:layout_marginTop="@dimen/margin_32dp"
-            style="@style/StyleBtnAccent.BtnSign"/>
+            style="@style/BtnAccent.BtnSign"/>
     </LinearLayout>
 
 

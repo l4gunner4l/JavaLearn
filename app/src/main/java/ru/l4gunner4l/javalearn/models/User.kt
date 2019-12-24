@@ -9,6 +9,7 @@ class User {
         private set
     var starsList = mutableListOf(0)
         private set
+    // TODO avatar
 
     constructor() {}
     constructor(id: String, name: String, email: String) {

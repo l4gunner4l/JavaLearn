@@ -43,7 +43,7 @@ class LessonsFragment : Fragment(){
         Toast.makeText(activity, "${position+1}) - stars=${rvAdapter.getItem(position)}", Toast.LENGTH_SHORT).show()
     }
 
-    fun setUser(user: User) {
+    fun setUserUI(user: User) {
         this.user = user
         updateInfo(user)
     }

@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                         dataSnapshot.child("id").value.toString(),
                         dataSnapshot.child("name").value.toString(),
                         dataSnapshot.child("email").value.toString(),
-                        mutableListOf(3, 3, 2, 1, 0)
+                        mutableListOf(0)
                 )
                 Log.i("M_MAIN", "3MainActivity - user=$user")
                 endLoading()
@@ -134,8 +134,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI() {
         toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.level.toString())
-        profileFragment.setUser(user)
-        lessonsFragment.setUser(user)
+        profileFragment.setUserUI(user)
+        lessonsFragment.setUserUI(user)
     }
 
     private fun initToolbar() {
