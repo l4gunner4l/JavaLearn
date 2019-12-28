@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
 
         val fm = supportFragmentManager
-        nav = findViewById(R.id.nav_view_main)
+        nav = findViewById(R.id.main_nav_view_main)
         nav.setOnNavigationItemSelectedListener {
             when (it.itemId){
                 R.id.nav_lessons -> {
@@ -127,9 +127,9 @@ class MainActivity : AppCompatActivity() {
 
         // set primary fragment - lessonsFrag - on the screen
         nav.selectedItemId = R.id.nav_lessons
-        fm.beginTransaction().add(R.id.fragment_container, profileFragment, "3").hide(profileFragment).commit()
-        fm.beginTransaction().add(R.id.fragment_container, shopFragment, "2").hide(shopFragment).commit()
-        fm.beginTransaction().add(R.id.fragment_container, activeFragment, "1").commit()
+        fm.beginTransaction().add(R.id.main_fragment_container, profileFragment, "3").hide(profileFragment).commit()
+        fm.beginTransaction().add(R.id.main_fragment_container, shopFragment, "2").hide(shopFragment).commit()
+        fm.beginTransaction().add(R.id.main_fragment_container, activeFragment, "1").commit()
     }
 
     private fun updateUI() {
@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        toolbar = findViewById(R.id.toolbar_main)
+        toolbar = findViewById(R.id.main_toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.title = null
     }

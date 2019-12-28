@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn
+package ru.l4gunner4l.javalearn.utils.extensions
 
 import android.app.Activity
 import android.content.Context

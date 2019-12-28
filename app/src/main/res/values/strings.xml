@@ -31,4 +31,5 @@
 
     <string name="label_your_lvl">Твой уровень: </string>
     <string name="text_error_not_available_lesson">Сначала пройдите предыдущие уроки!</string>
+    <string name="label_lesson">Урок</string>
 </resources>

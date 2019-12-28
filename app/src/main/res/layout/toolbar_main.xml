@@ -17,11 +17,9 @@
 
     <TextView
         android:id="@+id/tv_title"
-        style="@style/TextView.Light"
-        android:layout_gravity="center"
-        android:text="@string/label_your_lvl"
-        android:textSize="@dimen/text_size_22sp"
-        android:textStyle="bold"/>
+        style="@style/TextView.Toolbar"
+        android:textColor="@color/colorTextLight"
+        android:text="@string/label_your_lvl"/>
 
     <!--<ImageView
         android:id="@+id/iv_sign_out"
