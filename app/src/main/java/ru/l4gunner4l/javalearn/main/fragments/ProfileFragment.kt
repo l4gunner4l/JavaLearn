@@ -12,10 +12,10 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.FirebaseDatabase
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.hideKeyboard
 import ru.l4gunner4l.javalearn.main.MainActivity
 import ru.l4gunner4l.javalearn.models.User
-import ru.l4gunner4l.javalearn.showKeyboard
+import ru.l4gunner4l.javalearn.utils.extensions.hideKeyboard
+import ru.l4gunner4l.javalearn.utils.extensions.showKeyboard
 
 class ProfileFragment : Fragment() {
 

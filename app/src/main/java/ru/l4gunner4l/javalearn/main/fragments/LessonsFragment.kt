@@ -1,14 +1,15 @@
 package ru.l4gunner4l.javalearn.main.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.l4gunner4l.javalearn.R
+import ru.l4gunner4l.javalearn.lessonscreen.LessonActivity
 import ru.l4gunner4l.javalearn.main.MainActivity
 import ru.l4gunner4l.javalearn.main.adapters.LessonsAdapter
 import ru.l4gunner4l.javalearn.main.adapters.LessonsAdapter.ItemClickListener
@@ -40,7 +41,11 @@ class LessonsFragment : Fragment(){
     }
 
     private fun openLessonClick(position: Int) {
-        Toast.makeText(activity, "${position+1}) - stars=${rvAdapter.getItem(position)}", Toast.LENGTH_SHORT).show()
+        startActivity(LessonActivity.newInstance(
+                        context = activity as Activity,
+                        lessonNum = position+1,
+                        starsCount = rvAdapter.getStarsCount(position)
+        ))
     }
 
     fun setUserUI(user: User) {

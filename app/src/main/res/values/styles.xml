@@ -104,16 +104,19 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">@style/Text.Medium</item>
     </style>
+    <style name="TextView.Toolbar">
+        <item name="android:textSize">@dimen/text_size_22sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="TextView.Light">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
         <item name="android:textColor">@color/colorTextLight</item>
     </style>
     <style name="TextView.Dark">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
         <item name="android:textColor">@color/colorTextDark</item>
     </style>
 

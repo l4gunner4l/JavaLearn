@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ru.l4gunner4l.javalearn">
-
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:fullBackupContent="@xml/backup_descriptor">
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity
+            android:name=".lessonscreen.LessonActivity"
+            android:parentActivityName=".main.MainActivity"/>
 
         <activity
             android:name=".sign.SignActivity"
@@ -25,18 +29,19 @@
         <activity
             android:name=".sign.SignUpActivity"
             android:parentActivityName=".sign.SignActivity"
-            android:windowSoftInputMode="stateVisible"/> <!--Открытие клавы сразу при открытии-->
+            android:windowSoftInputMode="stateVisible" /> <!-- Открытие клавы сразу при открытии -->
 
         <activity
             android:name=".sign.SignInActivity"
             android:parentActivityName=".sign.SignActivity"
-            android:windowSoftInputMode="stateVisible"/> <!--Открытие клавы сразу при открытии-->
+            android:windowSoftInputMode="stateVisible" /> <!-- Открытие клавы сразу при открытии -->
 
         <activity
             android:name=".main.MainActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
-
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

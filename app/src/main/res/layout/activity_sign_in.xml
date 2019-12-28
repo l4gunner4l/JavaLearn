@@ -7,7 +7,7 @@
     tools:context=".sign.SignInActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_sign_in"
+        android:id="@+id/sign_in_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary">
@@ -28,14 +28,14 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@id/toolbar_sign_in"
+        android:layout_below="@id/sign_in_toolbar"
         android:background="@color/colorAccent"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/toolbar_sign_in"
+        android:layout_below="@id/sign_in_toolbar"
         android:layout_marginTop="@dimen/margin_32dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">

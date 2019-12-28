@@ -70,7 +70,7 @@ data class LessonsAdapter(val context: Context, val starsList: List<Int>, val cl
     }
 
     // convenience method for getting data at click position
-    fun getItem(id: Int) = starsList[id]
+    fun getStarsCount(lessonIndex: Int) = starsList[lessonIndex]
 
     // parent activity will implement this method to respond to click events
     interface ItemClickListener {
