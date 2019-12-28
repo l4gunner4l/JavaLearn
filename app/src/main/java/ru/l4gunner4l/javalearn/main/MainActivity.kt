@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                         dataSnapshot.child("id").value.toString(),
                         dataSnapshot.child("name").value.toString(),
                         dataSnapshot.child("email").value.toString(),
-                        mutableListOf(0)
+                        mutableListOf(3,2,1,0)
                 )
                 Log.i("M_MAIN", "3MainActivity - user=$user")
                 endLoading()
