@@ -1,5 +1,6 @@
 package ru.l4gunner4l.javalearn.main
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -84,9 +86,25 @@ class MainActivity : AppCompatActivity() {
      * Метод для выхода из профиля
      */
     fun signOut(view: View){
-        FirebaseAuth.getInstance().signOut()
-        startActivity(Intent(this, SignActivity::class.java))
-        finish()
+
+        val sureAlert = AlertDialog.Builder(this@MainActivity)
+        sureAlert.setTitle("Выход")
+        sureAlert.setMessage("Вы уверены, что хотите выйти?")
+        sureAlert.setCancelable(true)
+        sureAlert.setPositiveButton("Да, уверен"){dialog, which ->
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this, SignActivity::class.java))
+            finish()
+        }
+
+        sureAlert.setNegativeButton("Отмена"){dialog, which ->
+            Toast.makeText(applicationContext,
+                    "Мы рады, что вы остались!", Toast.LENGTH_SHORT).show()
+        }
+
+        val dialog: AlertDialog = sureAlert.create()
+        dialog.show()
+        
     }
 
     /**
