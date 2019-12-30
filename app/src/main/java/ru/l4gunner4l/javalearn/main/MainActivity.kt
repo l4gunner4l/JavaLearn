@@ -88,18 +88,18 @@ class MainActivity : AppCompatActivity() {
     fun signOut(view: View){
 
         val sureAlert = AlertDialog.Builder(this@MainActivity)
-        sureAlert.setTitle("Выход")
-        sureAlert.setMessage("Вы уверены, что хотите выйти?")
+        sureAlert.setTitle(getString(R.string.label_exit))
+        sureAlert.setMessage(getString(R.string.text_question_sure_sign_out))
         sureAlert.setCancelable(true)
-        sureAlert.setPositiveButton("Да, уверен"){dialog, which ->
+        sureAlert.setPositiveButton(getString(R.string.label_yes_sure)){ dialog, which ->
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(this, SignActivity::class.java))
             finish()
         }
 
-        sureAlert.setNegativeButton("Отмена"){dialog, which ->
+        sureAlert.setNegativeButton(getString(R.string.label_cancel)){ dialog, which ->
             Toast.makeText(applicationContext,
-                    "Мы рады, что вы остались!", Toast.LENGTH_SHORT).show()
+                    getString(R.string.text_you_stayed), Toast.LENGTH_SHORT).show()
         }
 
         val dialog: AlertDialog = sureAlert.create()
@@ -196,7 +196,7 @@ class MainActivity : AppCompatActivity() {
      * Метод для создания цветного текста с уровнем пользователя
      */
     private fun getLevelText(levelStr: String): SpannableString {
-        val spannable = SpannableString("${resources.getString(R.string.label_your_lvl)} $levelStr")
+        val spannable = SpannableString("${resources.getString(R.string.label_your_lvl)}: $levelStr")
         val startIndex = spannable.length-levelStr.length
         val endIndex = spannable.length
         spannable.setSpan(

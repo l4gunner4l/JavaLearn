@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Learn Java</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="label_exit">Exit</string>
+    <string name="label_lesson">Lesson</string>
+    <string name="label_lessons">Teaching</string>
+    <string name="label_profile">Profile</string>
+    <string name="label_shop">Shop</string>
+    <string name="label_sign_in">Sign in</string>
+    <string name="label_sign_out">Sign out</string>
+    <string name="label_sign_up">Sign in</string>
+    <string name="label_yes_sure">Yes, sure</string>
+    <string name="label_your_lvl">Your level</string>
+    <string name="text_email">E-mail</string>
+    <string name="text_enter_your_details">Input your  info</string>
+    <string name="text_error_fill_field">Fill in the field!</string>
+    <string name="text_error_not_available_lesson">Take previous lessons!</string>
+    <string name="text_error_signed_up">You are already signed in!</string>
+    <string name="text_error_too_little_name">Name is too short!</string>
+    <string name="text_error_too_little_password">Password must be longer than 8 chars!</string>
+    <string name="text_error_valid">Invalid data entered!</string>
+    <string name="text_error_wrong_auth">Incorrect data entered!</string>
+    <string name="text_error_wrong_email">Incorrect address!</string>
+    <string name="text_error_wrong_password">Password must contain only numbers and latin letters!</string>
+    <string name="text_error_wrong_repeat_password">Passwords don\'t match!</string>
+    <string name="text_name">Name</string>
+    <string name="text_password">Password</string>
+    <string name="text_password_repeat">Confirm password</string>
+    <string name="text_question_sure_sign_out">Are you sure want to sign out?</string>
+    <string name="text_sign_up">Sign in</string>
+    <string name="text_surname">Surname</string>
+    <string name="text_you_stayed">We are glad that you stayed!</string>
+</resources>

@@ -13,6 +13,7 @@
     <string name="text_password">Пароль</string>
     <string name="text_name">Имя</string>
     <string name="text_surname">Фамилия</string>
+    <string name="text_password_repeat">Повторите пароль</string>
 
     <string name="label_profile">Профиль</string>
     <string name="label_shop">Магазин</string>
@@ -25,11 +26,16 @@
     <string name="text_error_too_little_password">Пароль должен быть длиннее 8 символов!</string>
     <string name="text_error_wrong_password">Пароль должен содержать только цифры и лат. буквы!</string>
     <string name="text_error_signed_up">Вы уже зарегистрированы!</string>
-    <string name="text_password_repeat">Повторите пароль</string>
-    <string name="text_error_wrong_repeat_password">Пароли не совпадают</string>
+    <string name="text_error_wrong_repeat_password">Пароли не совпадают!</string>
     <string name="text_error_wrong_auth">Введены неверные данные!</string>
-
-    <string name="label_your_lvl">Твой уровень: </string>
     <string name="text_error_not_available_lesson">Сначала пройдите предыдущие уроки!</string>
+
+    <string name="text_question_sure_sign_out">Вы уверены, что хотите выйти?</string>
+    <string name="text_you_stayed">Мы рады, что вы остались!</string>
+
+    <string name="label_your_lvl">Твой уровень</string>
     <string name="label_lesson">Урок</string>
+    <string name="label_cancel">Отмена</string>
+    <string name="label_yes_sure">Да, уверен</string>
+    <string name="label_exit">Выход</string>
 </resources>
