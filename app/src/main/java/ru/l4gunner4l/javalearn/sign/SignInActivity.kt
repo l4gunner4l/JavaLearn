@@ -47,8 +47,8 @@ class SignInActivity : AppCompatActivity() {
 
         // auto-filling of email and password (temporarily)
         // автозаполнение email and password (временно)
-        /*emailTIL.editText!!.setText("qwerty@mail.ru")
-        passwordTIL.editText!!.setText("qwerty12")*/
+        emailTIL.editText!!.setText("155nimix@mail.ru")
+        passwordTIL.editText!!.setText("qwerty12")
 
         findViewById<Button>(R.id.sign_in_btn).setOnClickListener { startMainActivity() }
     }
