@@ -46,10 +46,10 @@ class LessonActivity : AppCompatActivity() {
     private fun setTextFromLesson(number:Int){
         val res: Int = when (number){
             1 -> R.raw.lesson1
-            2 -> R.raw.lesson1
-            3 -> R.raw.lesson1
-            4 -> R.raw.lesson1
-            5 -> R.raw.lesson1
+            2 -> R.raw.lesson2
+            3 -> R.raw.lesson3
+            4 -> R.raw.lesson4
+            5 -> R.raw.lesson5
             6 -> R.raw.lesson1
             7 -> R.raw.lesson1
             8 -> R.raw.lesson1
