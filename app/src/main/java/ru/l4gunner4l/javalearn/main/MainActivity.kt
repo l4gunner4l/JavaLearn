@@ -64,11 +64,15 @@ class MainActivity : AppCompatActivity() {
         userDbRef = db.reference.child("users").child(userId)
         userDbRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var starsList = mutableListOf<Int>()
+                for (starsSnapshot in dataSnapshot.child("starsList").children)
+                    starsList.add(starsSnapshot.getValue(Int::class.java)!!)
+
                 user = User(
                         dataSnapshot.child("id").value.toString(),
                         dataSnapshot.child("name").value.toString(),
                         dataSnapshot.child("email").value.toString(),
-                        mutableListOf(3,2,1,0)
+                        starsList
                 )
                 Log.i("M_MAIN", "3MainActivity - user=$user")
                 endLoading()
@@ -113,8 +117,8 @@ class MainActivity : AppCompatActivity() {
      */
     private fun endLoading() {
         updateUI()
-        findViewById<ProgressBar>(R.id.pb_progress).visibility = GONE
-        findViewById<ImageView>(R.id.iv_splash).visibility = GONE
+        findViewById<ProgressBar>(R.id.main_pb_progress).visibility = GONE
+        findViewById<ImageView>(R.id.main_iv_splash).visibility = GONE
     }
 
     private fun initViews() {

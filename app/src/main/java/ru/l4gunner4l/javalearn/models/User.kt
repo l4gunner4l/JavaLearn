@@ -18,12 +18,12 @@ class User {
         this.email = email
         starsList = mutableListOf(0)
     }
-    constructor(id: String, name: String, email: String, failsList: MutableList<Int>) {
+    constructor(id: String, name: String, email: String, starsList: MutableList<Int>) {
         this.id = id
         this.name = name
         this.email = email
-        this.level = failsList.size
-        this.starsList = failsList
+        this.level = starsList.size
+        this.starsList = starsList
     }
 
     fun lvlUp(){
@@ -36,10 +36,5 @@ class User {
             ", name=" + this.name +
             ", email=" + this.email +
             ", lvl=" + this.level + "}"
-
-    companion object {
-    }
-
-
 
 }

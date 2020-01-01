@@ -5,20 +5,26 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.google.firebase.database.*
 import ru.l4gunner4l.javalearn.R
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import ru.l4gunner4l.javalearn.models.Lesson
 
 class LessonActivity : AppCompatActivity() {
 
+    private var lesson = Lesson(1, "Name", "Some text", mutableListOf())
     private var lessonNum: Int = 1
     private var starsCount: Int = 0
     private lateinit var toolbar: Toolbar
     private lateinit var textTV: TextView
+
+    private lateinit var lessonDbRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +32,35 @@ class LessonActivity : AppCompatActivity() {
         val intent = intent
         lessonNum = intent.getIntExtra(EXTRA_LESSON_NUM, 1)
         starsCount = intent.getIntExtra(EXTRA_LESSON_STARS, 0)
+
+        lessonDbRef = FirebaseDatabase.getInstance().reference.child("lessons").child(lessonNum.toString())
+        lessonDbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var testsList = mutableListOf<Int>()
+                /*for (starsSnapshot in dataSnapshot.child("tests").children)
+                    testsList.add(starsSnapshot.getValue(Question::class.java)!!)*/
+
+                lesson = Lesson(
+                        dataSnapshot.child("number").getValue(Int::class.java)!!,
+                        dataSnapshot.child("name").value.toString(),
+                        dataSnapshot.child("text").value.toString(),
+                        testsList
+                )
+                Log.i("M_MAIN", "3MainActivity - user=$lesson")
+                endLoading()
+            }
+            override fun onCancelled(error: DatabaseError) { Log.i("M_MAIN", "Failed to read value.", error.toException()) }
+
+        })
+
+        initUI()
+    }
+
+    private fun initUI() {
         initToolbar()
-        findViewById<TextView>(R.id.lesson_tv_stars).append(" $starsCount")
+
         textTV = findViewById(R.id.lesson_tv_text)
         textTV.movementMethod = ScrollingMovementMethod()
-        setTextFromLesson(lessonNum)
     }
 
     private fun initToolbar() {
@@ -38,12 +68,24 @@ class LessonActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.title = null
 
-        toolbar.findViewById<TextView>(R.id.lesson_toolbar_tv_title)
-                .append(" $lessonNum")
         toolbar.findViewById<ImageView>(R.id.lesson_toolbar_iv_back).setOnClickListener{ finish() }
     }
 
-    private fun setTextFromLesson(number:Int){
+    private fun endLoading() {
+        updateUI()
+        findViewById<ProgressBar>(R.id.lesson_pb_progress).visibility = View.GONE
+        findViewById<ImageView>(R.id.lesson_iv_splash).visibility = View.GONE
+    }
+
+    private fun updateUI() {
+        toolbar.findViewById<TextView>(R.id.lesson_toolbar_tv_title)
+                .setText("${getString(R.string.label_lesson)} $lessonNum")
+        findViewById<TextView>(R.id.lesson_tv_stars).text = "Количество звёзд - $starsCount"
+        findViewById<TextView>(R.id.lesson_tv_name).text = lesson.name
+        setTextFromLesson(lesson.text)
+    }
+
+    /*private fun setTextFromLesson(number:Int){
         val res: Int = when (number){
             1 -> R.raw.lesson1
             2 -> R.raw.lesson2
@@ -70,6 +112,9 @@ class LessonActivity : AppCompatActivity() {
             textTV.text = Html.fromHtml(sBuffer.toString())
             inputStream.close()
         } catch (e: Exception){ textTV.text = "Some Error!!!" }
+    }*/
+    private fun setTextFromLesson(text:String){
+        textTV.text = Html.fromHtml(text)
     }
 
     companion object {

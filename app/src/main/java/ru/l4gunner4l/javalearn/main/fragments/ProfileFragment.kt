@@ -26,6 +26,7 @@ class ProfileFragment : Fragment() {
     private var isEditMode = false
     private lateinit var user: User
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         user = (activity as MainActivity).getUser()
