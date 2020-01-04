@@ -38,4 +38,6 @@
     <string name="label_cancel">Отмена</string>
     <string name="label_yes_sure">Да, уверен</string>
     <string name="label_exit">Выход</string>
+    <string name="label_go_test">Пройти тест</string>
+    <string name="label_check">Проверить</string>
 </resources>

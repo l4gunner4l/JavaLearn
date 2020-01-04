@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn.sign
+package ru.l4gunner4l.javalearn.ui.signscreens
 
 import android.content.Context
 import android.content.Intent
@@ -14,8 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.main.MainActivity
-import ru.l4gunner4l.javalearn.models.User
+import ru.l4gunner4l.javalearn.data.models.User
+import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
 import ru.l4gunner4l.javalearn.utils.Utils
 import java.util.regex.Pattern
 

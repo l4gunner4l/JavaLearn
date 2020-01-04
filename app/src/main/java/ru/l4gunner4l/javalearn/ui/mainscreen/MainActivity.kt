@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn.main
+package ru.l4gunner4l.javalearn.ui.mainscreen
 
 import android.app.AlertDialog
 import android.content.Context
@@ -24,11 +24,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.main.fragments.LessonsFragment
-import ru.l4gunner4l.javalearn.main.fragments.ProfileFragment
-import ru.l4gunner4l.javalearn.main.fragments.ShopFragment
-import ru.l4gunner4l.javalearn.models.User
-import ru.l4gunner4l.javalearn.sign.SignActivity
+import ru.l4gunner4l.javalearn.data.models.User
+import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.LessonsFragment
+import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.ProfileFragment
+import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.ShopFragment
+import ru.l4gunner4l.javalearn.ui.signscreens.SignActivity
 
 
 /**

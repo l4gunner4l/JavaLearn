@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ru.l4gunner4l.javalearn.ui.AspectRatioImageView
+        <ru.l4gunner4l.javalearn.ui.customview.AspectRatioImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/profile_bg"
@@ -27,7 +27,7 @@
             android:layout_marginEnd="@dimen/margin_16dp"
             />
 
-        <ru.l4gunner4l.javalearn.ui.CircleImageView
+        <ru.l4gunner4l.javalearn.ui.customview.CircleImageView
             android:id="@+id/civ_avatar"
             android:layout_width="@dimen/avatar_round_size_112dp"
             android:layout_height="@dimen/avatar_round_size_112dp"
@@ -75,7 +75,7 @@
                     android:layout_height="48dp"
                     android:maxLength="30"
                     android:inputType="textPersonName"
-                    android:textAppearance="@style/Text.Medium"
+                    android:textAppearance="@style/Text.Small"
                     android:textColor="@color/colorTextDark"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -98,7 +98,7 @@
                     android:layout_height="48dp"
                     android:maxLength="30"
                     android:inputType="textEmailAddress"
-                    android:textAppearance="@style/Text.Medium"
+                    android:textAppearance="@style/Text.Small"
                     android:textColor="@color/colorTextDark"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -112,6 +112,6 @@
         android:layout_centerHorizontal="true"
         android:text="@string/label_sign_out"
         android:onClick="signOut"
-        style="@style/BtnSignOut" />
+        style="@style/BtnAccent.BtnSignOut" />
 
 </RelativeLayout>

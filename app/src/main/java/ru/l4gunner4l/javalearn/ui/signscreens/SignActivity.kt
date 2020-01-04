@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn.sign
+package ru.l4gunner4l.javalearn.ui.signscreens
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.main.MainActivity
+import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
 
 /**
  * Activity for transition in SignInActivity or SignUpActivity

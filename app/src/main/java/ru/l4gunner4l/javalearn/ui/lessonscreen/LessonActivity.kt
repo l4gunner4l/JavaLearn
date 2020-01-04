@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn.lessonscreen
+package ru.l4gunner4l.javalearn.ui.lessonscreen
 
 import android.app.Activity
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.text.Html
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -14,7 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.database.*
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.models.Lesson
+import ru.l4gunner4l.javalearn.data.models.Lesson
+import ru.l4gunner4l.javalearn.ui.testscreen.TestActivity
 
 class LessonActivity : AppCompatActivity() {
 
@@ -29,6 +31,8 @@ class LessonActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lesson)
+        initUI()
+
         val intent = intent
         lessonNum = intent.getIntExtra(EXTRA_LESSON_NUM, 1)
         starsCount = intent.getIntExtra(EXTRA_LESSON_STARS, 0)
@@ -53,7 +57,6 @@ class LessonActivity : AppCompatActivity() {
 
         })
 
-        initUI()
     }
 
     private fun initUI() {
@@ -61,6 +64,11 @@ class LessonActivity : AppCompatActivity() {
 
         textTV = findViewById(R.id.lesson_tv_text)
         textTV.movementMethod = ScrollingMovementMethod()
+
+        findViewById<Button>(R.id.lesson_btn_go_test)
+                .setOnClickListener {
+                    startActivity(TestActivity.newInstance(this@LessonActivity, lessonNum))
+                }
     }
 
     private fun initToolbar() {

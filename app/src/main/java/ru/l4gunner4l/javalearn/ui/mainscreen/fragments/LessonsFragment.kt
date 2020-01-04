@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn.main.fragments
+package ru.l4gunner4l.javalearn.ui.mainscreen.fragments
 
 import android.app.Activity
 import android.os.Bundle
@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.lessonscreen.LessonActivity
-import ru.l4gunner4l.javalearn.main.MainActivity
-import ru.l4gunner4l.javalearn.main.adapters.LessonsAdapter
-import ru.l4gunner4l.javalearn.main.adapters.LessonsAdapter.ItemClickListener
-import ru.l4gunner4l.javalearn.models.User
+import ru.l4gunner4l.javalearn.data.models.User
+import ru.l4gunner4l.javalearn.ui.lessonscreen.LessonActivity
+import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
+import ru.l4gunner4l.javalearn.ui.mainscreen.adapters.LessonsAdapter
+import ru.l4gunner4l.javalearn.ui.mainscreen.adapters.LessonsAdapter.ItemClickListener
 
 class LessonsFragment : Fragment(){
 
@@ -29,7 +29,7 @@ class LessonsFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_lessons, container, false)
         rvLessons = view.findViewById(R.id.rv_lessons)
-        rvAdapter = LessonsAdapter(activity!!.baseContext, user.starsList, object : ItemClickListener{
+        rvAdapter = LessonsAdapter(activity!!.baseContext, user.starsList, object : ItemClickListener {
             override fun onItemClick(view: View?, position: Int) {
                 //openLessonClick(position)
             }
@@ -54,7 +54,7 @@ class LessonsFragment : Fragment(){
     }
 
     private fun updateInfo(user: User) {
-        rvAdapter = LessonsAdapter(activity!!.baseContext, user.starsList, object : ItemClickListener{
+        rvAdapter = LessonsAdapter(activity!!.baseContext, user.starsList, object : ItemClickListener {
             override fun onItemClick(view: View?, position: Int) {
                 openLessonClick(position)
             }

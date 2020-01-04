@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn.ui
+package ru.l4gunner4l.javalearn.ui.customview
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi

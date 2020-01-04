@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn.sign
+package ru.l4gunner4l.javalearn.ui.signscreens
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.main.MainActivity
+import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
 import ru.l4gunner4l.javalearn.utils.Utils
 import java.util.regex.Pattern
 
@@ -47,8 +47,8 @@ class SignInActivity : AppCompatActivity() {
 
         // auto-filling of email and password (temporarily)
         // автозаполнение email and password (временно)
-        emailTIL.editText!!.setText("155nimix@mail.ru")
-        passwordTIL.editText!!.setText("qwerty12")
+        /*emailTIL.editText!!.setText("155nimix@mail.ru")
+        passwordTIL.editText!!.setText("qwerty12")*/
 
         findViewById<Button>(R.id.sign_in_btn).setOnClickListener { startMainActivity() }
     }

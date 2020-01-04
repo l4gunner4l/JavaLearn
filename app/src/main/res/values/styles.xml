@@ -21,46 +21,62 @@
     </style>
 
     <style name="Text.Huge">
-        <item name="android:textSize">@dimen/text_size_20sp</item>
+        <item name="android:textSize">@dimen/text_size_22sp</item>
     </style>
     <style name="Text.Big">
-        <item name="android:textSize">@dimen/text_size_18sp</item>
+        <item name="android:textSize">@dimen/text_size_20sp</item>
     </style>
     <style name="Text.Medium">
-        <item name="android:textSize">@dimen/text_size_16sp</item>
+        <item name="android:textSize">@dimen/text_size_18sp</item>
     </style>
     <style name="Text.Small">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+    </style>
+    <style name="Text.Tiny">
         <item name="android:textSize">@dimen/text_size_14sp</item>
     </style>
 
 
 
     <!--BUTTON STYLES-->
-    <style name="BtnSignOut">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">45dp</item>
-        <item name="android:paddingStart">@dimen/margin_32dp</item>
-        <item name="android:paddingEnd">@dimen/margin_32dp</item>
-        <item name="android:drawableStart">@drawable/ic_sign_out_light_24dp</item>
-        <item name="android:drawablePadding">@dimen/margin_8dp</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">@color/colorTextLight</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
-        <item name="android:background">@color/colorBtnSignOut</item>
-    </style>
-
     <style name="BtnAccent">
         <item name="android:elevation">10dp</item>
         <item name="android:background">@drawable/btn_orange</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:textAppearance">@style/Text.Small</item>
         <item name="android:textColor">@color/colorTextLight</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="BtnAccent.BtnSignOut">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:paddingStart">@dimen/margin_32dp</item>
+        <item name="android:paddingEnd">@dimen/margin_32dp</item>
+        <item name="android:drawableStart">@drawable/ic_sign_out_light_24dp</item>
+        <item name="android:drawablePadding">@dimen/margin_8dp</item>
+        <item name="android:background">@drawable/btn_sign_out_red</item>
+    </style>
+
+    <style name="BtnAccent.BtnTestCheck">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:paddingStart">@dimen/margin_32dp</item>
+        <item name="android:paddingEnd">@dimen/margin_32dp</item>
+        <item name="android:background">@drawable/btn_check_green</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BtnAccent.BtnTest">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:paddingStart">@dimen/margin_32dp</item>
+        <item name="android:paddingEnd">@dimen/margin_32dp</item>
+    </style>
+
     <style name="BtnAccent.BtnSign">
         <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">54dp</item>
     </style>
 
 
@@ -71,7 +87,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColorHint">@color/colorAccent</item>
-        <item name="hintTextAppearance">@style/Text.Medium</item>
+        <item name="hintTextAppearance">@style/Text.Small</item>
     </style>
 
     <style name="TIL.Sign">
@@ -89,7 +105,7 @@
         <item name="android:background">@drawable/edit_text_light</item>
         <item name="android:padding">@dimen/padding_8dp</item>
         <item name="android:maxLength">30</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:textAppearance">@style/Text.Small</item>
         <item name="android:textColor">@color/colorTextDark</item>
         <item name="android:singleLine">true</item>
 
@@ -102,7 +118,7 @@
     <style name="TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@style/Text.Medium</item>
+        <item name="android:textAppearance">@style/Text.Small</item>
     </style>
     <style name="TextView.Toolbar">
         <item name="android:textSize">@dimen/text_size_22sp</item>
@@ -136,7 +152,14 @@
         <item name="colorControlActivated">@color/colorLight</item>
     </style>
 
-
+    <style name="TestRadioButton" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTextDark</item>
+        <item name="android:textSize">@dimen/text_size_18sp</item>
+        <item name="colorControlNormal">@color/colorGrey</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
 
 
 </resources>

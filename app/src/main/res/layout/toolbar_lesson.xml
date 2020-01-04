@@ -14,6 +14,7 @@
     <TextView
         android:id="@+id/lesson_toolbar_tv_title"
         style="@style/TextView.Toolbar"
+        android:layout_gravity="center"
         android:text="@string/label_lesson"
         android:textColor="@color/colorTextDark"/>
 

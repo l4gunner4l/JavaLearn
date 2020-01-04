@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".sign.SignActivity">
+    tools:context=".ui.signscreens.SignActivity">
 
     <ImageView
         android:layout_width="400dp"

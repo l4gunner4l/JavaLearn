@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn.main.fragments
+package ru.l4gunner4l.javalearn.ui.mainscreen.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

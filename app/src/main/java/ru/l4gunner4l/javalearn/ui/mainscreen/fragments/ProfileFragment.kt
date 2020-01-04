@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn.main.fragments
+package ru.l4gunner4l.javalearn.ui.mainscreen.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.FirebaseDatabase
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.main.MainActivity
-import ru.l4gunner4l.javalearn.models.User
+import ru.l4gunner4l.javalearn.data.models.User
+import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
 import ru.l4gunner4l.javalearn.utils.extensions.hideKeyboard
 import ru.l4gunner4l.javalearn.utils.extensions.showKeyboard
 
@@ -55,13 +55,13 @@ class ProfileFragment : Fragment() {
         return view
     }
 
-    fun setUserUI(user:User){
+    fun setUserUI(user: User){
         this.user = user
         nameTIL.editText!!.setText(user.name)
         emailTIL.editText!!.setText(user.email)
     }
 
-    private fun updateDBUser(user:User): Boolean {
+    private fun updateDBUser(user: User): Boolean {
         val newName = nameTIL.editText!!.text.toString().trim()
         //val newEmail = emailTIL.editText!!.text.toString().trim()
         return if (

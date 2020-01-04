@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".sign.SignInActivity">
+    tools:context=".ui.signscreens.SignInActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/sign_in_toolbar"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="@string/text_enter_your_details"
             style="@style/TextView.Light"
-            android:textAppearance="@style/Text.Huge"/>
+            android:textAppearance="@style/Text.Big"/>
     </androidx.appcompat.widget.Toolbar>
 
     <View

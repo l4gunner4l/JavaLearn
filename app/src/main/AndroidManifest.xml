@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.l4gunner4l.javalearn">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
@@ -12,35 +10,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ui.testscreen.TestActivity"></activity>
         <activity
-            android:name=".lessonscreen.LessonActivity"
-            android:parentActivityName=".main.MainActivity"/>
-
+            android:name=".ui.lessonscreen.LessonActivity"
+            android:parentActivityName=".ui.mainscreen.MainActivity" />
         <activity
-            android:name=".sign.SignActivity"
+            android:name=".ui.signscreens.SignActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".sign.SignUpActivity"
-            android:parentActivityName=".sign.SignActivity"
+            android:name=".ui.signscreens.SignUpActivity"
+            android:parentActivityName=".ui.signscreens.SignActivity"
             android:windowSoftInputMode="stateVisible" /> <!-- Открытие клавы сразу при открытии -->
-
         <activity
-            android:name=".sign.SignInActivity"
-            android:parentActivityName=".sign.SignActivity"
+            android:name=".ui.signscreens.SignInActivity"
+            android:parentActivityName=".ui.signscreens.SignActivity"
             android:windowSoftInputMode="stateVisible" /> <!-- Открытие клавы сразу при открытии -->
-
         <activity
-            android:name=".main.MainActivity"
+            android:name=".ui.mainscreen.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

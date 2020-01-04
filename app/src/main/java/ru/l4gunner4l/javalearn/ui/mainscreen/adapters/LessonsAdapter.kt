@@ -1,4 +1,4 @@
-package ru.l4gunner4l.javalearn.main.adapters
+package ru.l4gunner4l.javalearn.ui.mainscreen.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
