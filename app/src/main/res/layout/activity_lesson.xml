@@ -65,7 +65,7 @@
                 style="@style/TextView.LessonName"
                 android:layout_margin="@dimen/margin_16dp"
                 android:layout_marginTop="12dp"
-                android:text="Название урока"
+                android:text="Побитовые и поразрядные операции"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view2" />

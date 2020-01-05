@@ -40,9 +40,7 @@ class LessonActivity : AppCompatActivity() {
         lessonDbRef = FirebaseDatabase.getInstance().reference.child("lessons").child(lessonNum.toString())
         lessonDbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var testsList = mutableListOf<Int>()
-                /*for (starsSnapshot in dataSnapshot.child("tests").children)
-                    testsList.add(starsSnapshot.getValue(Question::class.java)!!)*/
+                val testsList = mutableListOf<Int>()
 
                 lesson = Lesson(
                         dataSnapshot.child("number").getValue(Int::class.java)!!,

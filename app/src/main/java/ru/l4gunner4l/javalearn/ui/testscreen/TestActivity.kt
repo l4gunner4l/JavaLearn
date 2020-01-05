@@ -17,6 +17,7 @@ class TestActivity : AppCompatActivity() {
         lessonNum = intent.getIntExtra(EXTRA_LESSON_NUM, 1)
     }
 
+
     companion object {
         private const val EXTRA_LESSON_NUM = "EXTRA_LESSON_NUM"
 
