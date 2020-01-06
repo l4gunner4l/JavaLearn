@@ -3,6 +3,7 @@ package ru.l4gunner4l.javalearn.ui.mainscreen
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -22,8 +23,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import ru.l4gunner4l.javalearn.R
+import ru.l4gunner4l.javalearn.data.FirebaseCallback
 import ru.l4gunner4l.javalearn.data.models.User
 import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.LessonsFragment
 import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.ProfileFragment
@@ -48,47 +53,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var nav: BottomNavigationView
     private lateinit var toolbar: Toolbar
     private var user: User = User("0", "-", "-")
-
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseDatabase
-    private lateinit var userDbRef: DatabaseReference
+    fun getUser() = user
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        auth = FirebaseAuth.getInstance()
-        val userId = auth.currentUser!!.uid
-        db = FirebaseDatabase.getInstance()
-        userDbRef = db.reference.child("users").child(userId)
-        userDbRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var starsList = mutableListOf<Int>()
-                for (starsSnapshot in dataSnapshot.child("starsList").children)
-                    starsList.add(starsSnapshot.getValue(Int::class.java)!!)
-
-                user = User(
-                        dataSnapshot.child("id").value.toString(),
-                        dataSnapshot.child("name").value.toString(),
-                        dataSnapshot.child("email").value.toString(),
-                        starsList
-                )
-                Log.i("M_MAIN", "3MainActivity - user=$user")
-                endLoading()
-            }
-            override fun onCancelled(error: DatabaseError) { Log.i("M_MAIN", "Failed to read value.", error.toException()) }
-
-        })
         initViews()
+        LoadUser().execute()
     }
 
-    fun getUser() = user
-
-    /**
-     * Method for sign out
-     * Метод для выхода из профиля
-     */
     fun signOut(view: View){
 
         val sureAlert = AlertDialog.Builder(this@MainActivity)
@@ -108,17 +82,46 @@ class MainActivity : AppCompatActivity() {
 
         val dialog: AlertDialog = sureAlert.create()
         dialog.show()
-        
+
     }
 
-    /**
-     * Method for hiding ProgressBar and background
-     * Метод для скрытия ProgressBar и скрывающего фона
-     */
+
+    private fun loadUser(firebaseCallback: FirebaseCallback) {
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        FirebaseDatabase.getInstance().reference.child("users").child(userId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val starsList = mutableListOf<Int>()
+                        for (starsSnapshot in dataSnapshot.child("starsList").children)
+                            starsList.add(starsSnapshot.getValue(Int::class.java)!!)
+
+                        user = User(
+                                dataSnapshot.child("id").value.toString(),
+                                dataSnapshot.child("name").value.toString(),
+                                dataSnapshot.child("email").value.toString(),
+                                starsList
+                        )
+                        Log.i("M_MAIN", "3MainActivity - user=$user")
+                        firebaseCallback.onCallback(user)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.i("M_MAIN", "Failed to read value.", error.toException())
+                    }
+
+                })
+    }
+
     private fun endLoading() {
         updateUI()
         findViewById<ProgressBar>(R.id.main_pb_progress).visibility = GONE
         findViewById<ImageView>(R.id.main_iv_splash).visibility = GONE
+    }
+
+    private fun updateUI() {
+        toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.level.toString())
+        profileFragment.setUserUI(user)
+        lessonsFragment.setUserUI(user)
     }
 
     private fun initViews() {
@@ -153,13 +156,6 @@ class MainActivity : AppCompatActivity() {
         fm.beginTransaction().add(R.id.main_fragment_container, shopFragment, "2").hide(shopFragment).commit()
         fm.beginTransaction().add(R.id.main_fragment_container, activeFragment, "1").commit()
     }
-
-    private fun updateUI() {
-        toolbar.findViewById<TextView>(R.id.tv_title).text = getLevelText(user.level.toString())
-        profileFragment.setUserUI(user)
-        lessonsFragment.setUserUI(user)
-    }
-
     private fun initToolbar() {
         toolbar = findViewById(R.id.main_toolbar)
         setSupportActionBar(toolbar)
@@ -167,10 +163,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    /**
-     * Method for changing active fragment
-     * Метод для изменения фрагмента
-     */
     private fun changeFragment(fm: FragmentManager, fragment: Fragment) {
         fm.beginTransaction()
                 .hide(activeFragment)
@@ -222,6 +214,18 @@ class MainActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             return intent
         }
+    }
+
+    inner class LoadUser : AsyncTask<Void, Void, Void>(){
+        override fun doInBackground(vararg params: Void?): Void? {
+            loadUser(object : FirebaseCallback {
+                override fun onCallback(obj: Any) {
+                    endLoading()
+                }
+            })
+            return null
+        }
+
     }
 
 }

@@ -17,8 +17,7 @@
 
     <TextView
         android:id="@+id/tv_title"
-        style="@style/TextView.Toolbar"
-        android:textColor="@color/colorTextLight"
+        style="@style/TextView.Toolbar.Light"
         android:text="@string/label_your_lvl"/>
 
     <!--<ImageView

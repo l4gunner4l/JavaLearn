@@ -121,18 +121,14 @@
         <item name="android:textAppearance">@style/Text.Small</item>
     </style>
     <style name="TextView.Toolbar">
-        <item name="android:textSize">@dimen/text_size_22sp</item>
+        <item name="android:textAppearance">@style/Text.Huge</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="TextView.Light">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="TextView.Toolbar.Light">
         <item name="android:textColor">@color/colorTextLight</item>
     </style>
-    <style name="TextView.Dark">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="TextView.Toolbar.Dark">
         <item name="android:textColor">@color/colorTextDark</item>
     </style>
     <style name="TextView.LessonName">
@@ -140,9 +136,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/text_size_22sp</item>
-        <item name="android:layout_gravity">center</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>
+    </style>
+    <style name="TextView.LessonText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textAlignment">inherit</item>
+        <item name="android:textAppearance">@style/Text.Tiny</item>
+        <item name="android:textColor">@color/colorTextDark</item>
     </style>
 
 
@@ -161,6 +162,7 @@
         <item name="colorControlNormal">@color/colorGrey</item>
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
+
 
 
 </resources>

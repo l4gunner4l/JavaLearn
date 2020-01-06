@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        style="@style/TextView.Dark"
+        style="@style/TextView"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Раздел в разработке..." />

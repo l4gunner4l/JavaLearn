@@ -31,59 +31,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lesson_toolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <TextView
-                android:id="@+id/lesson_tv_stars"
-                style="@style/TextView.Dark"
-                android:text="Количество звёзд - "
-                android:textAlignment="center"
+                android:id="@+id/lesson_tv_name"
+                style="@style/TextView.LessonName"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:text="Побитовые и поразрядные операции" />
+            <TextView
+                android:id="@+id/lesson_tv_text"
+                android:text="Some text"
+                android:layout_gravity="center"
                 android:layout_margin="@dimen/margin_16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <Button
-                android:id="@+id/lesson_btn_go_test"
-                style="@style/BtnAccent.BtnTest"
-                android:layout_marginTop="16dp"
-                android:text="@string/label_go_test"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lesson_tv_stars" />
+                style="@style/TextView.LessonText" />
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/colorAccent"
-                android:layout_marginTop="@dimen/margin_16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lesson_btn_go_test" />
+                android:layout_gravity="center" />
             <TextView
-                android:id="@+id/lesson_tv_name"
-                style="@style/TextView.LessonName"
-                android:layout_margin="@dimen/margin_16dp"
-                android:layout_marginTop="12dp"
-                android:text="Побитовые и поразрядные операции"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view2" />
-            <TextView
-                android:id="@+id/lesson_tv_text"
-                android:layout_width="match_parent"
+                android:id="@+id/lesson_tv_stars"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Some text"
-                android:textAlignment="inherit"
-                android:textAppearance="@style/Text.Tiny"
+                android:text="Количество звёзд - "
                 android:textColor="@color/colorTextDark"
-                android:layout_margin="@dimen/margin_16dp"
-                android:paddingBottom="@dimen/margin_32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lesson_tv_name"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_16dp" />
+            <Button
+                android:id="@+id/lesson_btn_go_test"
+                style="@style/BtnAccent.BtnTest"
+                android:text="@string/label_go_test"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:layout_marginBottom="64dp"/>
+
+        </LinearLayout>
     </ScrollView>
 
     <ImageView
@@ -106,7 +94,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone"/>
 
 
 

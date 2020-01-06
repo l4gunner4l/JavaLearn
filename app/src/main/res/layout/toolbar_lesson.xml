@@ -13,9 +13,8 @@
 
     <TextView
         android:id="@+id/lesson_toolbar_tv_title"
-        style="@style/TextView.Toolbar"
+        style="@style/TextView.Toolbar.Dark"
         android:layout_gravity="center"
-        android:text="@string/label_lesson"
-        android:textColor="@color/colorTextDark"/>
+        android:text="@string/label_lesson"/>
 
 </androidx.appcompat.widget.Toolbar>

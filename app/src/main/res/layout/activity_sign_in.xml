@@ -21,8 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_enter_your_details"
-            style="@style/TextView.Light"
-            android:textAppearance="@style/Text.Big"/>
+            style="@style/TextView.Toolbar.Light"/>
     </androidx.appcompat.widget.Toolbar>
 
     <View

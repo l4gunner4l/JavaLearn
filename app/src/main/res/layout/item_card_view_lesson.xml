@@ -36,7 +36,8 @@
             android:id="@+id/item_tv_lesson_number"
             android:layout_above="@id/item_rating_lesson"
             android:layout_centerHorizontal="true"
-            style="@style/TextView.Light"
+            style="@style/TextView"
+            android:textColor="@color/colorTextLight"
             android:textStyle="bold"
             android:textSize="80sp"
             android:text="1"/>
