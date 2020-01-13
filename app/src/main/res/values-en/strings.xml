@@ -36,4 +36,6 @@
     <string name="label_exit_from_test">Exit from test</string>
     <string name="text_question_sure_exit_from_test">The result will not be saved! Are you sure you want to exit the test?</string>
     <string name="text_lets_continue">Continue!</string>
+    <string name="text_not_saving_results">Result didn\'t upgrade</string>
+    <string name="text_saving_results">Your new result saved!</string>
 </resources>

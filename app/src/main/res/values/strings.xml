@@ -34,6 +34,8 @@
     <string name="text_question_sure_exit_from_test">Результат не сохранится! Вы уверены, что хотите выйти из теста?</string>
     <string name="text_you_stayed">Мы рады, что вы остались!</string>
     <string name="text_lets_continue">Продолжаем!</string>
+    <string name="text_saving_results">Ваш результат сохранён!</string>
+    <string name="text_not_saving_results">Результат не улучшен.</string>
 
     <string name="label_your_lvl">Твой уровень</string>
     <string name="label_lesson">Урок</string>

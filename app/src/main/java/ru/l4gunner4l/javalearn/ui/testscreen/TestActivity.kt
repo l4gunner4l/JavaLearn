@@ -27,6 +27,7 @@ class TestActivity : AppCompatActivity() {
     private var lessonNum: Int = 1
     private var test: MutableList<TestQuestion> = mutableListOf()
     private var currentQuestionIndex: Int = 0
+    private var failuresCount: Int = 0
 
     private lateinit var curtainIV: ImageView
     private lateinit var loadingPB: ProgressBar
@@ -55,7 +56,6 @@ class TestActivity : AppCompatActivity() {
         checkBtn = findViewById(R.id.test_btn_check)
         checkBtn.setOnClickListener { checkAnswer() }
     }
-
     private fun initToolbar() {
         toolbar = findViewById(R.id.test_toolbar)
         setSupportActionBar(toolbar)
@@ -63,18 +63,6 @@ class TestActivity : AppCompatActivity() {
         progressPB = toolbar.findViewById(R.id.test_toolbar_progressBar)
         toolbar.findViewById<ImageView>(R.id.test_toolbar_iv_back)
                 .setOnClickListener{ showSureDialog() }
-    }
-
-    private fun showSureDialog() {
-        val sureAlert = AlertDialog.Builder(this@TestActivity)
-        sureAlert.setTitle(getString(R.string.label_exit_from_test))
-                .setMessage(getString(R.string.text_question_sure_exit_from_test))
-                .setCancelable(true)
-                .setPositiveButton(getString(R.string.label_yes_sure)) { dialog, which -> finish() }
-                .setNegativeButton(getString(R.string.label_cancel)) { dialog, which ->
-                    Toast.makeText(applicationContext, getString(R.string.text_lets_continue), Toast.LENGTH_SHORT).show()
-                }
-        sureAlert.create().show()
     }
 
     private fun loadTest(firebaseCallback: FirebaseCallback){
@@ -107,22 +95,39 @@ class TestActivity : AppCompatActivity() {
     }
 
     private fun checkAnswer() {
-        Toast.makeText(this, "answersGroup.checkedRadioButtonId=${answersGroup.checkedRadioButtonId}", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "answersGroup.checkedRadioButtonId=${answersGroup.checkedRadioButtonId}", Toast.LENGTH_SHORT).show()
         if (answersGroup.checkedRadioButtonId == -1)
             Toast.makeText(this, "Answer, please!", Toast.LENGTH_SHORT).show()
         else {
-            if (currentQuestionIndex==9){
-                finish()
-                progressPB.progress = currentQuestionIndex+1
+            if (answersGroup.checkedRadioButtonId != test[currentQuestionIndex].rightAnswer){
+                failuresCount++
             }
-            else {
-                if (answersGroup.checkedRadioButtonId != test[currentQuestionIndex].rightAnswer){
-                    Toast.makeText(this, "Wrong answer!(((", Toast.LENGTH_SHORT).show()
-                } else Toast.makeText(this, "Right answer!)))", Toast.LENGTH_SHORT).show()
-                currentQuestionIndex++
-                updateUI(test[currentQuestionIndex])
-            }
+            //Toast.makeText(this, "$failuresCount fails", Toast.LENGTH_SHORT).show()
+
+            currentQuestionIndex++
+            if (currentQuestionIndex==10) finishActivity()
+            else updateUI(test[currentQuestionIndex])
+
+            answersGroup.clearCheck()
         }
+    }
+
+    private fun finishActivity() {
+        if (currentQuestionIndex == 10){
+            progressPB.progress = currentQuestionIndex+1
+            val newStarsCount: Int = when(failuresCount){
+                0 -> 3
+                1 -> 2
+                2 -> 1
+                else -> 0
+            }
+            setResult(
+                    RESULT_OK,
+                    Intent().putExtra(EXTRA_STARS_COUNT, newStarsCount)
+            )
+        } else setResult(Activity.RESULT_CANCELED)
+
+        finish()
     }
 
     private fun updateUI(testQuestion: TestQuestion) {
@@ -137,7 +142,7 @@ class TestActivity : AppCompatActivity() {
             val radioButton = AppCompatRadioButton(this)
             radioButton.text = answer
             radioButton.id = i+1
-            radioButton.setMyStyle(R.color.colorAccent, R.color.colorGrey)
+            radioButton.setMyStyle()
 
             answersGroup.addView(radioButton)
         }
@@ -146,8 +151,21 @@ class TestActivity : AppCompatActivity() {
         loadingPB.visibility = View.GONE
     }
 
+    private fun showSureDialog() {
+        val sureAlert = AlertDialog.Builder(this@TestActivity)
+        sureAlert.setTitle(getString(R.string.label_exit_from_test))
+                .setMessage(getString(R.string.text_question_sure_exit_from_test))
+                .setCancelable(true)
+                .setPositiveButton(getString(R.string.label_yes_sure)) { dialog, which -> finishActivity() }
+                .setNegativeButton(getString(R.string.label_cancel)) { dialog, which ->
+                    Toast.makeText(applicationContext, getString(R.string.text_lets_continue), Toast.LENGTH_SHORT).show()
+                }
+        sureAlert.create().show()
+    }
+
     companion object {
         private const val EXTRA_LESSON_NUM = "EXTRA_LESSON_NUM"
+        public const val EXTRA_STARS_COUNT = "EXTRA_STARS_COUNT"
 
         fun newInstance(context: Activity, lessonNum: Int): Intent {
             val intent = Intent(context, TestActivity::class.java)

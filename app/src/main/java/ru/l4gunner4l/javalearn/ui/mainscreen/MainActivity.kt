@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadUser(firebaseCallback: FirebaseCallback) {
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
         FirebaseDatabase.getInstance().reference.child("users").child(userId)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
+                .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         val starsList = mutableListOf<Int>()
                         for (starsSnapshot in dataSnapshot.child("starsList").children)
