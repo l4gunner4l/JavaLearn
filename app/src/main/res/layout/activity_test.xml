@@ -5,50 +5,74 @@
     android:layout_height="match_parent"
     tools:context=".ui.testscreen.TestActivity">
 
-    <include
-        android:id="@+id/test_toolbar"
-        layout="@layout/toolbar_test"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/test_toolbar"
-        android:background="@color/colorAccent"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="@dimen/margin_16dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/test_tv_question"
-            android:layout_height="wrap_content"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/test_toolbar"
+            layout="@layout/toolbar_test"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/test_toolbar"
+            android:background="@color/colorAccent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/margin_16dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/test_tv_question"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                tools:text="Чем отличается объявление переменной от её инициализации?"
+                android:textColor="@color/colorTextDark"
+                android:textAlignment="center"
+                style="@style/Text.Huge" />
+            <RadioGroup
+                android:id="@+id/test_radio_group_answers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_16dp"
+                style="@style/TestRadioButton"
+                android:gravity="start"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/test_btn_check"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/margin_16dp"
-            tools:text="Чем отличается объявление переменной от её инициализации?"
-            android:textColor="@color/colorTextDark"
-            android:textAlignment="center"
-            style="@style/Text.Huge" />
-        <RadioGroup
-            android:id="@+id/test_radio_group_answers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"/>
-    </LinearLayout>
+            android:text="@string/label_check"
+            style="@style/BtnAccent.BtnTestCheck"/>
+    </RelativeLayout>
 
-    <Button
-        android:id="@+id/text_btn_check"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_16dp"
-        android:text="@string/label_check"
-        style="@style/BtnAccent.BtnTestCheck"/>
+
+    <ImageView
+        android:id="@+id/test_iv_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:background="@color/colorLight"
+        tools:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/test_pb_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        tools:visibility="gone"/>
 
 </RelativeLayout>

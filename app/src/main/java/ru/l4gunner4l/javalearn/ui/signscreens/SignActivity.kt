@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
@@ -19,6 +20,7 @@ class SignActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
+        FirebaseApp.initializeApp(this)
     }
 
     override fun onStart() {

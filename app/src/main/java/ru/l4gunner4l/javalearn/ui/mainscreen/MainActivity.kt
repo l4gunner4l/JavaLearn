@@ -64,25 +64,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun signOut(view: View){
-
         val sureAlert = AlertDialog.Builder(this@MainActivity)
         sureAlert.setTitle(getString(R.string.label_exit))
-        sureAlert.setMessage(getString(R.string.text_question_sure_sign_out))
-        sureAlert.setCancelable(true)
-        sureAlert.setPositiveButton(getString(R.string.label_yes_sure)){ dialog, which ->
+                .setMessage(getString(R.string.text_question_sure_sign_out))
+                .setCancelable(true)
+                .setPositiveButton(getString(R.string.label_yes_sure)){ dialog, which ->
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(this, SignActivity::class.java))
             finish()
         }
-
-        sureAlert.setNegativeButton(getString(R.string.label_cancel)){ dialog, which ->
+                .setNegativeButton(getString(R.string.label_cancel)){ dialog, which ->
             Toast.makeText(applicationContext,
                     getString(R.string.text_you_stayed), Toast.LENGTH_SHORT).show()
         }
-
-        val dialog: AlertDialog = sureAlert.create()
-        dialog.show()
-
+        sureAlert.create().show()
     }
 
 

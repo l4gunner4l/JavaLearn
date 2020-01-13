@@ -34,9 +34,18 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
         initViews()
         auth = FirebaseAuth.getInstance()
-
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(EXTRA_EMAIL, emailTIL.editText!!.text.toString())
+        outState.putString(EXTRA_PASSWORD, passwordTIL.editText!!.text.toString())
+    }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        emailTIL.editText!!.setText(savedInstanceState?.getString(EXTRA_EMAIL))
+        passwordTIL.editText!!.setText(savedInstanceState?.getString(EXTRA_PASSWORD))
+    }
 
     fun endSignInActivity(view: View?) { finish() }
 
@@ -44,11 +53,6 @@ class SignInActivity : AppCompatActivity() {
     private fun initViews() {
         emailTIL = findViewById(R.id.sign_in_til_email)
         passwordTIL = findViewById(R.id.sign_in_til_password)
-
-        // auto-filling of email and password (temporarily)
-        // автозаполнение email and password (временно)
-        /*emailTIL.editText!!.setText("155nimix@mail.ru")
-        passwordTIL.editText!!.setText("qwerty12")*/
 
         findViewById<Button>(R.id.sign_in_btn).setOnClickListener { startMainActivity() }
     }
@@ -95,6 +99,8 @@ class SignInActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val EXTRA_EMAIL = "EXTRA_EMAIL"
+        const val EXTRA_PASSWORD = "EXTRA_PASSWORD"
         fun createNewInstance(context: Context): Intent {
             return Intent(context, SignInActivity::class.java)
         }

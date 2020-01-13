@@ -45,6 +45,21 @@ class SignUpActivity : AppCompatActivity() {
         dbRef = db.getReference("users")
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(EXTRA_NAME, nameTIL.editText!!.text.toString())
+        outState.putString(EXTRA_EMAIL, emailTIL.editText!!.text.toString())
+        outState.putString(EXTRA_PASSWORD, passwordTIL.editText!!.text.toString())
+        outState.putString(EXTRA_PASSWORD_REPEAT, passwordRepeatTIL.editText!!.text.toString())
+    }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        nameTIL.editText!!.setText(savedInstanceState?.getString(EXTRA_NAME))
+        emailTIL.editText!!.setText(savedInstanceState?.getString(EXTRA_EMAIL))
+        passwordTIL.editText!!.setText(savedInstanceState?.getString(EXTRA_PASSWORD))
+        passwordRepeatTIL.editText!!.setText(savedInstanceState?.getString(EXTRA_PASSWORD_REPEAT))
+    }
+
     fun endSignUpActivity(view: View?) { finish() }
 
     private fun initViews() {
@@ -138,6 +153,10 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val EXTRA_NAME = "EXTRA_NAME"
+        const val EXTRA_EMAIL = "EXTRA_EMAIL"
+        const val EXTRA_PASSWORD = "EXTRA_PASSWORD"
+        const val EXTRA_PASSWORD_REPEAT = "EXTRA_PASSWORD_REPEAT"
         fun createNewInstance(context: Context): Intent {
             return Intent(context, SignUpActivity::class.java)
         }

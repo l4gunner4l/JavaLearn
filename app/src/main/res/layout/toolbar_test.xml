@@ -20,8 +20,8 @@
         android:layout_marginEnd="@dimen/margin_32dp"
         android:indeterminate="false"
         android:progressDrawable="@drawable/progressbar_test"
-        android:progress="20"
-        android:max="100"
+        android:progress="0"
+        android:max="10"
         style="?android:attr/progressBarStyleHorizontal"/>
 
 </androidx.appcompat.widget.Toolbar>

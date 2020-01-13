@@ -33,4 +33,7 @@
     <string name="text_you_stayed">We are glad that you stayed!</string>
     <string name="label_go_test">Pass the test</string>
     <string name="label_check">Check</string>
+    <string name="label_exit_from_test">Exit from test</string>
+    <string name="text_question_sure_exit_from_test">The result will not be saved! Are you sure you want to exit the test?</string>
+    <string name="text_lets_continue">Continue!</string>
 </resources>
