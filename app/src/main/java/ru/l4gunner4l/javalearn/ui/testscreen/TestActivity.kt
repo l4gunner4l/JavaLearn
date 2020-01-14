@@ -105,7 +105,7 @@ class TestActivity : AppCompatActivity() {
             //Toast.makeText(this, "$failuresCount fails", Toast.LENGTH_SHORT).show()
 
             currentQuestionIndex++
-            if (currentQuestionIndex==10) finishActivity()
+            if (currentQuestionIndex==test.size) finishActivity()
             else updateUI(test[currentQuestionIndex])
 
             answersGroup.clearCheck()
@@ -113,8 +113,8 @@ class TestActivity : AppCompatActivity() {
     }
 
     private fun finishActivity() {
-        if (currentQuestionIndex == 10){
-            progressPB.progress = currentQuestionIndex+1
+        if (currentQuestionIndex == test.size){
+            progressPB.progress = currentQuestionIndex*(10/test.size)
             val newStarsCount: Int = when(failuresCount){
                 0 -> 3
                 1 -> 2
@@ -131,24 +131,27 @@ class TestActivity : AppCompatActivity() {
     }
 
     private fun updateUI(testQuestion: TestQuestion) {
-        curtainIV.visibility = View.VISIBLE
-        loadingPB.visibility = View.VISIBLE
+        // curtainIV.visibility = View.VISIBLE
+        // loadingPB.visibility = View.VISIBLE
+
+        // если вопросов - 5, то увеличение прогресса по 2 до 10
+        // если вопросов - 10, то увеличение прогресса по 1 до 10
+        progressPB.progress = currentQuestionIndex*(10/test.size)
 
         questionTV.text = Html.fromHtml(testQuestion.question)
-        progressPB.progress = currentQuestionIndex
         answersGroup.removeAllViews()
         for (i in 0 until testQuestion.answers.size){
             val answer = testQuestion.answers[i]
             val radioButton = AppCompatRadioButton(this)
-            radioButton.text = answer
+            radioButton.text = Html.fromHtml(answer)
             radioButton.id = i+1
             radioButton.setMyStyle()
 
             answersGroup.addView(radioButton)
         }
 
-        curtainIV.visibility = View.GONE
-        loadingPB.visibility = View.GONE
+        // curtainIV.visibility = View.GONE
+        // loadingPB.visibility = View.GONE
     }
 
     private fun showSureDialog() {

@@ -1,0 +1,105 @@
+1) Что выведет программа?<br/>
+   <tt>int x = 5;<br/>
+   int y = 2-x;<br/>
+   System.out.println(x+y);</tt>
+- x+y
+- 5-3
+- -5
+- 0
++ 2
+- 5
+
+2) Что выведет программа?<br/>
+      <tt>double x = 35.2;<br/>
+      double y = 2.0;<br/>
+      System.out.println(x/y);</tt>
+- x/y
+- 17
+- 17.0
++ 17.1
+- 0
+
+3) Что выведет программа?<br/>
+   <tt>int x = 37;<br/>
+   int y = 2;<br/>
+   System.out.println(x/y);</tt>
+- x/y
++ 18
+- 18.0
+- 18.5
+- 19
+
+4) Что выведет программа?<br/>
+   <tt>double x = 37.0;<br/>
+   int y = 2;<br/>
+   System.out.println(x/y);</tt>
+- x/y
+- 18
+- 18.0
++ 18.5
+- 19
+
+5) Что выведет программа?<br/>
+   <tt>int x = 7;<br/>
+   int y = --6;<br/>
+   int z = 2++;<br/>
+   System.out.println(x+y+z);</tt>
++ 14
+- 15
+- 17
+- 19
+- x+y+z
+
+
+6) Что выведет программа?<br/>
+      <tt>int x = 7;<br/>
+      int y = --x;<br/>
+      int z = y++;<br/>
+      System.out.println(x+y+z);</tt>
+- 21
+- 20
+- 18
++ 19
+- x+y+z
+
+7) Что выведет программа?<br/>
+         <tt>int x = 99;<br/>
+         int y = ++x;<br/>
+         int z = y--;<br/>
+         System.out.print(x+" ");<br/>
+         System.out.print(y+" ");<br/>
+         System.out.print(z+" ");</tt>
+- x y z
++ 100 99 100
+- 99 100 99
+- 100 100 100
+- 99 99 99
+
+8) Что выведет программа?<br/>
+    <tt>int x = 9;<br/>
+    int y = ++x*12/(6-4);<br/>
+    int z = y+x*y+x;<br/>
+    System.out.print(x+" ");<br/>
+    System.out.print(y+" ");<br/>
+    System.out.print(z+" ");</tt>
+- x y z
+- 9 55 559
++ 10 60 670
+- 9 61 560
+- 10 50 590
+
+9) Какие приоритет операций верен?
+- ++/--<br/>()/[]<br/>* /<br/>+/-<br/>%
++ ()/[]<br/>++/--<br/>* / %<br/>+/-
+- ++/--<br/>()/[]<br/>%<br/>* /<br/>+/-
+- ()/[]<br/>* / %<br/>++/--<br/>+/-
+
+
+10) Что выведет программа?<br/>
+System.out.println( (5*3)%2*(3+1)/2-4 );</tt>
+- В программе ошибка
+- 0
++ -2
+- (5*3)%2*(3+1)/2-4
+- 3
+- -4
