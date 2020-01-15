@@ -1,0 +1,40 @@
+1) Как программно записать число<br/>0000 0000 0000 0111?
+- byte a = 7;
++ short b = 7;
+- byte c = 6;
+- short d = 6;
+
+2) Что выведет программа?<br/>
+      <tt>int x = 4;<br/>
+      int y = 5;<br/>
+      System.out.println( x&y );</tt>
+- 2
+- 3
++ 4
+- 5
+
+3) Что выведет программа?<br/>
+   <tt>int x = 4;<br/>
+   int y = 5;<br/>
+   System.out.println( x|y );</tt>
++ 5
+- 6
+- 7
+- 8
+
+4) Что выведет программа?<br/>
+      <tt>byte x = 12;<br/>
+      System.out.println( ~x );</tt>
+- -11
++ -13
+- 11
+- 13
+
+5) Что выведет программа?<br/>
+   <tt>int x = 4;<br/>
+   int y = 1;<br/>
+   System.out.println(x&lt;&lt;y);</tt>
+- 5
+- 6
+- 7
++ 8

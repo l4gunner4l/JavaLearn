@@ -28,6 +28,7 @@ class TestActivity : AppCompatActivity() {
     private var test: MutableList<TestQuestion> = mutableListOf()
     private var currentQuestionIndex: Int = 0
     private var failuresCount: Int = 0
+    private var lastSelectedBtnIndex: Int = -1
 
     private lateinit var curtainIV: ImageView
     private lateinit var loadingPB: ProgressBar
@@ -37,7 +38,17 @@ class TestActivity : AppCompatActivity() {
     private lateinit var answersGroup: RadioGroup
     private lateinit var checkBtn: Button
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.i("M_MAIN", "onSaveInstanceState")
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_CURRENT_Q, currentQuestionIndex)
+        outState.putInt(KEY_FAILS_COUNT, failuresCount)
+        lastSelectedBtnIndex = answersGroup.checkedRadioButtonId
+        outState.putInt(KEY_LAST, lastSelectedBtnIndex)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i("M_MAIN", "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
         initUI()
@@ -48,6 +59,7 @@ class TestActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
+        Log.i("M_MAIN", "initUI")
         initToolbar()
         curtainIV = findViewById(R.id.test_iv_splash)
         loadingPB = findViewById(R.id.test_pb_progress)
@@ -65,7 +77,16 @@ class TestActivity : AppCompatActivity() {
                 .setOnClickListener{ showSureDialog() }
     }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        Log.i("M_MAIN", "onRestoreInstanceState")
+        super.onRestoreInstanceState(savedInstanceState)
+        currentQuestionIndex = savedInstanceState?.getInt(KEY_CURRENT_Q) ?: 0
+        failuresCount = savedInstanceState?.getInt(KEY_FAILS_COUNT) ?: 0
+        lastSelectedBtnIndex = savedInstanceState?.getInt(KEY_LAST) ?: -1
+    }
+
     private fun loadTest(firebaseCallback: FirebaseCallback){
+        Log.i("M_MAIN", "loadTest")
         FirebaseDatabase.getInstance().reference.child("lessons").child(lessonNum.toString()).child("tests")
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -88,10 +109,38 @@ class TestActivity : AppCompatActivity() {
     }
 
     private fun endLoading() {
+        Log.i("M_MAIN", "endLoading")
         val currentTestQuestion = test[currentQuestionIndex]
         updateUI(currentTestQuestion)
         loadingPB.visibility = View.GONE
         curtainIV.visibility = View.GONE
+    }
+
+    private fun updateUI(testQuestion: TestQuestion) {
+        Log.i("M_MAIN", "updateUI")
+        // curtainIV.visibility = View.VISIBLE
+        // loadingPB.visibility = View.VISIBLE
+
+        // если вопросов - 5, то увеличение прогресса по 2 до 10
+        // если вопросов - 10, то увеличение прогресса по 1 до 10
+        progressPB.progress = currentQuestionIndex*(10/test.size)
+
+        questionTV.text = Html.fromHtml(testQuestion.question)
+
+        answersGroup.removeAllViews()
+        for (i in 0 until testQuestion.answers.size){
+            val answer = testQuestion.answers[i]
+            val radioButton = AppCompatRadioButton(this)
+            radioButton.text = Html.fromHtml(answer)
+            radioButton.id = i+1
+            radioButton.setMyStyle()
+
+            answersGroup.addView(radioButton)
+        }
+        answersGroup.check(lastSelectedBtnIndex)
+
+        // curtainIV.visibility = View.GONE
+        // loadingPB.visibility = View.GONE
     }
 
     private fun checkAnswer() {
@@ -130,30 +179,6 @@ class TestActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun updateUI(testQuestion: TestQuestion) {
-        // curtainIV.visibility = View.VISIBLE
-        // loadingPB.visibility = View.VISIBLE
-
-        // если вопросов - 5, то увеличение прогресса по 2 до 10
-        // если вопросов - 10, то увеличение прогресса по 1 до 10
-        progressPB.progress = currentQuestionIndex*(10/test.size)
-
-        questionTV.text = Html.fromHtml(testQuestion.question)
-        answersGroup.removeAllViews()
-        for (i in 0 until testQuestion.answers.size){
-            val answer = testQuestion.answers[i]
-            val radioButton = AppCompatRadioButton(this)
-            radioButton.text = Html.fromHtml(answer)
-            radioButton.id = i+1
-            radioButton.setMyStyle()
-
-            answersGroup.addView(radioButton)
-        }
-
-        // curtainIV.visibility = View.GONE
-        // loadingPB.visibility = View.GONE
-    }
-
     private fun showSureDialog() {
         val sureAlert = AlertDialog.Builder(this@TestActivity)
         sureAlert.setTitle(getString(R.string.label_exit_from_test))
@@ -167,8 +192,11 @@ class TestActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val KEY_CURRENT_Q = "KEY_CURRENT_Q"
+        private const val KEY_FAILS_COUNT = "KEY_FAILS_COUNT"
+        private const val KEY_LAST = "KEY_LAST"
         private const val EXTRA_LESSON_NUM = "EXTRA_LESSON_NUM"
-        public const val EXTRA_STARS_COUNT = "EXTRA_STARS_COUNT"
+        const val EXTRA_STARS_COUNT = "EXTRA_STARS_COUNT"
 
         fun newInstance(context: Activity, lessonNum: Int): Intent {
             val intent = Intent(context, TestActivity::class.java)

@@ -78,7 +78,7 @@ class LessonActivity : AppCompatActivity() {
             if (newStarsCount > starsCount) {
                 starsCount = newStarsCount
                 updateUI(lesson)
-                FirebaseDatabase.getInstance().getReference()
+                FirebaseDatabase.getInstance().reference
                         .child("users")
                         .child(FirebaseAuth.getInstance().currentUser!!.uid)
                         .orderByChild("starsList")
@@ -93,7 +93,7 @@ class LessonActivity : AppCompatActivity() {
                                         .ref.setValue(starsCount)
                                 Toast.makeText(
                                         this@LessonActivity,
-                                        "Вы набрали $starsCount звезды!\n"+
+                                        "Вы набрали $newStarsCount звезды!\n"+
                                         getString(R.string.text_saving_results),
                                         Toast.LENGTH_SHORT).show()
                             }
@@ -101,7 +101,7 @@ class LessonActivity : AppCompatActivity() {
                         })
             } else Toast.makeText(
                     this@LessonActivity,
-                    "Вы набрали ${starsCount} звезды!\n"+
+                    "Вы набрали $newStarsCount звезды!\n"+
                     getString(R.string.text_not_saving_results),
                     Toast.LENGTH_SHORT).show()
         }
