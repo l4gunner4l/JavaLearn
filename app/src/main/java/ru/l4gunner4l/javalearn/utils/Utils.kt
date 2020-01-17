@@ -1,7 +1,11 @@
 package ru.l4gunner4l.javalearn.utils
 
-import android.util.Log
-import java.util.regex.Pattern
+import android.content.Context
+import android.graphics.PorterDuff
+import android.view.Gravity
+import android.widget.TextView
+import android.widget.Toast
+import ru.l4gunner4l.javalearn.R
 
 /**
  * Object for Constants and util functions
@@ -16,5 +20,22 @@ object Utils {
             ".{8,}" +               //at least 8 characters
             "$"
 
+    fun showToast(context: Context, text:String, duration:Int){
+        val toast = Toast.makeText(context, text, duration)
+        toast.setGravity(Gravity.CENTER, 0, 0)
+        toast.view.background.setColorFilter(context.getColor(R.color.colorBackgroundDark), PorterDuff.Mode.SRC_IN)
+        toast.view.findViewById<TextView>(android.R.id.message)
+                .setTextColor(context.getColor(R.color.colorAccent))
+        toast.show()
+    }
+
+    fun showToast(context: Context, text:Int, duration:Int){
+        val toast = Toast.makeText(context, text, duration)
+        toast.setGravity(Gravity.CENTER, 0, 0)
+        toast.view.background.setColorFilter(context.getColor(R.color.colorBackgroundDark), PorterDuff.Mode.SRC_IN)
+        toast.view.findViewById<TextView>(android.R.id.message)
+                .setTextColor(context.getColor(R.color.colorTextLight))
+        toast.show()
+    }
 
 }

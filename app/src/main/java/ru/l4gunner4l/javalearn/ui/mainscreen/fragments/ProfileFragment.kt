@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.data.models.User
 import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
+import ru.l4gunner4l.javalearn.utils.Utils
 import ru.l4gunner4l.javalearn.utils.extensions.hideKeyboard
 import ru.l4gunner4l.javalearn.utils.extensions.showKeyboard
 
@@ -42,11 +43,11 @@ class ProfileFragment : Fragment() {
         editSaveBtn.setOnClickListener {
             if (this.isEditMode) {
                 val isSuccessful = updateDBUser(user)
-                Toast.makeText(
-                        activity,
+                Utils.showToast(
+                        activity!!.baseContext,
                         if (isSuccessful) "Данные успешно обновлены!"
                         else "Данные имеют неверный формат! Обновление не завершено!",
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT)
             }
             isEditMode = !isEditMode
             showCurrentMode(isEditMode)

@@ -19,10 +19,10 @@ import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.data.FirebaseCallback
 import ru.l4gunner4l.javalearn.data.models.Lesson
 import ru.l4gunner4l.javalearn.ui.testscreen.TestActivity
+import ru.l4gunner4l.javalearn.utils.Utils
 
 class LessonActivity : AppCompatActivity() {
 
-    //private var lesson = Lesson(1, "Name", "Some text", mutableListOf())
     private lateinit var lesson: Lesson
     private var lessonNum: Int = 1
     private var starsCount: Int = 0
@@ -76,6 +76,14 @@ class LessonActivity : AppCompatActivity() {
         else {
             val newStarsCount = data.getIntExtra(TestActivity.EXTRA_STARS_COUNT, 0)
             if (newStarsCount > starsCount) {
+                if (starsCount == 0){
+                    FirebaseDatabase.getInstance().reference
+                            .child("users")
+                            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                            .child("starsList")
+                            .child(lessonNum.toString())
+                            .setValue(0)
+                }
                 starsCount = newStarsCount
                 updateUI(lesson)
                 FirebaseDatabase.getInstance().reference
@@ -91,19 +99,19 @@ class LessonActivity : AppCompatActivity() {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
                                 dataSnapshot.child("starsList").child((lessonNum-1).toString())
                                         .ref.setValue(starsCount)
-                                Toast.makeText(
+                                Utils.showToast(
                                         this@LessonActivity,
                                         "Вы набрали $newStarsCount звезды!\n"+
                                         getString(R.string.text_saving_results),
-                                        Toast.LENGTH_SHORT).show()
+                                        Toast.LENGTH_SHORT)
                             }
 
                         })
-            } else Toast.makeText(
+            } else Utils.showToast(
                     this@LessonActivity,
                     "Вы набрали $newStarsCount звезды!\n"+
                     getString(R.string.text_not_saving_results),
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT)
         }
     }
 

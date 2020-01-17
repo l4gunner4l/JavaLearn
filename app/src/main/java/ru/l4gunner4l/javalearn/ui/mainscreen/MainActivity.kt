@@ -34,6 +34,7 @@ import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.LessonsFragment
 import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.ProfileFragment
 import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.ShopFragment
 import ru.l4gunner4l.javalearn.ui.signscreens.SignActivity
+import ru.l4gunner4l.javalearn.utils.Utils
 
 
 /**
@@ -74,8 +75,8 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
                 .setNegativeButton(getString(R.string.label_cancel)){ dialog, which ->
-            Toast.makeText(applicationContext,
-                    getString(R.string.text_you_stayed), Toast.LENGTH_SHORT).show()
+                Utils.showToast(applicationContext,
+                    getString(R.string.text_you_stayed), Toast.LENGTH_SHORT)
         }
         sureAlert.create().show()
     }

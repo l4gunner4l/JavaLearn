@@ -89,15 +89,15 @@ class SignUpActivity : AppCompatActivity() {
                                             Log.i("M_MAIN", "2)SignUpActivity - id=$userId")
                                             startActivity(MainActivity.createNewInstance(this))
                                             finish()
-                                        } else Toast.makeText(baseContext, getString(R.string.text_error_signed_up),
-                                                Toast.LENGTH_SHORT).show()
+                                        } else Utils.showToast(baseContext, getString(R.string.text_error_signed_up),
+                                                Toast.LENGTH_SHORT)
                                     }
 
-                        } else Toast.makeText(baseContext, getString(R.string.text_error_signed_up),
-                                    Toast.LENGTH_SHORT).show()
+                        } else Utils.showToast(baseContext, getString(R.string.text_error_signed_up),
+                                    Toast.LENGTH_SHORT)
 
                     }
-        } else Toast.makeText(this, R.string.text_error_valid, Toast.LENGTH_SHORT).show()
+        } else Utils.showToast(this, R.string.text_error_valid, Toast.LENGTH_SHORT)
     }
 
     private fun isValidInput(name:String, email:String, password:String, passwordRepeat:String) =

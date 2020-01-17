@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import ru.l4gunner4l.javalearn.R
+import ru.l4gunner4l.javalearn.utils.Utils
 
 data class LessonsAdapter(val context: Context, val starsList: List<Int>, val clickListener: ItemClickListener)
     : RecyclerView.Adapter<LessonsAdapter.ViewHolder>() {
@@ -54,14 +55,12 @@ data class LessonsAdapter(val context: Context, val starsList: List<Int>, val cl
 
         override fun onClick(view: View) {
             if (adapterPosition+1 <= starsList.size){
-                //Toast.makeText(context, "${adapterPosition+1}) - stars=${starsList[adapterPosition]}", Toast.LENGTH_SHORT).show()
                 clickListener.onItemClick(view, adapterPosition)
             }
-            else Toast.makeText(
+            else Utils.showToast(
                         context,
                         context.resources.getString(R.string.text_error_not_available_lesson),
                         Toast.LENGTH_SHORT)
-                        .show()
         }
 
         init {

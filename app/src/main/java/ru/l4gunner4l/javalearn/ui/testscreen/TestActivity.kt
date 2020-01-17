@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.data.FirebaseCallback
 import ru.l4gunner4l.javalearn.data.models.TestQuestion
+import ru.l4gunner4l.javalearn.utils.Utils
 import ru.l4gunner4l.javalearn.utils.extensions.setMyStyle
 
 
@@ -144,14 +145,12 @@ class TestActivity : AppCompatActivity() {
     }
 
     private fun checkAnswer() {
-        //Toast.makeText(this, "answersGroup.checkedRadioButtonId=${answersGroup.checkedRadioButtonId}", Toast.LENGTH_SHORT).show()
         if (answersGroup.checkedRadioButtonId == -1)
-            Toast.makeText(this, "Answer, please!", Toast.LENGTH_SHORT).show()
+            Utils.showToast(this, "Answer, please!", Toast.LENGTH_SHORT)
         else {
             if (answersGroup.checkedRadioButtonId != test[currentQuestionIndex].rightAnswer){
                 failuresCount++
             }
-            //Toast.makeText(this, "$failuresCount fails", Toast.LENGTH_SHORT).show()
 
             currentQuestionIndex++
             if (currentQuestionIndex==test.size) finishActivity()
@@ -186,7 +185,7 @@ class TestActivity : AppCompatActivity() {
                 .setCancelable(true)
                 .setPositiveButton(getString(R.string.label_yes_sure)) { dialog, which -> finishActivity() }
                 .setNegativeButton(getString(R.string.label_cancel)) { dialog, which ->
-                    Toast.makeText(applicationContext, getString(R.string.text_lets_continue), Toast.LENGTH_SHORT).show()
+                    Utils.showToast(applicationContext, getString(R.string.text_lets_continue), Toast.LENGTH_SHORT)
                 }
         sureAlert.create().show()
     }

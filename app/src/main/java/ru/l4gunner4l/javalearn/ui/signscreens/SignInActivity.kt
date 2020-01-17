@@ -67,9 +67,9 @@ class SignInActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             startActivity(MainActivity.createNewInstance(this))
                             finish()
-                        } else Toast.makeText(baseContext, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT).show()
+                        } else Utils.showToast(baseContext, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT)
                     }
-        } else Toast.makeText(this, R.string.text_error_valid, Toast.LENGTH_SHORT).show()
+        } else Utils.showToast(this, R.string.text_error_valid, Toast.LENGTH_SHORT)
     }
 
     private fun isValidInput(email:String, password:String) = isValidEmail(email) && isValidPassword(password)

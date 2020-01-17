@@ -1,0 +1,40 @@
+1) Условные выражения - это
+- некоторое условие, возвращающее значение типа byte, если условие истинно - число больше нуля, а если ложно - меньше нуля
++ некоторое условие, возвращающее значение типа boolean, если условие истинно - true, а если ложно - false
+
+2) Что выведет программа?<br/>
+   <tt>int a = 1;<br/>
+   int b = 2;<br/>
+   int c = 1;<br/>
+   int d = 4;<br/>
+   System.out.print(a==c+" ");<br/>
+   System.out.print(b>d+" ");<br/>
+   System.out.print(c&lt;=d+" ");<br/>
+   System.out.print(d!=a);</tt>
+- false false true false
++ true false true true
+- true true true false
+- false false true true
+
+3) Что выведет программа?<br/>
+      <tt>double x = 6;<br/>
+      System.out<br/>.println((5>x)||(4&lt;x));</tt>
+- false
++ true
+- Ошибка
+
+4) Что выведет программа?<br/>
+<tt>int x = 4;<br/>
+int y = 6;<br/>
+System.out<br/>.println((50>y)&|(x/2&lt;3));</tt>
+- false
+- true
++ Ошибка
+
+5) Что выведет программа?<br/>
+   <tt>int x = 4;<br/>
+   int y = 6;<br/>
+   System.out<br/>.println((50>y)^(x/2&lt;3));</tt>
++ false
+- true
+- Ошибка
