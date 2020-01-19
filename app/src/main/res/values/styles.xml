@@ -163,6 +163,10 @@
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
-
+    <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:background">@color/colorBackgroundDark</item>
+    </style>
 
 </resources>

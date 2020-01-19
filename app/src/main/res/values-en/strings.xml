@@ -38,4 +38,6 @@
     <string name="text_lets_continue">Continue!</string>
     <string name="text_not_saving_results">Result didn\'t upgrade</string>
     <string name="text_saving_results">Your new result saved!</string>
+    <string name="label_forgot_pass"><u>Forgot password?</u></string>
+    <string name="label_forgot_send">Send</string>
 </resources>

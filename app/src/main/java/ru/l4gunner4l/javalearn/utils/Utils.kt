@@ -34,7 +34,7 @@ object Utils {
         toast.setGravity(Gravity.CENTER, 0, 0)
         toast.view.background.setColorFilter(context.getColor(R.color.colorBackgroundDark), PorterDuff.Mode.SRC_IN)
         toast.view.findViewById<TextView>(android.R.id.message)
-                .setTextColor(context.getColor(R.color.colorTextLight))
+                .setTextColor(context.getColor(R.color.colorAccent))
         toast.show()
     }
 

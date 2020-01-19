@@ -45,4 +45,6 @@
     <string name="label_exit_from_test">Выход из теста</string>
     <string name="label_go_test">Пройти тест</string>
     <string name="label_check">Проверить</string>
+    <string name="label_forgot_pass"><u>Забыли пароль?</u></string>
+    <string name="label_forgot_send">Отправить</string>
 </resources>

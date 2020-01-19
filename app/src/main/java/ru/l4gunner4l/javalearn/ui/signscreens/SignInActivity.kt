@@ -1,15 +1,16 @@
 package ru.l4gunner4l.javalearn.ui.signscreens
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_sign_in.*
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
 import ru.l4gunner4l.javalearn.utils.Utils
@@ -26,8 +27,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var passwordTIL: TextInputLayout
 
     private lateinit var auth: FirebaseAuth
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +52,28 @@ class SignInActivity : AppCompatActivity() {
     private fun initViews() {
         emailTIL = findViewById(R.id.sign_in_til_email)
         passwordTIL = findViewById(R.id.sign_in_til_password)
+        sign_in_forgot_pass.setOnClickListener { startForgotPassword() }
+        sign_in_btn.setOnClickListener { startMainActivity() }
+    }
 
-        findViewById<Button>(R.id.sign_in_btn).setOnClickListener { startMainActivity() }
+    private fun startForgotPassword() {
+        val changePassDialog = AlertDialog.Builder(this, R.style.DialogStyle)
+        val view = this.layoutInflater.inflate(R.layout.dialog_forgot_pass, null)
+        changePassDialog.setTitle("Введите почту для сброса пароля")
+                .setView(view)
+                .setCancelable(true)
+                .setPositiveButton("Сбросить"){ dialog, which ->
+                    val email = view.findViewById<TextInputLayout>(R.id.forgot_email).editText!!.text
+                    if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                        auth.sendPasswordResetEmail(email.toString()).addOnCompleteListener { task ->
+                            if (task.isSuccessful) Utils.showToast(
+                                    this@SignInActivity, "На $email отправлена ссылка на сброс пароля", Toast.LENGTH_LONG)
+                            else Utils.showToast(this@SignInActivity, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT)
+                        }
+                    } else Utils.showToast(this@SignInActivity, R.string.text_error_valid, Toast.LENGTH_SHORT)
+                }
+                .setNegativeButton("Отмена"){ dialog, which -> }
+        changePassDialog.create().show()
     }
 
     private fun startMainActivity() {
@@ -67,9 +86,9 @@ class SignInActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             startActivity(MainActivity.createNewInstance(this))
                             finish()
-                        } else Utils.showToast(baseContext, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT)
+                        } else Utils.showToast(this@SignInActivity, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT)
                     }
-        } else Utils.showToast(this, R.string.text_error_valid, Toast.LENGTH_SHORT)
+        } else Utils.showToast(this@SignInActivity, R.string.text_error_valid, Toast.LENGTH_SHORT)
     }
 
     private fun isValidInput(email:String, password:String) = isValidEmail(email) && isValidPassword(password)

@@ -56,15 +56,24 @@
                 android:inputType="textPassword"
                 style="@style/SignEditText"/>
         </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/sign_in_btn"
             android:layout_width="wrap_content"
             android:paddingStart="@dimen/padding_8dp"
             android:paddingEnd="@dimen/padding_8dp"
-            android:layout_marginBottom="@dimen/margin_16dp"
             android:text="@string/label_sign_in"
-            android:layout_marginTop="@dimen/margin_32dp"
+            android:layout_marginTop="@dimen/margin_16dp"
             style="@style/BtnAccent.BtnSign"/>
+
+        <TextView
+            android:id="@+id/sign_in_forgot_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:text="@string/label_forgot_pass"
+            android:textColor="@color/colorGrey"
+            android:textSize="@dimen/text_size_14sp"/>
     </LinearLayout>
 
 
