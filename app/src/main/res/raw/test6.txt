@@ -1,40 +1,34 @@
-1) Условные выражения - это
-- некоторое условие, возвращающее значение типа byte, если условие истинно - число больше нуля, а если ложно - меньше нуля
-+ некоторое условие, возвращающее значение типа boolean, если условие истинно - true, а если ложно - false
-
-2) Что выведет программа?<br/>
-   <tt>int a = 1;<br/>
-   int b = 2;<br/>
-   int c = 1;<br/>
-   int d = 4;<br/>
-   System.out.print(a==c+" ");<br/>
-   System.out.print(b>d+" ");<br/>
-   System.out.print(c&lt;=d+" ");<br/>
-   System.out.print(d!=a);</tt>
-- false false true false
-+ true false true true
-- true true true false
-- false false true true
-
-3) Что выведет программа?<br/>
-      <tt>double x = 6;<br/>
-      System.out<br/>.println((5>x)||(4&lt;x));</tt>
-- false
-+ true
-- Ошибка
-
-4) Что выведет программа?<br/>
-<tt>int x = 4;<br/>
-int y = 6;<br/>
-System.out<br/>.println((50>y)&|(x/2&lt;3));</tt>
-- false
+0) Что выведет программа?
+int x = 8;<br/>System.out.print(++x*9!=(18+9)*3);
+- 0
 - true
-+ Ошибка
-
-5) Что выведет программа?<br/>
-   <tt>int x = 4;<br/>
-   int y = 6;<br/>
-   System.out<br/>.println((50>y)^(x/2&lt;3));</tt>
+- 56
 + false
+- 81
+
+
+1) Что выведет программа?
+int x = 8;<br/>System.out.print(x++*7==6+5*10);
+- 0
++ true
+- 56
+- false
+- 81
+
+2) Что выведет программа?
+int x = 1;<br/>int y = 2;<br/>System.out.print(y*++y*y-x % x+y);
+- 12
 - true
-- Ошибка
+- 3
+- false
++ 21
+
+3) Какая операция менее приоритетная?
+- instanceof
++ ==
+- &lt;=
+
+4) Какая операция более приоритетная?
++ +
+- &&
+- ==

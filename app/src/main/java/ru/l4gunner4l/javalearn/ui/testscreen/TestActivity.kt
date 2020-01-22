@@ -25,7 +25,7 @@ import ru.l4gunner4l.javalearn.utils.extensions.setMyStyle
 
 class TestActivity : AppCompatActivity() {
 
-    private var lessonNum: Int = 1
+    private var lessonNum: Int = 0
     private var test: MutableList<TestQuestion> = mutableListOf()
     private var currentQuestionIndex: Int = 0
     private var failuresCount: Int = 0
@@ -36,6 +36,7 @@ class TestActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var progressPB: ProgressBar
     private lateinit var questionTV: TextView
+    private lateinit var codeTV: TextView
     private lateinit var answersGroup: RadioGroup
     private lateinit var checkBtn: Button
 
@@ -54,7 +55,7 @@ class TestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_test)
         initUI()
 
-        lessonNum = intent.getIntExtra(EXTRA_LESSON_NUM, 1)
+        lessonNum = intent.getIntExtra(EXTRA_LESSON_NUM, 0)
 
         LoadTestQuestionsTask().execute()
     }
@@ -65,6 +66,7 @@ class TestActivity : AppCompatActivity() {
         curtainIV = findViewById(R.id.test_iv_splash)
         loadingPB = findViewById(R.id.test_pb_progress)
         questionTV = findViewById(R.id.test_tv_question)
+        codeTV = findViewById(R.id.test_tv_code)
         answersGroup = findViewById(R.id.test_radio_group_answers)
         checkBtn = findViewById(R.id.test_btn_check)
         checkBtn.setOnClickListener { checkAnswer() }
@@ -98,6 +100,7 @@ class TestActivity : AppCompatActivity() {
                             }
                             test.add(TestQuestion(
                                     qDS.child("question").getValue(String::class.java)!!,
+                                    qDS.child("code").getValue(String::class.java),
                                     answers,
                                     qDS.child("rightAnswer").getValue(Int::class.java)!!
                                     ))
@@ -127,6 +130,14 @@ class TestActivity : AppCompatActivity() {
         progressPB.progress = currentQuestionIndex*(10/test.size)
 
         questionTV.text = Html.fromHtml(testQuestion.question)
+        if (testQuestion.code == null) {
+            codeTV.text = ""
+            codeTV.visibility = View.GONE
+        }
+        else {
+            codeTV.visibility = View.VISIBLE
+            codeTV.text = Html.fromHtml(testQuestion.code)
+        }
 
         answersGroup.removeAllViews()
         for (i in 0 until testQuestion.answers.size){

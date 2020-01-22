@@ -24,7 +24,7 @@ import ru.l4gunner4l.javalearn.utils.Utils
 class LessonActivity : AppCompatActivity() {
 
     private lateinit var lesson: Lesson
-    private var lessonNum: Int = 1
+    private var lessonNum: Int = 0
     private var starsCount: Int = 0
 
     private lateinit var toolbar: Toolbar
@@ -40,7 +40,7 @@ class LessonActivity : AppCompatActivity() {
         initUI()
 
         val intent = intent
-        lessonNum = intent.getIntExtra(EXTRA_LESSON_NUM, 1)
+        lessonNum = intent.getIntExtra(EXTRA_LESSON_NUM, 0)
         starsCount = intent.getIntExtra(EXTRA_LESSON_STARS, 0)
 
         LoadLessonTask().execute()
@@ -81,7 +81,7 @@ class LessonActivity : AppCompatActivity() {
                             .child("users")
                             .child(FirebaseAuth.getInstance().currentUser!!.uid)
                             .child("starsList")
-                            .child(lessonNum.toString())
+                            .child((lessonNum+1).toString())
                             .setValue(0)
                 }
                 starsCount = newStarsCount
@@ -90,20 +90,19 @@ class LessonActivity : AppCompatActivity() {
                         .child("users")
                         .child(FirebaseAuth.getInstance().currentUser!!.uid)
                         .orderByChild("starsList")
-                        .equalTo((lessonNum-1).toString())
+                        .equalTo(lessonNum.toString())
                         .addListenerForSingleValueEvent(object : ValueEventListener{
                             override fun onCancelled(p0: DatabaseError) {
                                 Log.i("M_MAIN", "LessonActivity: Updating stars count failed")
                             }
-
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                dataSnapshot.child("starsList").child((lessonNum-1).toString())
+                                dataSnapshot.child("starsList").child(lessonNum.toString())
                                         .ref.setValue(starsCount)
                                 Utils.showToast(
                                         this@LessonActivity,
                                         "Вы набрали $newStarsCount звезды!\n"+
                                         getString(R.string.text_saving_results),
-                                        Toast.LENGTH_SHORT)
+                                        Toast.LENGTH_LONG)
                             }
 
                         })
@@ -122,7 +121,7 @@ class LessonActivity : AppCompatActivity() {
                         val testsList = mutableListOf<Int>()
 
                         lesson = Lesson(
-                                dataSnapshot.child("number").getValue(Int::class.java)!!,
+                                lessonNum,
                                 dataSnapshot.child("name").value.toString(),
                                 dataSnapshot.child("text").value.toString(),
                                 testsList
@@ -144,7 +143,7 @@ class LessonActivity : AppCompatActivity() {
 
     private fun updateUI(lesson: Lesson) {
         toolbar.findViewById<TextView>(R.id.lesson_toolbar_tv_title).text =
-                "${getString(R.string.label_lesson)} ${lesson.number}"
+                "${getString(R.string.label_lesson)} ${lesson.number+1}"
         starsTV.text = "Количество звёзд - $starsCount"
         nameTV.text = lesson.name
         textTV.text = Html.fromHtml(lesson.text)
@@ -172,6 +171,8 @@ class LessonActivity : AppCompatActivity() {
             val intent = Intent(context, LessonActivity::class.java)
             intent.putExtra(EXTRA_LESSON_NUM, lessonNum)
             intent.putExtra(EXTRA_LESSON_STARS, starsCount)
+
+
             return intent
         }
     }

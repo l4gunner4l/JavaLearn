@@ -1,40 +1,28 @@
-1) Как программно записать число<br/>0000 0000 0000 0111?
-- byte a = 7;
-+ short b = 7;
-- byte c = 6;
-- short d = 6;
+0) Условные выражения - это
+- некоторое условие, возвращающее значение типа byte, если условие истинно - число больше нуля, а если ложно - меньше нуля
++ некоторое условие, возвращающее значение типа boolean, если условие истинно - true, а если ложно - false
 
-2) Что выведет программа?<br/>
-      <tt>int x = 4;<br/>
-      int y = 5;<br/>
-      System.out.println( x&y );</tt>
-- 2
-- 3
-+ 4
-- 5
+1) Что выведет программа?
+int a = 1;<br/>int b = 2;<br/>int c = 1;<br/>int d = 4;<br/>System.out.print(a==c+" ");<br/>System.out.print(b>d+" ");<br/>System.out.print(c&lt;=d+" ");<br/>System.out.print(d!=a);
+- false false true false
++ true false true true
+- true true true false
+- false false true true
 
-3) Что выведет программа?<br/>
-   <tt>int x = 4;<br/>
-   int y = 5;<br/>
-   System.out.println( x|y );</tt>
-+ 5
-- 6
-- 7
-- 8
+2) Что выведет программа?
+double x = 6;<br/>System.out.println((5>x)||(4&lt;x));
+- false
++ true
+- Ошибка
 
-4) Что выведет программа?<br/>
-      <tt>byte x = 12;<br/>
-      System.out.println( ~x );</tt>
-- -11
-+ -13
-- 11
-- 13
+3) Что выведет программа?
+int x = 4;<br/>int y = 6;<br/>System.out.println((50>y)&|(x/2&lt;3));
+- false
+- true
++ Ошибка
 
-5) Что выведет программа?<br/>
-   <tt>int x = 4;<br/>
-   int y = 1;<br/>
-   System.out.println(x&lt;&lt;y);</tt>
-- 5
-- 6
-- 7
-+ 8
+4) Что выведет программа?
+int x = 4;<br/>int y = 6;<br/>System.out.println((50>y)^(x/2&lt;3));
++ false
+- true
+- Ошибка

@@ -1,38 +1,43 @@
-1) Что выведет программа?<br/>
-   <tt>int x = 8;<br/>
-   System.out.<br/>print(++x*9!=(18+9)*3);<br/></tt>
+0) Что выведет программа?
+int a = 9;<br/>int b = 63;<br/>if (b/9>=a){<br/>    a += b;<br/>    b = b-b;<br/>} else {<br/>    a += b/(-3);<br/>    b = a+b;<br/>}<br/>System.out.print("a="+a+"; b="+b);
+- a=0; b=72
+- a=72; b=0
++ a=-12; b=51
+- a=-12; b=72
+
+1) Что выведет программа?
+int a = 0;<br/>int b = 5;<br/>if (b==5){<br/>    a += b;<br/>    b = 10;<br/>} else if (b > 5){<br/>    a -= b;<br/>    b = 1;<br/>} else if (b &lt; 5){<br/>    a = b;<br/>    b = 0;<br/>}<br/>System.out.print("a="+a+"; b="+b);
+- a=0; b=5
+- a=5; b=5
++ a=5; b=10
+- a=-5; b=1
+- a=1; b=0
+- a=-5; b=0
+
+
+2) Что выведет программа?
+int k = 2;<br/>switch(k){<br/>    case 0:<br/>        k = k++;<br/>        break;<br/>    case 1:<br/>        k = k++;<br/>        break;<br/>    case 2:<br/>        k = k++;<br/>        break;<br/>    default:<br/>        k = -1;<br/>        break;<br/>}<br/>System.out.print(k);
+- k
 - 0
-- true
-- 56
-+ false
-- 81
+- 1
+- 2
++ 3
+- В программе ошибка
 
-
-2) Что выведет программа?<br/>
-   <tt>int x = 8;<br/>
-   System.out.<br/>print(x++*7==6+5*10);<br/></tt>
+3) Что выведет программа?
+int k = 0;<br/>switch(k){<br/>case 0:<br/>k = k+2;<br/>case 2:<br/>k = k+2;<br/>case 3:<br/>k = k+2;<br/>default:<br/>k = -1;<br/>}<br/>System.out.print(k);
+- k
++ -1
 - 0
-+ true
-- 56
-- false
-- 81
+- 2
+- 4
+- 6
+- В программе ошибка
 
-3) Что выведет программа?<br/>
-   <tt>int x = 1;<br/>
-   int y = 2;<br/>
-   System.out.<br/>print(y*++y*y-x % x+y);<br/></tt>
-- 12
-- true
-- 3
-- false
-+ 21
-
-4) Какая операция менее приоритетная?
-- instanceof
-+ ==
-- <=
-
-5) Какая операция более приоритетная?
-+ +
-- &&
-- ==
+4) Что выведет программа?
+ int x=3;<br/>int y=2;<br/>int z = x>y ? (x+y) : (x-y);<br/>System.out.println(z);
+- z
+- 0
+- 1
++ 5
+- В программе ошибка

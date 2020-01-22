@@ -34,11 +34,20 @@
                 android:id="@+id/test_tv_question"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/margin_16dp"
-                tools:text="Чем отличается объявление переменной от её инициализации?"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                tools:text="Что выведет программа?"
                 android:textColor="@color/colorTextDark"
                 android:textAlignment="center"
                 style="@style/Text.Huge" />
+            <TextView
+                android:id="@+id/test_tv_code"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/margin_16dp"
+                tools:text="int x = 0;System.out.println(x);"
+                android:textColor="@color/colorTextDark"
+                android:textAlignment="inherit"
+                android:textSize="@dimen/text_size_18sp"/>
             <RadioGroup
                 android:id="@+id/test_radio_group_answers"
                 android:layout_width="match_parent"

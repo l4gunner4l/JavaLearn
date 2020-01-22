@@ -15,5 +15,14 @@ class ExampleUnitTest {
     }
     @Test
     fun test7(){
+        var a = 0
+        for(i in 0 until 6) {
+            if (a==8){
+                print("bye ")
+                continue
+            }
+            a += 2
+        }
+        print("a="+a)
     }
 }

@@ -43,7 +43,7 @@ class LessonsFragment : Fragment(){
     private fun openLessonClick(position: Int) {
         startActivity(LessonActivity.newInstance(
                         context = activity as Activity,
-                        lessonNum = position+1,
+                        lessonNum = position,
                         starsCount = rvAdapter.getStarsCount(position)
         ))
     }

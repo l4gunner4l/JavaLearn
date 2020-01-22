@@ -1,0 +1,35 @@
+0) Как нельзя объявлять массив?
+- <tt>int array[];</tt>
+- <tt>int[] array;</tt>
++ <tt>int[] array[];</tt>
+
+1) Как нельзя инициализировать массив?
+- <tt>array = new int[]{ 1,2,3 };</tt>
+- <tt>array = new int[3];</tt>
+- <tt>array = new int[3][];</tt>
+- <tt>array = { { 1 }, { 4,5 } };</tt>
++ <tt>array = new int[];</tt>
+- <tt>array = new int[3][1];</tt>
+- <tt>array = { 1,2,3 };</tt>
+
+
+2) Что выведет программа?
+int[] array = { 1,2,3 };<br/>System.out.print(array[2]);
+- 0
+- 2
++ 3
+
+3) Что выведет программа?
+int[] array = { 1,2,3,4,5 };<br/>System.out.print(array[array.length-1]);<br/>System.out.print(array[array.length]);
+- 00
+- 45
+- 50
++ В программе ошибка
+
+4) Что выведет программа?
+int[][] array = { { 1,2,3 }, { 4,5,6 } };<br/>System.out.print(array[array.length-1][0]);<br/>System.out.print(array[0][array.length-2]);
++ 42
+- 41
+- 15
+- 14
+- В программе ошибка

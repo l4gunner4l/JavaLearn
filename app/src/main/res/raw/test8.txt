@@ -1,0 +1,33 @@
+0) Что выведет программа?
+   int a = 0;<br/>for (int i=0; i&lt;=4; i++){<br/>a += 2;<br/>}<br/>System.out.print("a="+a);
+- a=8
++ a=10
+- a=12
+
+1) Что выведет программа?
+int a = 9;<br/>do {<br/>a += 2;<br/>}while( a&lt;=11 );<br/>System.out.print("a="+a);
+- a=9
+- a=11
++ a=13
+
+
+2) Что выведет программа?
+int a = 9;<br/>while( a&lt;11 ){<br/>a += 2;<br/>}<br/>System.out.print("a="+a);
+- a=9
++ a=11
+- a=13
+
+3) Что выведет программа?
+int a = 0;<br/>do {<br/>if (a==6){<br/>System.out.<br/>print("bye,a="+a+" ");<br/>break;<br/>}<br/>a += 2;<br/>} while( a&lt;=9 );<br/>System.out.print("a="+a);
+   - bye,a=6
+   - bye,a=6 a=10
+   + bye,a=6 a=6
+   - a=10
+
+4) Что выведет программа?
+int a = 0;<br/>for(int i = 0; i&lt;6; i++) {<br/>if (a==8){<br/>System.out.<br/>print("bye ");<br/>continue;<br/>}<br/>a += 2;<br/>}<br/>System.out.<br/>print("a="+a);
++ bye bye a=8
+- bye bye a=10
+- bye a=8
+- bye a=10
+- a=8
