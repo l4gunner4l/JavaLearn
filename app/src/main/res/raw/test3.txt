@@ -8,7 +8,7 @@
 - 5
 
 1) Что выведет программа?
-double x = 35.2;<br/>double y = 2.0;<br/>System.out.println(x/y);
+double x = 34.2;<br/>double y = 2.0;<br/>System.out.println(x/y);
 - x/y
 - 17
 - 17.0

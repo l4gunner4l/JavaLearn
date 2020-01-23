@@ -40,4 +40,9 @@
     <string name="text_saving_results">Your new result saved!</string>
     <string name="label_forgot_pass"><u>Forgot password?</u></string>
     <string name="label_forgot_send">Send</string>
+    <string name="dialog_start_lesson_helping">Hey, read material of lesson and pass test and don\'t forget to practice!</string>
+    <string name="label_start_lesson">Start the lesson</string>
+    <string name="label_lvl">Level</string>
+    <string name="label_dialog_lesson">Lesson: %1$d/%2$d</string>
+    <string name="label_dialog_progress">Progress: %1$d/%2$d</string>
 </resources>

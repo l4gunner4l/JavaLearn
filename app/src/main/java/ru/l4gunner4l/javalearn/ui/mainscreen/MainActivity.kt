@@ -28,15 +28,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.data.FirebaseCallback
+import ru.l4gunner4l.javalearn.data.FirebaseEndLoading
 import ru.l4gunner4l.javalearn.data.models.User
 import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.LessonsFragment
 import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.ProfileFragment
 import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.ShopFragment
 import ru.l4gunner4l.javalearn.ui.signscreens.SignActivity
 import ru.l4gunner4l.javalearn.utils.Utils
-
-
 /**
  * Activity with Bottom NavigationView (Profile, Lessons, Shop).
  * It is host for fragments
@@ -46,22 +44,23 @@ import ru.l4gunner4l.javalearn.utils.Utils
  */
 class MainActivity : AppCompatActivity() {
 
-    private val lessonsFragment: LessonsFragment = LessonsFragment()
-    private val shopFragment: ShopFragment = ShopFragment()
-    private val profileFragment: ProfileFragment = ProfileFragment()
-    private var activeFragment: Fragment = lessonsFragment
+    private lateinit var lessonsFragment: LessonsFragment
+    private lateinit var shopFragment: ShopFragment
+    private lateinit var profileFragment: ProfileFragment
+    private lateinit var activeFragment: Fragment
 
     private lateinit var nav: BottomNavigationView
     private lateinit var toolbar: Toolbar
-    private var user: User = User("0", "-", "-")
-    fun getUser() = user
+    lateinit var user: User
+        private set
+    lateinit var lessonsNames: MutableList<String>
+        private set
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initViews()
-        LoadUser().execute()
+        LoadData().execute()
     }
 
     fun signOut(view: View){
@@ -81,34 +80,38 @@ class MainActivity : AppCompatActivity() {
         sureAlert.create().show()
     }
 
-
-    private fun loadUser(firebaseCallback: FirebaseCallback) {
+    private fun loadData(endAction: FirebaseEndLoading) {
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
-        FirebaseDatabase.getInstance().reference.child("users").child(userId)
+        FirebaseDatabase.getInstance().reference
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val userDataSnapshot = dataSnapshot.child("users").child(userId)
                         val starsList = mutableListOf<Int>()
-                        for (starsSnapshot in dataSnapshot.child("starsList").children)
+                        for (starsSnapshot in userDataSnapshot.child("starsList").children)
                             starsList.add(starsSnapshot.getValue(Int::class.java)!!)
-
                         user = User(
-                                dataSnapshot.child("id").value.toString(),
-                                dataSnapshot.child("name").value.toString(),
-                                dataSnapshot.child("email").value.toString(),
+                                userDataSnapshot.child("id").value.toString(),
+                                userDataSnapshot.child("name").value.toString(),
+                                userDataSnapshot.child("email").value.toString(),
                                 starsList
                         )
-                        Log.i("M_MAIN", "3MainActivity - user=$user")
-                        firebaseCallback.onCallback(user)
-                    }
 
+                        val lessonsDataSnapshot = dataSnapshot.child("lessons")
+                        lessonsNames = mutableListOf()
+                        for (lessonSnapshot in lessonsDataSnapshot.children){
+                            lessonsNames.add(lessonSnapshot.child("name").value.toString())
+                        }
+
+                        endAction.onEndLoading(user)
+                    }
                     override fun onCancelled(error: DatabaseError) {
                         Log.i("M_MAIN", "Failed to read value.", error.toException())
                     }
-
                 })
     }
 
     private fun endLoading() {
+        initView()
         updateUI()
         findViewById<ProgressBar>(R.id.main_pb_progress).visibility = GONE
         findViewById<ImageView>(R.id.main_iv_splash).visibility = GONE
@@ -120,8 +123,13 @@ class MainActivity : AppCompatActivity() {
         lessonsFragment.setUserUI(user)
     }
 
-    private fun initViews() {
+    private fun initView() {
         initToolbar()
+
+        profileFragment = ProfileFragment()
+        lessonsFragment = LessonsFragment()
+        shopFragment = ShopFragment()
+        activeFragment = lessonsFragment
 
         val fm = supportFragmentManager
         nav = findViewById(R.id.main_nav_view_main)
@@ -145,7 +153,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
         // set primary fragment - lessonsFrag - on the screen
         nav.selectedItemId = R.id.nav_lessons
         fm.beginTransaction().add(R.id.main_fragment_container, profileFragment, "3").hide(profileFragment).commit()
@@ -212,10 +219,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    inner class LoadUser : AsyncTask<Void, Void, Void>(){
+    inner class LoadData : AsyncTask<Void, Void, Void>(){
         override fun doInBackground(vararg params: Void?): Void? {
-            loadUser(object : FirebaseCallback {
-                override fun onCallback(obj: Any) {
+            loadData(object : FirebaseEndLoading {
+                override fun onEndLoading(obj: Any) {
                     endLoading()
                 }
             })

@@ -65,7 +65,7 @@
                 android:layout_marginTop="@dimen/margin_16dp" />
             <Button
                 android:id="@+id/lesson_btn_go_test"
-                style="@style/BtnAccent.BtnTest"
+                style="@style/BtnAccent.BtnLesson"
                 android:text="@string/label_go_test"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_16dp"

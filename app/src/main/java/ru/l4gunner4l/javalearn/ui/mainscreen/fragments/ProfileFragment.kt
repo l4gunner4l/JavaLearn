@@ -1,7 +1,6 @@
 package ru.l4gunner4l.javalearn.ui.mainscreen.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -30,16 +29,18 @@ class ProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        user = (activity as MainActivity).getUser()
-        Log.i("M_MAIN", "(activity as MainActivity).getUser()=$user")
+        user = (activity as MainActivity).user
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         nameTIL = view.findViewById(R.id.profile_til_name)
         emailTIL = view.findViewById(R.id.profile_til_email)
-        emailTIL.isEnabled = false
         editSaveBtn = view.findViewById(R.id.btn_edit)
+
+        nameTIL.editText!!.setText(user.name)
+        emailTIL.editText!!.setText(user.email)
+        emailTIL.isEnabled = false
         editSaveBtn.setOnClickListener {
             if (this.isEditMode) {
                 val isSuccessful = updateDBUser(user)
@@ -58,8 +59,6 @@ class ProfileFragment : Fragment() {
 
     fun setUserUI(user: User){
         this.user = user
-        nameTIL.editText!!.setText(user.name)
-        emailTIL.editText!!.setText(user.email)
     }
 
     private fun updateDBUser(user: User): Boolean {

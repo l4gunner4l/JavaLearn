@@ -28,13 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="@dimen/margin_16dp"
+            android:layout_margin="@dimen/margin_32dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/test_tv_question"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/margin_8dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
                 tools:text="Что выведет программа?"
                 android:textColor="@color/colorTextDark"
                 android:textAlignment="center"
@@ -43,7 +43,7 @@
                 android:id="@+id/test_tv_code"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_margin="@dimen/margin_16dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
                 tools:text="int x = 0;System.out.println(x);"
                 android:textColor="@color/colorTextDark"
                 android:textAlignment="inherit"
@@ -52,7 +52,6 @@
                 android:id="@+id/test_radio_group_answers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_16dp"
                 style="@style/TestRadioButton"
                 android:gravity="start"/>
         </LinearLayout>
@@ -63,7 +62,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/margin_16dp"
             android:text="@string/label_check"
-            style="@style/BtnAccent.BtnTestCheck"/>
+            style="@style/BtnAccent.BtnLesson.Check"/>
     </RelativeLayout>
 
 

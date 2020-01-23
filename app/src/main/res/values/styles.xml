@@ -40,17 +40,18 @@
 
     <!--BUTTON STYLES-->
     <style name="BtnAccent">
+        <item name="android:layout_height">54dp</item>
         <item name="android:elevation">10dp</item>
         <item name="android:background">@drawable/btn_orange</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textAppearance">@style/Text.Small</item>
         <item name="android:textColor">@color/colorTextLight</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="BtnAccent.BtnSignOut">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">54dp</item>
         <item name="android:paddingStart">@dimen/margin_32dp</item>
         <item name="android:paddingEnd">@dimen/margin_32dp</item>
         <item name="android:drawableStart">@drawable/ic_sign_out_light_24dp</item>
@@ -58,25 +59,18 @@
         <item name="android:background">@drawable/btn_sign_out_red</item>
     </style>
 
-    <style name="BtnAccent.BtnTestCheck">
-        <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">54dp</item>
+    <style name="BtnAccent.BtnLesson">
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:paddingStart">@dimen/margin_32dp</item>
         <item name="android:paddingEnd">@dimen/margin_32dp</item>
-        <item name="android:background">@drawable/btn_check_green</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="BtnAccent.BtnTest">
-        <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">54dp</item>
-        <item name="android:paddingStart">@dimen/margin_32dp</item>
-        <item name="android:paddingEnd">@dimen/margin_32dp</item>
+    <style name="BtnAccent.BtnLesson.Check">
+        <item name="android:background">@drawable/btn_check_green</item>
     </style>
 
     <style name="BtnAccent.BtnSign">
         <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">54dp</item>
     </style>
 
 

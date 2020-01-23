@@ -15,10 +15,6 @@
     <string name="text_surname">Фамилия</string>
     <string name="text_password_repeat">Повторите пароль</string>
 
-    <string name="label_profile">Профиль</string>
-    <string name="label_shop">Магазин</string>
-    <string name="label_lessons">Обучение</string>
-
     <string name="text_error_valid">Введены невалидные данные!</string>
     <string name="text_error_fill_field">Заполните поле!</string>
     <string name="text_error_wrong_email">Неверный адрес!</string>
@@ -28,6 +24,14 @@
     <string name="text_error_signed_up">Вы уже зарегистрированы!</string>
     <string name="text_error_wrong_repeat_password">Пароли не совпадают!</string>
     <string name="text_error_wrong_auth">Введены неверные данные!</string>
+
+
+
+
+    <string name="label_profile">Профиль</string>
+    <string name="label_shop">Магазин</string>
+    <string name="label_lessons">Обучение</string>
+
     <string name="text_error_not_available_lesson">Сначала пройдите предыдущие уроки!</string>
 
     <string name="text_question_sure_sign_out">Вы уверены, что хотите выйти?</string>
@@ -38,7 +42,10 @@
     <string name="text_not_saving_results">Результат не улучшен.</string>
 
     <string name="label_your_lvl">Твой уровень</string>
+    <string name="label_lvl">Уровень</string>
     <string name="label_lesson">Урок</string>
+    <string name="label_dialog_lesson">Урок: %1$d/%2$d</string>
+    <string name="label_dialog_progress">Прогресс: %1$d/%2$d</string>
     <string name="label_cancel">Отмена</string>
     <string name="label_yes_sure">Да, уверен</string>
     <string name="label_exit">Выход</string>
@@ -47,4 +54,7 @@
     <string name="label_check">Проверить</string>
     <string name="label_forgot_pass"><u>Забыли пароль?</u></string>
     <string name="label_forgot_send">Отправить</string>
+    <string name="label_start_lesson">Начать урок</string>
+
+    <string name="dialog_start_lesson_helping">Прочитай материал по теме и пройди тест, а также, конечно, не забывай практиковаться!</string>
 </resources>

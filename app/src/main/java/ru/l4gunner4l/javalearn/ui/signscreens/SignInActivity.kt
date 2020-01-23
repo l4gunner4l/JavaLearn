@@ -63,7 +63,7 @@ class SignInActivity : AppCompatActivity() {
                 .setView(view)
                 .setCancelable(true)
                 .setPositiveButton("Сбросить"){ dialog, which ->
-                    val email = view.findViewById<TextInputLayout>(R.id.forgot_email).editText!!.text
+                    val email = view.findViewById<TextInputLayout>(R.id.dialog_forgot_email_til).editText!!.text
                     if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                         auth.sendPasswordResetEmail(email.toString()).addOnCompleteListener { task ->
                             if (task.isSuccessful) Utils.showToast(

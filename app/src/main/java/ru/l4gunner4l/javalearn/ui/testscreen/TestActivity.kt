@@ -17,7 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.data.FirebaseCallback
+import ru.l4gunner4l.javalearn.data.FirebaseEndLoading
 import ru.l4gunner4l.javalearn.data.models.TestQuestion
 import ru.l4gunner4l.javalearn.utils.Utils
 import ru.l4gunner4l.javalearn.utils.extensions.setMyStyle
@@ -88,7 +88,7 @@ class TestActivity : AppCompatActivity() {
         lastSelectedBtnIndex = savedInstanceState?.getInt(KEY_LAST) ?: -1
     }
 
-    private fun loadTest(firebaseCallback: FirebaseCallback){
+    private fun loadTest(firebaseCallback: FirebaseEndLoading){
         Log.i("M_MAIN", "loadTest")
         FirebaseDatabase.getInstance().reference.child("lessons").child(lessonNum.toString()).child("tests")
                 .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -105,7 +105,7 @@ class TestActivity : AppCompatActivity() {
                                     qDS.child("rightAnswer").getValue(Int::class.java)!!
                                     ))
                         }
-                        firebaseCallback.onCallback(test)
+                        firebaseCallback.onEndLoading(test)
                     }
                     override fun onCancelled(error: DatabaseError) { Log.i("M_MAIN", "Failed to read value.", error.toException()) }
 
@@ -217,8 +217,8 @@ class TestActivity : AppCompatActivity() {
 
     inner class LoadTestQuestionsTask : AsyncTask<Void, Void, Void>() {
         override fun doInBackground(vararg params: Void?): Void? {
-            loadTest(object : FirebaseCallback {
-                override fun onCallback(obj: Any) {
+            loadTest(object : FirebaseEndLoading {
+                override fun onEndLoading(obj: Any) {
                     endLoading()
                 }
             })

@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.data.FirebaseCallback
+import ru.l4gunner4l.javalearn.data.FirebaseEndLoading
 import ru.l4gunner4l.javalearn.data.models.Lesson
 import ru.l4gunner4l.javalearn.ui.testscreen.TestActivity
 import ru.l4gunner4l.javalearn.utils.Utils
@@ -69,52 +69,25 @@ class LessonActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode != REQUEST_GO_TEST ||
-            resultCode == Activity.RESULT_CANCELED ||
-            data == null)
-            return
+        if (requestCode != REQUEST_GO_TEST || resultCode == Activity.RESULT_CANCELED || data == null) return
         else {
             val newStarsCount = data.getIntExtra(TestActivity.EXTRA_STARS_COUNT, 0)
             if (newStarsCount > starsCount) {
-                if (starsCount == 0){
-                    FirebaseDatabase.getInstance().reference
-                            .child("users")
-                            .child(FirebaseAuth.getInstance().currentUser!!.uid)
-                            .child("starsList")
-                            .child((lessonNum+1).toString())
-                            .setValue(0)
-                }
+                if (starsCount == 0)
+                    LevelUpTask().execute()
+
                 starsCount = newStarsCount
                 updateUI(lesson)
-                FirebaseDatabase.getInstance().reference
-                        .child("users")
-                        .child(FirebaseAuth.getInstance().currentUser!!.uid)
-                        .orderByChild("starsList")
-                        .equalTo(lessonNum.toString())
-                        .addListenerForSingleValueEvent(object : ValueEventListener{
-                            override fun onCancelled(p0: DatabaseError) {
-                                Log.i("M_MAIN", "LessonActivity: Updating stars count failed")
-                            }
-                            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                dataSnapshot.child("starsList").child(lessonNum.toString())
-                                        .ref.setValue(starsCount)
-                                Utils.showToast(
-                                        this@LessonActivity,
-                                        "Вы набрали $newStarsCount звезды!\n"+
-                                        getString(R.string.text_saving_results),
-                                        Toast.LENGTH_LONG)
-                            }
 
-                        })
-            } else Utils.showToast(
-                    this@LessonActivity,
-                    "Вы набрали $newStarsCount звезды!\n"+
-                    getString(R.string.text_not_saving_results),
+                SaveResultsTask().execute()
+
+            } else Utils.showToast(this@LessonActivity,
+                    "Вы набрали $newStarsCount звезды!\n"+ getString(R.string.text_not_saving_results),
                     Toast.LENGTH_SHORT)
         }
     }
 
-    private fun loadLesson(firebaseCallback: FirebaseCallback){
+    private fun loadLesson(firebaseCallback: FirebaseEndLoading){
         FirebaseDatabase.getInstance().reference.child("lessons").child(lessonNum.toString())
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -128,7 +101,7 @@ class LessonActivity : AppCompatActivity() {
                         )
                         Log.i("M_MAIN", "LessonActivity - user=$lesson")
 
-                        firebaseCallback.onCallback(lesson)
+                        firebaseCallback.onEndLoading(lesson)
                     }
                     override fun onCancelled(error: DatabaseError) { Log.i("M_MAIN", "Failed to read value.", error.toException()) }
 
@@ -150,16 +123,48 @@ class LessonActivity : AppCompatActivity() {
     }
 
     inner class LoadLessonTask : AsyncTask<Void, Void, Void>() {
-
         override fun doInBackground(vararg params: Void?): Void? {
-            loadLesson(object : FirebaseCallback {
-                override fun onCallback(obj: Any) {
+            loadLesson(object : FirebaseEndLoading {
+                override fun onEndLoading(obj: Any) {
                     endLoading()
                 }
             })
             return null
         }
+    }
 
+    inner class LevelUpTask : AsyncTask<Void, Void, Void>(){
+        override fun doInBackground(vararg params: Void?): Void? {
+            FirebaseDatabase.getInstance().reference.child("users")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid).child("starsList")
+                    .child((lessonNum+1).toString()).setValue(0)
+            return null
+        }
+
+    }
+
+    inner class SaveResultsTask : AsyncTask<Void, Void, Void>() {
+        override fun doInBackground(vararg params: Void?): Void? {
+            FirebaseDatabase.getInstance().reference.child("users")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid).orderByChild("starsList")
+                    .equalTo(lessonNum.toString()).addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {
+                            Log.i("M_MAIN", "LessonActivity: Updating stars count failed")
+                        }
+
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            dataSnapshot.child("starsList").child(lessonNum.toString())
+                                    .ref.setValue(starsCount)
+                            Utils.showToast(
+                                    this@LessonActivity,
+                                    "Вы набрали $starsCount звезды!\n" +
+                                            getString(R.string.text_saving_results),
+                                    Toast.LENGTH_LONG)
+                        }
+
+                    })
+            return null
+        }
     }
 
     companion object {
