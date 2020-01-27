@@ -93,6 +93,8 @@ class MainActivity : AppCompatActivity() {
                                 userDataSnapshot.child("id").value.toString(),
                                 userDataSnapshot.child("name").value.toString(),
                                 userDataSnapshot.child("email").value.toString(),
+                                userDataSnapshot.child("imageUrl")
+                                        .getValue(String::class.java),
                                 starsList
                         )
 

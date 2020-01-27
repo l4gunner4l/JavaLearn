@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.testscreen.TestActivity">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <include
             android:id="@+id/test_toolbar"
             layout="@layout/toolbar_test"
@@ -22,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_below="@id/test_toolbar"
-            android:background="@color/colorAccent"/>
+            android:background="@color/colorAccent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,40 +33,56 @@
             android:layout_centerInParent="true"
             android:layout_margin="@dimen/margin_32dp"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/test_tv_question"
-                android:layout_height="wrap_content"
+                style="@style/Text.Huge"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_16dp"
-                tools:text="Что выведет программа?"
-                android:textColor="@color/colorTextDark"
                 android:textAlignment="center"
-                style="@style/Text.Huge" />
+                android:textColor="@color/colorTextDark"
+                tools:text="Что выведет программа?" />
+
             <TextView
                 android:id="@+id/test_tv_code"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_16dp"
-                tools:text="int x = 0;System.out.println(x);"
-                android:textColor="@color/colorTextDark"
                 android:textAlignment="inherit"
-                android:textSize="@dimen/text_size_18sp"/>
+                android:textColor="@color/colorTextDark"
+                android:textSize="@dimen/text_size_18sp"
+                tools:text="int x = 0;System.out.println(x);" />
+
             <RadioGroup
                 android:id="@+id/test_radio_group_answers"
+                style="@style/TestRadioButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TestRadioButton"
-                android:gravity="start"/>
+                android:gravity="start" />
         </LinearLayout>
+
+        <View
+            android:id="@+id/test_view_green"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorGreen"
+            android:elevation="10dp"
+            android:translationY="150dp" />
 
         <Button
             android:id="@+id/test_btn_check"
+            style="@style/BtnAccent.BtnLesson.Check"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/margin_16dp"
-            android:text="@string/label_check"
-            style="@style/BtnAccent.BtnLesson.Check"/>
+            android:text="@string/label_check" />
     </RelativeLayout>
+
+    <include
+        layout="@layout/test_bottom_sheet"
+        tools:visibility="gone"/>
 
 
     <ImageView
@@ -83,4 +102,4 @@
         android:layout_centerInParent="true"
         tools:visibility="gone"/>
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

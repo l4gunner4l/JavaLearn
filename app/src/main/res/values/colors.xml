@@ -18,4 +18,5 @@
 
 
     <color name="colorBtnSignOut">#FF3636</color>
+    <color name="colorGreen">#00A829</color>
 </resources>

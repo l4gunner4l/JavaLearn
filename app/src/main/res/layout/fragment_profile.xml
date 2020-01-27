@@ -27,12 +27,12 @@
             android:layout_marginEnd="@dimen/margin_16dp"
             />
 
-        <ru.l4gunner4l.javalearn.ui.customview.CircleImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_avatar"
             android:layout_width="@dimen/avatar_round_size_112dp"
             android:layout_height="@dimen/avatar_round_size_112dp"
-            app:cv_borderColor="@color/colorLight"
-            app:cv_borderWidth="@dimen/size_4dp"
+            app:civ_border_color="@color/colorLight"
+            app:civ_border_width="@dimen/size_4dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
         

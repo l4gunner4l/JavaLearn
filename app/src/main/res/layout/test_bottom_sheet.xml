@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    android:background="@color/colorGreen">
+    <TextView
+        android:id="@+id/test_tv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16dp"
+        style="@style/Text.Huge"
+        android:textStyle="bold"
+        android:textColor="@color/colorTextLight"
+        android:text="Верно"
+        />
+    <TextView
+        android:id="@+id/test_tv_txt_right_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16dp"
+        style="@style/Text.Huge"
+        android:textStyle="bold"
+        android:textColor="@color/colorTextLight"
+        android:text="Правильный ответ:"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/test_tv_right_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_16dp"
+        style="@style/Text.Small"
+        android:textColor="@color/colorTextLight"
+        android:text="1245958"
+        android:visibility="invisible"
+        />
+    <Button
+        android:id="@+id/test_btn_next"
+        style="@style/BtnAccent.BtnLesson.Check"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginBottom="@dimen/margin_16dp"
+        android:text="Далее" />
+
+</LinearLayout>

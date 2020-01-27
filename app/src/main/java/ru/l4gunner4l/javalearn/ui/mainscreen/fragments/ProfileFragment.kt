@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
@@ -22,6 +23,7 @@ class ProfileFragment : Fragment() {
     private lateinit var editSaveBtn: ImageButton
     private lateinit var nameTIL: TextInputLayout
     private lateinit var emailTIL: TextInputLayout
+    private lateinit var avatarIV: ImageView
 
     private var isEditMode = false
     private lateinit var user: User
@@ -37,7 +39,9 @@ class ProfileFragment : Fragment() {
         nameTIL = view.findViewById(R.id.profile_til_name)
         emailTIL = view.findViewById(R.id.profile_til_email)
         editSaveBtn = view.findViewById(R.id.btn_edit)
+        avatarIV = view.findViewById(R.id.civ_avatar)
 
+        if (user.imageUrl == null) avatarIV.setImageResource(R.drawable.avatar_default)
         nameTIL.editText!!.setText(user.name)
         emailTIL.editText!!.setText(user.email)
         emailTIL.isEnabled = false

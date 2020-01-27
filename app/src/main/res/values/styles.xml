@@ -66,6 +66,7 @@
     </style>
 
     <style name="BtnAccent.BtnLesson.Check">
+        <item name="android:layout_width">300dp</item>
         <item name="android:background">@drawable/btn_check_green</item>
     </style>
 

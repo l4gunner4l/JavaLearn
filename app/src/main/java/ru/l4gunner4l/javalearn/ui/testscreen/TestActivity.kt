@@ -12,10 +12,12 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.test_bottom_sheet.*
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.data.FirebaseEndLoading
 import ru.l4gunner4l.javalearn.data.models.TestQuestion
@@ -39,6 +41,8 @@ class TestActivity : AppCompatActivity() {
     private lateinit var codeTV: TextView
     private lateinit var answersGroup: RadioGroup
     private lateinit var checkBtn: Button
+
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
     override fun onSaveInstanceState(outState: Bundle) {
         Log.i("M_MAIN", "onSaveInstanceState")
@@ -70,6 +74,15 @@ class TestActivity : AppCompatActivity() {
         answersGroup = findViewById(R.id.test_radio_group_answers)
         checkBtn = findViewById(R.id.test_btn_check)
         checkBtn.setOnClickListener { checkAnswer() }
+
+        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet))
+        test_btn_next.setOnClickListener {
+            currentQuestionIndex++
+            if (currentQuestionIndex==test.size) finishActivity()
+            else updateUI(test[currentQuestionIndex])
+            answersGroup.clearCheck()
+            hideBottomSheet()
+        }
     }
     private fun initToolbar() {
         toolbar = findViewById(R.id.test_toolbar)
@@ -77,7 +90,7 @@ class TestActivity : AppCompatActivity() {
         supportActionBar!!.title = null
         progressPB = toolbar.findViewById(R.id.test_toolbar_progressBar)
         toolbar.findViewById<ImageView>(R.id.test_toolbar_iv_back)
-                .setOnClickListener{ showSureDialog() }
+                .setOnClickListener{ showSureExitDialog() }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -116,14 +129,15 @@ class TestActivity : AppCompatActivity() {
         Log.i("M_MAIN", "endLoading")
         val currentTestQuestion = test[currentQuestionIndex]
         updateUI(currentTestQuestion)
+        hideBottomSheet()
         loadingPB.visibility = View.GONE
         curtainIV.visibility = View.GONE
     }
 
     private fun updateUI(testQuestion: TestQuestion) {
         Log.i("M_MAIN", "updateUI")
-        // curtainIV.visibility = View.VISIBLE
-        // loadingPB.visibility = View.VISIBLE
+        curtainIV.visibility = View.VISIBLE
+        loadingPB.visibility = View.VISIBLE
 
         // если вопросов - 5, то увеличение прогресса по 2 до 10
         // если вопросов - 10, то увеличение прогресса по 1 до 10
@@ -133,8 +147,7 @@ class TestActivity : AppCompatActivity() {
         if (testQuestion.code == null) {
             codeTV.text = ""
             codeTV.visibility = View.GONE
-        }
-        else {
+        } else {
             codeTV.visibility = View.VISIBLE
             codeTV.text = Html.fromHtml(testQuestion.code)
         }
@@ -151,8 +164,8 @@ class TestActivity : AppCompatActivity() {
         }
         answersGroup.check(lastSelectedBtnIndex)
 
-        // curtainIV.visibility = View.GONE
-        // loadingPB.visibility = View.GONE
+        curtainIV.visibility = View.GONE
+        loadingPB.visibility = View.GONE
     }
 
     private fun checkAnswer() {
@@ -161,14 +174,36 @@ class TestActivity : AppCompatActivity() {
         else {
             if (answersGroup.checkedRadioButtonId != test[currentQuestionIndex].rightAnswer){
                 failuresCount++
-            }
-
-            currentQuestionIndex++
-            if (currentQuestionIndex==test.size) finishActivity()
-            else updateUI(test[currentQuestionIndex])
-
-            answersGroup.clearCheck()
+                showBottomSheetRed()
+            } else { showBottomSheetGreen() }
         }
+    }
+
+    private fun hideBottomSheet(){
+        bottomSheetBehavior.isHideable = true
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.peekHeight = 0
+    }
+
+
+    private fun showBottomSheetGreen(){
+        bottom_sheet.background = getDrawable(R.color.colorGreen)
+        test_tv_right.visibility = View.VISIBLE
+        test_tv_txt_right_answer.visibility = View.GONE
+        test_tv_right_answer.visibility = View.INVISIBLE
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetBehavior.peekHeight = bottom_sheet.height
+    }
+
+    private fun showBottomSheetRed(){
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        bottom_sheet.background = getDrawable(android.R.color.holo_red_light)
+        test_tv_right.visibility = View.GONE
+        test_tv_txt_right_answer.visibility = View.VISIBLE
+        test_tv_right_answer.visibility = View.VISIBLE
+        test_tv_right_answer.text =
+                test[currentQuestionIndex].answers[test[currentQuestionIndex].rightAnswer-1]
+        bottomSheetBehavior.peekHeight = bottom_sheet.height
     }
 
     private fun finishActivity() {
@@ -189,7 +224,7 @@ class TestActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun showSureDialog() {
+    private fun showSureExitDialog() {
         val sureAlert = AlertDialog.Builder(this@TestActivity)
         sureAlert.setTitle(getString(R.string.label_exit_from_test))
                 .setMessage(getString(R.string.text_question_sure_exit_from_test))
