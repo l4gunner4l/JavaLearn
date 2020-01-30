@@ -45,4 +45,14 @@
     <string name="label_lvl">Level</string>
     <string name="label_dialog_lesson">Lesson: %1$d/%2$d</string>
     <string name="label_dialog_progress">Progress: %1$d/%2$d</string>
+    <string name="label_settings">Settings</string>
+    <string name="label_change_user_data">User\'s data editing</string>
+    <string name="label_change_user_photo">Change profile\'s photo</string>
+    <string name="text_changes_updated">Data saved!</string>
+    <string name="text_saving_failed">Saving failed!</string>
+    <string name="text_next">Next</string>
+    <string name="text_right">It\'s right!</string>
+    <string name="text_right_answer">Right answer:</string>
+    <string name="text_section_is_developing">The section is developing…</string>
+    <string name="text_stars_count">Stars count - %1$d</string>
 </resources>

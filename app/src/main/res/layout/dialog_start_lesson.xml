@@ -8,7 +8,7 @@
     android:paddingEnd="@dimen/margin_32dp"
     android:paddingTop="@dimen/margin_16dp"
     android:paddingBottom="@dimen/margin_16dp"
-    android:background="@color/colorBackgroundDark"
+    android:background="@color/colorBackgroundLight"
     android:gravity="center">
 
     <TextView
@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
         style="@style/Text.Medium"
+        android:textColor="@color/colorTextDark"
         tools:text="Прогресс: 0/3"/>
     <TextView
         android:layout_width="wrap_content"
@@ -41,6 +42,7 @@
         android:layout_marginTop="@dimen/margin_8dp"
         style="@style/Text.Medium"
         android:textAlignment="center"
+        android:textColor="@color/colorTextDark"
         android:text="@string/dialog_start_lesson_helping"/>
 
     <Button

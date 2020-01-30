@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         style="@style/Text.Huge"
         android:textStyle="bold"
         android:textColor="@color/colorTextLight"
-        android:text="Верно"
+        android:text="@string/text_right"
         />
     <TextView
         android:id="@+id/test_tv_txt_right_answer"
@@ -26,7 +26,7 @@
         style="@style/Text.Huge"
         android:textStyle="bold"
         android:textColor="@color/colorTextLight"
-        android:text="Правильный ответ:"
+        android:text="@string/text_right_answer"
         android:visibility="gone"
         />
     <TextView
@@ -36,7 +36,7 @@
         android:layout_marginStart="@dimen/margin_16dp"
         style="@style/Text.Small"
         android:textColor="@color/colorTextLight"
-        android:text="1245958"
+        tools:text="1245958"
         android:visibility="invisible"
         />
     <Button
@@ -45,6 +45,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_16dp"
         android:layout_marginBottom="@dimen/margin_16dp"
-        android:text="Далее" />
+        android:text="@string/text_next" />
 
 </LinearLayout>

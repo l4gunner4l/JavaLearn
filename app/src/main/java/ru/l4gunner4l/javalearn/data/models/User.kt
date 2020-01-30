@@ -5,12 +5,11 @@ class User {
         private set
     lateinit var name: String
     lateinit var email: String
-    var imageUrl: String? = null
+    var avatarUrl: String? = null
     var level = 1
         private set
     var starsList = mutableListOf(0)
         private set
-    // TODO avatar
 
     constructor() {}
     constructor(id: String, name: String, email: String) {
@@ -23,14 +22,14 @@ class User {
         this.id = id
         this.name = name
         this.email = email
-        this.imageUrl = imageUrl
+        this.avatarUrl = imageUrl
         starsList = mutableListOf(0)
     }
     constructor(id: String, name: String, email: String, imageUrl: String?, starsList: MutableList<Int>) {
         this.id = id
         this.name = name
         this.email = email
-        this.imageUrl = imageUrl
+        this.avatarUrl = imageUrl
         this.level = starsList.size
         this.starsList = starsList
     }

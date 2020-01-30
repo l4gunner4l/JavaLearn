@@ -1,16 +1,24 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorBackgroundLight</item>
-
     </style>
 
-    <style name="AppTheme.Launcher">
+    <style name="AppTheme.ActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="AppTheme.NoActionBar.Launcher">
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
@@ -40,6 +48,7 @@
 
     <!--BUTTON STYLES-->
     <style name="BtnAccent">
+        <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">54dp</item>
         <item name="android:elevation">10dp</item>
         <item name="android:background">@drawable/btn_orange</item>
@@ -56,22 +65,28 @@
         <item name="android:paddingEnd">@dimen/margin_32dp</item>
         <item name="android:drawableStart">@drawable/ic_sign_out_light_24dp</item>
         <item name="android:drawablePadding">@dimen/margin_8dp</item>
-        <item name="android:background">@drawable/btn_sign_out_red</item>
+        <item name="android:background">@drawable/btn_red</item>
     </style>
 
     <style name="BtnAccent.BtnLesson">
-        <item name="android:layout_width">wrap_content</item>
         <item name="android:paddingStart">@dimen/margin_32dp</item>
         <item name="android:paddingEnd">@dimen/margin_32dp</item>
     </style>
 
     <style name="BtnAccent.BtnLesson.Check">
-        <item name="android:layout_width">300dp</item>
-        <item name="android:background">@drawable/btn_check_green</item>
+        <item name="android:background">@drawable/btn_green</item>
     </style>
 
     <style name="BtnAccent.BtnSign">
         <item name="android:layout_width">300dp</item>
+    </style>
+
+    <style name="BtnAccent.Settings">
+        <item name="android:paddingStart">@dimen/margin_32dp</item>
+        <item name="android:paddingEnd">@dimen/margin_32dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@drawable/btn_white</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
 

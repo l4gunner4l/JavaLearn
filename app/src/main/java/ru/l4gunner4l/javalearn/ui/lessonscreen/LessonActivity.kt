@@ -116,8 +116,9 @@ class LessonActivity : AppCompatActivity() {
 
     private fun updateUI(lesson: Lesson) {
         toolbar.findViewById<TextView>(R.id.lesson_toolbar_tv_title).text =
-                "${getString(R.string.label_lesson)} ${lesson.number+1}"
-        starsTV.text = "Количество звёзд - $starsCount"
+                String.format(getString(R.string.label_lesson), lesson.number+1)
+        starsTV.text = String.format(getString(R.string.text_stars_count), starsCount)
+                "Количество звёзд - $starsCount"
         nameTV.text = lesson.name
         textTV.text = Html.fromHtml(lesson.text)
     }

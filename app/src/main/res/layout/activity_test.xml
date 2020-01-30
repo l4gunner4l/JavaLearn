@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.testscreen.TestActivity">
+    tools:context=".ui.testscreen.TestActivity"
+    android:background="@color/colorBackgroundLight">
 
 
     <RelativeLayout
@@ -16,9 +17,7 @@
             layout="@layout/toolbar_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp" />
+            android:layout_alignParentTop="true" />
 
         <View
             android:id="@+id/view"
