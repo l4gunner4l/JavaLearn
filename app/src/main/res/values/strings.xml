@@ -67,5 +67,9 @@
     <string name="text_right_answer">Правильный ответ:</string>
     <string name="text_right">Верно!</string>
     <string name="text_next">Далее</string>
+    <string name="text_photo_updated">Фотография профиля обновлена</string>
+    <string name="text_name_updated">Имя обновлено</string>
+    <string name="text_email_updated">E-mail обновлён</string>
+    <string name="text_no_updates">Изменений нет</string>
 
 </resources>

@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         profileFragment = ProfileFragment()
+        profileFragment.ctx = this
         lessonsFragment = LessonsFragment()
         lessonsFragment.ctx = this
         shopFragment = ShopFragment()

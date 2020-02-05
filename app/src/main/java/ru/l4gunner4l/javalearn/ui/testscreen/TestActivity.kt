@@ -194,7 +194,6 @@ class TestActivity : AppCompatActivity() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottomSheetBehavior.peekHeight = bottom_sheet.height
     }
-
     private fun showBottomSheetRed(){
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bottom_sheet.background = getDrawable(android.R.color.holo_red_light)
@@ -234,6 +233,10 @@ class TestActivity : AppCompatActivity() {
                     Utils.showToast(applicationContext, getString(R.string.text_lets_continue), Toast.LENGTH_SHORT)
                 }
         sureAlert.create().show()
+    }
+
+    override fun onBackPressed() {
+        showSureExitDialog()
     }
 
     companion object {

@@ -3,6 +3,8 @@
     package="ru.l4gunner4l.javalearn">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -11,7 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ui.settingsscreen.SettingsActivity"
             android:parentActivityName=".ui.mainscreen.MainActivity">
@@ -25,7 +27,7 @@
 
         <activity
             android:name=".ui.signscreens.SignActivity"
-            android:theme="@style/AppTheme.NoActionBar.Launcher">
+            android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

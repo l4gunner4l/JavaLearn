@@ -55,4 +55,8 @@
     <string name="text_right_answer">Right answer:</string>
     <string name="text_section_is_developing">The section is developing…</string>
     <string name="text_stars_count">Stars count - %1$d</string>
+    <string name="text_name_updated">Name updated</string>
+    <string name="text_no_updates">No updates</string>
+    <string name="text_photo_updated">Avatar updated</string>
+    <string name="text_email_updated">E-mail updated</string>
 </resources>

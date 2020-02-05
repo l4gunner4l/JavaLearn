@@ -17,7 +17,7 @@ import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
 class SignActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme_NoActionBar)
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
         FirebaseApp.initializeApp(this)

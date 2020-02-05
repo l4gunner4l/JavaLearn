@@ -1,5 +1,6 @@
 package ru.l4gunner4l.javalearn.ui.mainscreen.fragments
 
+import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -16,11 +17,15 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.data.models.User
 import ru.l4gunner4l.javalearn.ui.settingsscreen.SettingsActivity
 
+
 class ProfileFragment : Fragment() {
+
+    lateinit var ctx: Context
 
     private lateinit var nameTIL: TextInputLayout
     private lateinit var emailTIL: TextInputLayout
@@ -42,7 +47,7 @@ class ProfileFragment : Fragment() {
         val toolbar = view.findViewById<Toolbar>(R.id.profile_toolbar)
         toolbar.findViewById<ImageView>(R.id.profile_toolbar_iv_settings)
                 .setOnClickListener{
-                    startActivity(SettingsActivity.createNewInstance(activity!!.baseContext, user))
+                    startActivity(SettingsActivity.createNewInstance(ctx, user))
                 }
         nameTIL.isEnabled = false
         emailTIL.isEnabled = false
@@ -51,9 +56,17 @@ class ProfileFragment : Fragment() {
     }
 
     private fun updateUI() {
-        if (user.avatarUrl == null) avatarIV.setImageResource(R.drawable.avatar_default)
+        if (user.avatarName == null || user.avatarName == "null")
+            avatarIV.setImageResource(R.drawable.avatar_default)
         else {
-            Glide.with(activity!!.baseContext).load(user.avatarUrl).into(avatarIV)
+            val storageRef = FirebaseStorage.getInstance()
+                    .getReferenceFromUrl("gs://l4gunner4l-learn-java.appspot.com")
+            val fileName = user.avatarName!!
+            storageRef.child("images").child(fileName)
+                    .downloadUrl
+                    .addOnSuccessListener {
+                        Glide.with(activity!!.baseContext).load(it).into(avatarIV)
+                    }
         }
         nameTIL.editText!!.setText(user.name)
         emailTIL.editText!!.setText(user.email)
@@ -69,6 +82,7 @@ class ProfileFragment : Fragment() {
 
     private fun loadData() {
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
+
         FirebaseDatabase.getInstance().reference.child("users").child(userId)
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -80,13 +94,11 @@ class ProfileFragment : Fragment() {
                                 dataSnapshot.child("id").value.toString(),
                                 dataSnapshot.child("name").value.toString(),
                                 dataSnapshot.child("email").value.toString(),
-                                dataSnapshot.child("imageUrl")
-                                        .getValue(String::class.java),
+                                dataSnapshot.child("avatarName").value.toString(),
                                 starsList
                         )
                         updateUI()
                     }
-
                     override fun onCancelled(error: DatabaseError) {
                         Log.i("M_MAIN", "Failed to read value.", error.toException())
                     }

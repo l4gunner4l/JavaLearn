@@ -76,8 +76,7 @@
                         android:maxLength="30"
                         android:inputType="textEmailAddress"
                         android:textAppearance="@style/Text.Small"
-                        android:textColor="@color/colorTextDark"
-                        android:focusable="false"/>
+                        android:textColor="@color/colorTextDark"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
             <LinearLayout
@@ -89,13 +88,17 @@
                     android:layout_width="@dimen/size_40dp"
                     android:layout_height="@dimen/size_40dp"
                     android:layout_marginEnd="@dimen/margin_20dp"
-                    android:layout_gravity="bottom"
+                    android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_camera_light_48dp"/>
                 <Button
                     android:id="@+id/settings_btn_change_photo"
                     style="@style/BtnAccent.Settings"
                     android:text="@string/label_change_user_photo"/>
             </LinearLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/settings_iv_avatar"
+                android:layout_width="@dimen/size_40dp"
+                android:layout_height="@dimen/size_40dp"/>
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"

@@ -1,9 +1,13 @@
 package ru.l4gunner4l.javalearn.ui.settingsscreen
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.util.Patterns
 import android.widget.ImageView
@@ -15,17 +19,21 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.settings_activity.*
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.data.models.User
 import ru.l4gunner4l.javalearn.utils.Utils
 import ru.l4gunner4l.javalearn.utils.extensions.hideKeyboard
+import java.io.ByteArrayOutputStream
+
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var nameOld: String
     private lateinit var emailOld: String
-    private var avatarNew: String? = null
+    private lateinit var avatarIV: ImageView
+    private var avatarNew: Bitmap? = null
 
     private lateinit var nameTIL: TextInputLayout
     private lateinit var emailTIL: TextInputLayout
@@ -33,8 +41,8 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
-        nameOld = intent.getStringExtra("name")
-        emailOld = intent.getStringExtra("email")
+        nameOld = intent.getStringExtra("name") ?: ""
+        emailOld = intent.getStringExtra("email") ?: ""
         initToolbar()
         initViews()
     }
@@ -44,15 +52,46 @@ class SettingsActivity : AppCompatActivity() {
         emailTIL = findViewById(R.id.settings_til_email)
         nameTIL.editText!!.setText(nameOld)
         emailTIL.editText!!.setText(emailOld)
+        avatarIV = settings_iv_avatar
+        settings_btn_change_photo.setOnClickListener{ chooseImage() }
     }
-
     private fun initToolbar() {
         setSupportActionBar(findViewById(R.id.settings_toolbar))
         supportActionBar!!.title = null
         settings_toolbar.findViewById<ImageView>(R.id.settings_toolbar_iv_back)
                 .setOnClickListener { finish(); this@SettingsActivity.hideKeyboard() }
         settings_toolbar.findViewById<ImageView>(R.id.settings_toolbar_iv_save)
-                .setOnClickListener { SaveData().execute(); this@SettingsActivity.hideKeyboard() }
+                .setOnClickListener { onSaveClick() }
+    }
+
+    private fun onSaveClick() {
+        val nameNew = nameTIL.editText!!.text.toString().trim()
+        val emailNew = emailTIL.editText!!.text.toString().trim()
+        if (!isValidName(nameNew) || !isValidEmail(emailNew))
+            Utils.showToast(this@SettingsActivity, getString(R.string.text_error_valid), Toast.LENGTH_LONG)
+        else if (avatarNew == null && nameOld == nameNew && emailOld == emailNew)
+            Utils.showToast(this@SettingsActivity, getString(R.string.text_no_updates), Toast.LENGTH_LONG)
+        else SaveData().execute()
+        this@SettingsActivity.hideKeyboard()
+    }
+
+    private fun chooseImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, imageReturnedIntent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent)
+        if (requestCode == PICK_IMAGE_REQUEST &&
+            resultCode == Activity.RESULT_OK &&
+            imageReturnedIntent != null
+        ){
+            val selectedImageUri: Uri? = imageReturnedIntent.data
+            avatarNew = MediaStore.Images.Media.getBitmap(contentResolver, selectedImageUri)
+            avatarIV.setImageBitmap(avatarNew)
+        }
     }
 
     private fun isValidEmail(emailInput: String): Boolean {
@@ -85,6 +124,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val PICK_IMAGE_REQUEST = 71
         fun createNewInstance(context: Context, user: User): Intent {
             val intent = Intent(context, SettingsActivity::class.java)
             intent.putExtra("name", user.name)
@@ -102,31 +142,49 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun saveProfileData() {
+        var isSuccessful = ""
+        if (avatarNew != null){
+            val fileName = System.currentTimeMillis().toString()+".png"
+            val stream = ByteArrayOutputStream()
+            avatarNew!!.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            FirebaseStorage.getInstance()
+                    .getReferenceFromUrl("gs://l4gunner4l-learn-java.appspot.com")
+                    .child("images/$fileName")
+                    .putBytes(stream.toByteArray())
+                    .addOnSuccessListener {
+                        FirebaseDatabase.getInstance().reference
+                                .child("users")
+                                .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                                .child("avatarName")
+                                .setValue(fileName)
+                        isSuccessful += getString(R.string.text_photo_updated)
+                    }
+                    .addOnFailureListener{
+                        Log.i("M_MAIN", "saveProfileData: $it")
+                    }
+        }
         FirebaseDatabase.getInstance().reference.child("users")
                 .child(FirebaseAuth.getInstance().currentUser!!.uid)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
-                        Log.i("M_MAIN", "LessonActivity: Updating stars count failed")
+                        Log.i("M_MAIN", "saveProfileData:$p0")
                     }
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        var isSuccesful = false
                         val nameNew = nameTIL.editText!!.text.toString().trim()
                         if (isValidName(nameNew) && nameOld != nameNew){
                             dataSnapshot.child("name").ref.setValue(nameNew)
-                            isSuccesful = true
+                            nameOld = nameNew
+                            isSuccessful += if (isSuccessful!="") "\n" else ""
+                            isSuccessful += getString(R.string.text_name_updated)
                         }
                         val emailNew = emailTIL.editText!!.text.toString().trim()
                         if (isValidEmail(emailNew) && emailOld != emailNew){
                             dataSnapshot.child("email").ref.setValue(emailNew)
-                            isSuccesful = true
+                            emailOld = emailNew
+                            isSuccessful += if (isSuccessful!="") "\n" else ""
+                            isSuccessful += getString(R.string.text_email_updated)
                         }
-                        if (avatarNew != null){
-                            dataSnapshot.child("avatar").ref.setValue(avatarNew)
-                            isSuccesful = true
-                        }
-                        if (isSuccesful)
-                            Utils.showToast(this@SettingsActivity, R.string.text_changes_updated, Toast.LENGTH_LONG)
-                        else Utils.showToast(this@SettingsActivity, R.string.text_saving_failed, Toast.LENGTH_LONG)
+                        if (isSuccessful!="") Utils.showToast(this@SettingsActivity, isSuccessful, Toast.LENGTH_LONG)
                     }
 
                 })
