@@ -1,7 +1,6 @@
 package ru.l4gunner4l.javalearn.ui.mainscreen.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,7 @@ import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import ru.l4gunner4l.javalearn.R
-import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
 import ru.l4gunner4l.javalearn.utils.Utils
 
 data class LessonsAdapter(
@@ -24,8 +17,8 @@ data class LessonsAdapter(
     : RecyclerView.Adapter<LessonsAdapter.ViewHolder>() {
 
     lateinit var clickListener: ItemClickListener
-    private val lessonsNamesList = mutableMapOf<Int, String>()
-    private val starsList = mutableMapOf<Int, Int>()
+    var starsList = mutableMapOf<Int, Int>()
+
 
     // inflates the cell layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,40 +28,7 @@ data class LessonsAdapter(
 
     // binds the data in each cell
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val userId = FirebaseAuth.getInstance().currentUser!!.uid
-        FirebaseDatabase.getInstance().reference
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val currentLessonStars = try {
-                            dataSnapshot
-                                    .child("users").child(userId).child("starsList").child(position.toString())
-                                    .getValue(Int::class.java)!!
-                        } catch (e: KotlinNullPointerException) { -1 }
-
-                        if (currentLessonStars >= 0){
-                            starsList[position] = currentLessonStars
-                            holder.bgIV.setImageDrawable(context.getDrawable(R.drawable.bg_card_lesson_orange))
-                            holder.failsRB.rating = currentLessonStars.toFloat()
-                        } else {
-                            holder.bgIV.setImageDrawable(context.getDrawable(R.drawable.bg_card_lesson_grey))
-                            holder.failsRB.rating = 0f
-                        }
-
-                        val currentLessonName = dataSnapshot
-                                .child("lessons").child(position.toString())
-                                .child("name")
-                                .value.toString()
-                        lessonsNamesList[position] = currentLessonName
-
-                        holder.numberTV.text = (position+1).toString()
-                        if (position==9)
-                            (context as MainActivity).endLoading()
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.i("M_MAIN", "Failed to read value.", error.toException())
-                    }
-                })
-
+        holder.bind(position)
     }
 
 
@@ -79,8 +39,6 @@ data class LessonsAdapter(
 
     // convenience method for getting data at click position
     fun getStarsCount(lessonIndex: Int) = starsList[lessonIndex]
-
-    fun getLessonName(lessonIndex: Int) = lessonsNamesList[lessonIndex]
 
     fun getUsersLvl() = starsList.size-1
 
@@ -96,6 +54,17 @@ data class LessonsAdapter(
 
         init {
             itemView.setOnClickListener(this)
+        }
+
+        fun bind(position: Int){
+            numberTV.text = (position+1).toString()
+            if (position>=starsList.size){
+                bgIV.setImageResource(R.drawable.bg_card_lesson_grey)
+                failsRB.rating = 0f
+            } else {
+                bgIV.setImageResource(R.drawable.bg_card_lesson_orange)
+                failsRB.rating = starsList[position]!!.toFloat()
+            }
         }
 
         override fun onClick(view: View) {

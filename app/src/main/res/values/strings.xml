@@ -59,17 +59,16 @@
     <string name="label_settings">Настройки</string>
     <string name="label_change_user_data">Изменение данных пользователя</string>
     <string name="label_change_user_photo">Изменить фото профиля</string>
-    <string name="text_changes_updated">Изменения сохранены!</string>
-    <string name="text_saving_failed">Сохранение не удалось!</string>
+    <string name="text_avatar_updated">Аватар сохранен!</string>
+    <string name="text_avatar_not_updated">Аватар не сохранен!</string>
+    <string name="text_name_updated">Имя сохранено!</string>
+    <string name="text_email_updated">E-mail сохранен!</string>
+    <string name="text_no_updates">Изменений нет</string>
 
     <string name="text_stars_count">Количество звёзд - %1$d</string>
     <string name="text_section_is_developing">Раздел в разработке…</string>
     <string name="text_right_answer">Правильный ответ:</string>
     <string name="text_right">Верно!</string>
     <string name="text_next">Далее</string>
-    <string name="text_photo_updated">Фотография профиля обновлена</string>
-    <string name="text_name_updated">Имя обновлено</string>
-    <string name="text_email_updated">E-mail обновлён</string>
-    <string name="text_no_updates">Изменений нет</string>
 
 </resources>

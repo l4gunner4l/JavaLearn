@@ -111,11 +111,12 @@ class TestActivity : AppCompatActivity() {
                             for (ansDS in qDS.child("answers").children){
                                 answers.add(ansDS.getValue(String::class.java)!!)
                             }
+                            val rightAnswer = qDS.child("rightAnswer").getValue(Int::class.java)!!
                             test.add(TestQuestion(
                                     qDS.child("question").getValue(String::class.java)!!,
                                     qDS.child("code").getValue(String::class.java),
                                     answers,
-                                    qDS.child("rightAnswer").getValue(Int::class.java)!!
+                                    rightAnswer
                                     ))
                         }
                         firebaseCallback.onEndLoading(test)

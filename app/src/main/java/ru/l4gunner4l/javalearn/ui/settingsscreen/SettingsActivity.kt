@@ -142,7 +142,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun saveProfileData() {
-        var isSuccessful = ""
         if (avatarNew != null){
             val fileName = System.currentTimeMillis().toString()+".png"
             val stream = ByteArrayOutputStream()
@@ -157,10 +156,11 @@ class SettingsActivity : AppCompatActivity() {
                                 .child(FirebaseAuth.getInstance().currentUser!!.uid)
                                 .child("avatarName")
                                 .setValue(fileName)
-                        isSuccessful += getString(R.string.text_photo_updated)
+                        Utils.showToast(this@SettingsActivity, getString(R.string.text_avatar_updated), Toast.LENGTH_LONG)
                     }
                     .addOnFailureListener{
                         Log.i("M_MAIN", "saveProfileData: $it")
+                        Utils.showToast(this@SettingsActivity, getString(R.string.text_avatar_updated), Toast.LENGTH_LONG)
                     }
         }
         FirebaseDatabase.getInstance().reference.child("users")
@@ -174,17 +174,15 @@ class SettingsActivity : AppCompatActivity() {
                         if (isValidName(nameNew) && nameOld != nameNew){
                             dataSnapshot.child("name").ref.setValue(nameNew)
                             nameOld = nameNew
-                            isSuccessful += if (isSuccessful!="") "\n" else ""
-                            isSuccessful += getString(R.string.text_name_updated)
+                            Utils.showToast(this@SettingsActivity, getString(R.string.text_name_updated), Toast.LENGTH_LONG)
                         }
                         val emailNew = emailTIL.editText!!.text.toString().trim()
                         if (isValidEmail(emailNew) && emailOld != emailNew){
                             dataSnapshot.child("email").ref.setValue(emailNew)
                             emailOld = emailNew
-                            isSuccessful += if (isSuccessful!="") "\n" else ""
-                            isSuccessful += getString(R.string.text_email_updated)
+                            Utils.showToast(this@SettingsActivity, getString(R.string.text_email_updated), Toast.LENGTH_LONG)
                         }
-                        if (isSuccessful!="") Utils.showToast(this@SettingsActivity, isSuccessful, Toast.LENGTH_LONG)
+
                     }
 
                 })
