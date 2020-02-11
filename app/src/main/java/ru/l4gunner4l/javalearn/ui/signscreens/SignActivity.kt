@@ -25,9 +25,10 @@ class SignActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (FirebaseAuth.getInstance().currentUser != null){
-            startActivity(Intent(this, MainActivity::class.java))
-        }
+        if (FirebaseAuth.getInstance().currentUser != null)
+            if (FirebaseAuth.getInstance().currentUser!!.isEmailVerified)
+                startActivity(Intent(this, MainActivity::class.java))
+
     }
 
     fun startSignInActivity(view: View?) {

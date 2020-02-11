@@ -1,25 +1,19 @@
 package ru.l4gunner4l.javalearn.ui.mainscreen
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.view.View.GONE
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.LessonsFragment
 import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.ProfileFragment
 import ru.l4gunner4l.javalearn.ui.mainscreen.fragments.ShopFragment
-import ru.l4gunner4l.javalearn.ui.signscreens.SignActivity
-import ru.l4gunner4l.javalearn.utils.Utils
 
 /**
  * Activity with Bottom NavigationView (Profile, Lessons, Shop).
@@ -44,22 +38,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun signOut(view: View){
-        val sureAlert = AlertDialog.Builder(this@MainActivity)
-        sureAlert.setTitle(getString(R.string.label_exit))
-                .setMessage(getString(R.string.text_question_sure_sign_out))
-                .setCancelable(true)
-                .setPositiveButton(getString(R.string.label_yes_sure)){ dialog, which ->
-            FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this, SignActivity::class.java))
-            finish()
-        }
-                .setNegativeButton(getString(R.string.label_cancel)){ dialog, which ->
-                Utils.showToast(applicationContext,
-                    getString(R.string.text_you_stayed), Toast.LENGTH_SHORT)
-        }
-        sureAlert.create().show()
-    }
 
     private fun initView() {
         profileFragment = ProfileFragment()

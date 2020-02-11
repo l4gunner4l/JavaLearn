@@ -1,13 +1,17 @@
 package ru.l4gunner4l.javalearn.ui.mainscreen.fragments
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -20,7 +24,10 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.data.models.User
+import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
 import ru.l4gunner4l.javalearn.ui.settingsscreen.SettingsActivity
+import ru.l4gunner4l.javalearn.ui.signscreens.SignActivity
+import ru.l4gunner4l.javalearn.utils.Utils
 
 
 class ProfileFragment : Fragment() {
@@ -44,6 +51,7 @@ class ProfileFragment : Fragment() {
         nameTIL = view.findViewById(R.id.profile_til_name)
         emailTIL = view.findViewById(R.id.profile_til_email)
         avatarIV = view.findViewById(R.id.civ_avatar)
+        view.findViewById<Button>(R.id.btn_sign_out).setOnClickListener { signOut() }
         val toolbar = view.findViewById<Toolbar>(R.id.profile_toolbar)
         toolbar.findViewById<ImageView>(R.id.profile_toolbar_iv_settings)
                 .setOnClickListener{
@@ -53,6 +61,23 @@ class ProfileFragment : Fragment() {
         emailTIL.isEnabled = false
 
         return view
+    }
+
+    private fun signOut(){
+        val sureAlert = AlertDialog.Builder(ctx)
+        sureAlert.setTitle(getString(R.string.label_exit))
+                .setMessage(getString(R.string.text_question_sure_sign_out))
+                .setCancelable(true)
+                .setPositiveButton(getString(R.string.label_yes_sure)){ dialog, which ->
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(ctx, SignActivity::class.java))
+                    (ctx as MainActivity).finish()
+                }
+                .setNegativeButton(getString(R.string.label_cancel)){ dialog, which ->
+                    Utils.showToast(ctx,
+                            getString(R.string.text_you_stayed), Toast.LENGTH_SHORT)
+                }
+        sureAlert.create().show()
     }
 
     private fun updateUI() {

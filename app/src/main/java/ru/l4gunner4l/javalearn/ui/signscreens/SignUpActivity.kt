@@ -3,10 +3,11 @@ package ru.l4gunner4l.javalearn.ui.signscreens
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
@@ -15,7 +16,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.data.models.User
-import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
 import ru.l4gunner4l.javalearn.utils.Utils
 import java.util.regex.Pattern
 
@@ -31,6 +31,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var emailTIL: TextInputLayout
     private lateinit var passwordTIL: TextInputLayout
     private lateinit var passwordRepeatTIL: TextInputLayout
+    private lateinit var progressBar: ProgressBar
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseDatabase
@@ -67,10 +68,12 @@ class SignUpActivity : AppCompatActivity() {
         emailTIL = findViewById(R.id.sign_up_til_email)
         passwordTIL = findViewById(R.id.sign_up_til_password)
         passwordRepeatTIL = findViewById(R.id.sign_up_til_password_repeat)
+        progressBar = findViewById(R.id.sign_up_pb)
         findViewById<Button>(R.id.sign_up_btn).setOnClickListener { startMainActivity() }
     }
 
     private fun startMainActivity() {
+        progressBar.visibility = View.VISIBLE
         val name = nameTIL.editText!!.text.toString().trim()
         val email = emailTIL.editText!!.text.toString().trim()
         val password = passwordTIL.editText!!.text.toString().trim()
@@ -79,25 +82,53 @@ class SignUpActivity : AppCompatActivity() {
         if (isValidInput(name, email, password, passwordRepeat)) {
             auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
+                        progressBar.visibility = View.GONE
                         if (task.isSuccessful) {
-                            val userId = auth.currentUser!!.uid
-                            Log.i("M_MAIN", "1)SignUpActivity - id=$userId")
-                            val user = User(userId, name, email)
-                            dbRef.child(userId).setValue(user)
-                                    .addOnCompleteListener {
-                                        if (it.isSuccessful){
-                                            Log.i("M_MAIN", "2)SignUpActivity - id=$userId")
-                                            startActivity(MainActivity.createNewInstance(this))
-                                            finish()
-                                        } else Utils.showToast(baseContext, getString(R.string.text_error_signed_up),
-                                                Toast.LENGTH_SHORT)
+                            val firebaseUser = auth.currentUser!!
+                            firebaseUser.sendEmailVerification()
+                                    .addOnCompleteListener { task1 ->
+                                        if (task1.isSuccessful) {
+                                            val user = User(firebaseUser.uid, name, email)
+                                            dbRef.child(firebaseUser.uid).setValue(user)
+                                                    .addOnCompleteListener {
+                                                        if (it.isSuccessful){
+                                                            Utils.showToast(baseContext, getString(R.string.text_verification),
+                                                                    Toast.LENGTH_SHORT)
+                                                            Handler().postDelayed(
+                                                                    {
+                                                                        startActivity(SignInActivity.createNewInstance(this))
+                                                                        finish()
+                                                                    },
+                                                                    5000
+                                                            )
+                                                        } else Utils.showToast(baseContext, getString(R.string.text_error_signed_up),
+                                                                Toast.LENGTH_SHORT)
+                                                    }
+                                        } else {
+                                            Utils.showToast(baseContext, task1.exception?.message.toString(),
+                                                    Toast.LENGTH_SHORT)
+                                        }
                                     }
 
-                        } else Utils.showToast(baseContext, getString(R.string.text_error_signed_up),
+
+                        } else {
+                            Utils.showToast(baseContext, getString(R.string.text_error_signed_up),
                                     Toast.LENGTH_SHORT)
+                            Handler().postDelayed(
+                                    {
+                                        startActivity(SignInActivity.createNewInstance(this))
+                                        finish()
+                                    },
+                                    4000
+                            )
+
+                        }
 
                     }
-        } else Utils.showToast(this, R.string.text_error_valid, Toast.LENGTH_SHORT)
+        } else {
+            progressBar.visibility = View.GONE
+            Utils.showToast(this, R.string.text_error_valid, Toast.LENGTH_SHORT)
+        }
     }
 
     private fun isValidInput(name:String, email:String, password:String, passwordRepeat:String) =

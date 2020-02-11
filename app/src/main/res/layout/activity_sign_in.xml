@@ -75,8 +75,16 @@
             android:text="@string/label_forgot_pass"
             android:textColor="@color/colorGrey"
             android:textSize="@dimen/text_size_14sp"/>
+
     </LinearLayout>
 
 
+    <ProgressBar
+        android:id="@+id/sign_in_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
 </RelativeLayout>

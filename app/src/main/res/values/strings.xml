@@ -70,5 +70,6 @@
     <string name="text_right_answer">Правильный ответ:</string>
     <string name="text_right">Верно!</string>
     <string name="text_next">Далее</string>
+    <string name="text_verification">Регистрация прошла успешно. Проверьте почту и пройдите верификацию.</string>
 
 </resources>

@@ -109,7 +109,6 @@
         android:layout_marginBottom="@dimen/margin_16dp"
         android:layout_centerHorizontal="true"
         android:text="@string/label_sign_out"
-        android:onClick="signOut"
         style="@style/BtnAccent.BtnSignOut" />
 
 </RelativeLayout>

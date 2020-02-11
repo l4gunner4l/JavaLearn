@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
@@ -25,6 +26,7 @@ class SignInActivity : AppCompatActivity() {
 
     private lateinit var emailTIL: TextInputLayout
     private lateinit var passwordTIL: TextInputLayout
+    private lateinit var progressBar: ProgressBar
 
     private lateinit var auth: FirebaseAuth
 
@@ -52,6 +54,7 @@ class SignInActivity : AppCompatActivity() {
     private fun initViews() {
         emailTIL = findViewById(R.id.sign_in_til_email)
         passwordTIL = findViewById(R.id.sign_in_til_password)
+        progressBar = findViewById(R.id.sign_in_pb)
         sign_in_forgot_pass.setOnClickListener { startForgotPassword() }
         sign_in_btn.setOnClickListener { startMainActivity() }
     }
@@ -77,18 +80,31 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun startMainActivity() {
+        progressBar.visibility = View.VISIBLE
         val email = emailTIL.editText!!.text.toString().trim()
         val password = passwordTIL.editText!!.text.toString().trim()
 
         if (isValidInput(email, password)) {
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
+                        progressBar.visibility = View.GONE
                         if (task.isSuccessful) {
-                            startActivity(MainActivity.createNewInstance(this))
-                            finish()
-                        } else Utils.showToast(this@SignInActivity, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT)
+                            if (FirebaseAuth.getInstance().currentUser!!.isEmailVerified){
+                                startActivity(MainActivity.createNewInstance(this))
+                                finish()
+                            } else {
+                                Utils.showToast(this@SignInActivity, "Пройдите верификацию по ссылке в сообщениях вашей эл. почты", Toast.LENGTH_SHORT)
+                            }
+
+                        } else {
+                            Utils.showToast(this@SignInActivity, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT)
+                        }
                     }
-        } else Utils.showToast(this@SignInActivity, R.string.text_error_valid, Toast.LENGTH_SHORT)
+        } else {
+            progressBar.visibility = View.GONE
+            Utils.showToast(this@SignInActivity, R.string.text_error_valid, Toast.LENGTH_SHORT)
+
+        }
     }
 
     private fun isValidInput(email:String, password:String) = isValidEmail(email) && isValidPassword(password)

@@ -3,7 +3,7 @@
     <color name="colorPrimary">#232020</color>
     <color name="colorPrimaryDark">#131111</color>
     <color name="colorAccent">#ff7315</color>
-    <color name="colorLight">#F4F4F4</color>
+    <color name="colorLight">#FFF7F7</color>
 
     <!--Colors for texts-->
     <color name="colorTextLight">@color/colorLight</color>
