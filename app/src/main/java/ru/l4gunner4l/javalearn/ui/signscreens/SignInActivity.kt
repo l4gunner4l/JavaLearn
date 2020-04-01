@@ -56,7 +56,11 @@ class SignInActivity : AppCompatActivity() {
         passwordTIL = findViewById(R.id.sign_in_til_password)
         progressBar = findViewById(R.id.sign_in_pb)
         sign_in_forgot_pass.setOnClickListener { startForgotPassword() }
-        sign_in_btn.setOnClickListener { startMainActivity() }
+        sign_in_btn.setOnClickListener {
+            if (Utils.isInternetConnection(this))
+                startMainActivity()
+            else Utils.showToast(this, R.string.text_no_internet, Toast.LENGTH_LONG)
+        }
     }
 
     private fun startForgotPassword() {
@@ -90,15 +94,12 @@ class SignInActivity : AppCompatActivity() {
                         progressBar.visibility = View.GONE
                         if (task.isSuccessful) {
                             if (FirebaseAuth.getInstance().currentUser!!.isEmailVerified){
-                                startActivity(MainActivity.createNewInstance(this))
+                                var isAdmin = false
+                                if (email == Utils.ADMIN_EMAIL) isAdmin = true
+                                startActivity(MainActivity.createNewInstance(this, isAdmin))
                                 finish()
-                            } else {
-                                Utils.showToast(this@SignInActivity, "Пройдите верификацию по ссылке в сообщениях вашей эл. почты", Toast.LENGTH_SHORT)
-                            }
-
-                        } else {
-                            Utils.showToast(this@SignInActivity, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT)
-                        }
+                            } else { Utils.showToast(this@SignInActivity, getString(R.string.text_go_verificate), Toast.LENGTH_SHORT) }
+                        } else { Utils.showToast(this@SignInActivity, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT) }
                     }
         } else {
             progressBar.visibility = View.GONE

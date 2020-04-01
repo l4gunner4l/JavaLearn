@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -25,6 +26,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ru.l4gunner4l.javalearn.R
+import ru.l4gunner4l.javalearn.ui.admin.AdminActivity
 import ru.l4gunner4l.javalearn.ui.lessonscreen.LessonActivity
 import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
 import ru.l4gunner4l.javalearn.ui.mainscreen.adapters.LessonsAdapter
@@ -36,11 +38,14 @@ class LessonsFragment : Fragment(){
     lateinit var ctx: Context
 
     private lateinit var lvlTV: TextView
+    private lateinit var addLesson: ImageView
     private lateinit var rvLessons: RecyclerView
     private lateinit var rvAdapter: LessonsAdapter
     private lateinit var startLessonAlert: AlertDialog
 
     private var lessonsNames: MutableList<String> = mutableListOf()
+
+    var isAdmin = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +58,7 @@ class LessonsFragment : Fragment(){
         rvLessons = view.findViewById(R.id.rv_lessons)
         rvLessons.layoutManager = GridLayoutManager(ctx, 2)
         lvlTV = view.findViewById(R.id.lessons_toolbar_tv_title)
+        addLesson = view.findViewById(R.id.lessons_toolbar_add_lesson)
 
         rvAdapter = LessonsAdapter(ctx)
         rvAdapter.setOnItemClickListener(object : ItemClickListener {
@@ -67,6 +73,13 @@ class LessonsFragment : Fragment(){
     fun updateUI() {
         rvAdapter.notifyDataSetChanged()
         lvlTV.text = makeLevelText(rvAdapter.getUsersLvl().toString())
+        if (isAdmin) {
+            addLesson.visibility = View.VISIBLE
+            addLesson.findViewById<ImageView>(R.id.lessons_toolbar_add_lesson)
+                    .setOnClickListener {
+                        startActivity(AdminActivity.createNewInstance(ctx, lessonsNames.size))
+                    }
+        }
     }
 
     private fun openLessonClick(position: Int) {
@@ -89,7 +102,6 @@ class LessonsFragment : Fragment(){
                         context = activity as Activity,
                         lessonNum = position,
                         starsCount = rvAdapter.getStarsCount(position) ?: 0
-
                 ))
                 startLessonAlert.cancel()
             }
@@ -148,7 +160,9 @@ class LessonsFragment : Fragment(){
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         for (ds in dataSnapshot.children){
                             lessonsNames.add(ds.child("name").getValue(String::class.java)!!)
+                            rvAdapter.lessonsCount = rvAdapter.lessonsCount+1
                         }
+
                     }
                     override fun onCancelled(error: DatabaseError) {
                         Log.i("M_MAIN", "Failed to read value.", error.toException())

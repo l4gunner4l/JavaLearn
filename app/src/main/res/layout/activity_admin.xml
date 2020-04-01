@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/add_lesson_toolbar"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="@color/colorBackgroundDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/admin_toolbar_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/margin_8dp"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/ic_arrow_back_dark_32dp"/>
+
+        <TextView
+            style="@style/TextView.Toolbar.Light"
+            android:layout_gravity="center"
+            android:text="Возможности администратора"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        <Button
+            android:id="@+id/admin_btn_add_lesson"
+            style="@style/BtnAccent.BtnLesson"
+            android:text="@string/label_add_lesson"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginBottom="@dimen/margin_16dp"/>
+
+        <Button
+            android:id="@+id/admin_btn_change_lesson"
+            style="@style/BtnAccent.BtnLesson"
+            android:text="@string/label_change_lesson"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginBottom="@dimen/margin_16dp"/>
+
+        <Button
+            android:id="@+id/admin_btn_delete_lesson"
+            style="@style/BtnAccent.BtnLesson"
+            android:text="@string/label_delete_lesson"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginBottom="@dimen/margin_16dp"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

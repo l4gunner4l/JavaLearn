@@ -15,6 +15,16 @@
         <TextView
             android:id="@+id/lessons_toolbar_tv_title"
             style="@style/TextView.Toolbar.Light"/>
+        <ImageView
+            android:id="@+id/lessons_toolbar_add_lesson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_8dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:src="@drawable/ic_edit_light_32dp"
+            />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView

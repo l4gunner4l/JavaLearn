@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin_8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/dialog_add_answer_et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_8dp"
+        android:padding="@dimen/padding_4dp"
+        android:minHeight="48dp"
+        android:background="@android:color/white"
+        android:textAppearance="@style/Text.Medium"
+        android:textColor="@color/colorTextDark"
+        android:textColorHint="@color/colorTextGrey"
+        android:hint="Ответ"/>
+
+    <CheckBox
+        android:id="@+id/dialog_add_answer_is_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_8dp"
+        android:buttonTint="@color/colorAccent"
+        android:textColor="@color/colorTextLight"
+        android:textAppearance="@style/Text.Medium"
+        android:text="Верный?"
+        />
+
+</LinearLayout>

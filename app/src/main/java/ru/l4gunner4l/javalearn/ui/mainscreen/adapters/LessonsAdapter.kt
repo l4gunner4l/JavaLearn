@@ -18,6 +18,7 @@ data class LessonsAdapter(
 
     lateinit var clickListener: ItemClickListener
     var starsList = mutableMapOf<Int, Int>()
+    var lessonsCount = 0
 
 
     // inflates the cell layout from xml when needed
@@ -33,7 +34,7 @@ data class LessonsAdapter(
 
 
     // total number of cells
-    override fun getItemCount() = 10
+    override fun getItemCount() = lessonsCount
 
     fun setOnItemClickListener(function: ItemClickListener){ this.clickListener = function }
 

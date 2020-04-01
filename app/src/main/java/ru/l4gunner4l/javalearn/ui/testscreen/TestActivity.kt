@@ -144,7 +144,7 @@ class TestActivity : AppCompatActivity() {
         // если вопросов - 10, то увеличение прогресса по 1 до 10
         progressPB.progress = currentQuestionIndex*(10/test.size)
 
-        questionTV.text = Html.fromHtml(testQuestion.question)
+        questionTV.text = Html.fromHtml(testQuestion.text)
         if (testQuestion.code == null) {
             codeTV.text = ""
             codeTV.visibility = View.GONE

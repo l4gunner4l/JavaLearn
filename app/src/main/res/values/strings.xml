@@ -71,5 +71,19 @@
     <string name="text_right">Верно!</string>
     <string name="text_next">Далее</string>
     <string name="text_verification">Регистрация прошла успешно. Проверьте почту и пройдите верификацию.</string>
+    <string name="text_no_internet">No internet connection</string>
+    <string name="text_go_verificate">Пройдите верификацию по ссылке в сообщениях вашей эл. почты</string>
+    <string name="text_not_selected">не задан</string>
+    <string name="label_answers">Варианты ответов</string>
+    <string name="text_answers_empty">Список вариантов ответов пуст</string>
+    <string name="hint_question">Вопрос</string>
+    <string name="hint_code_for_question">Программа для вопроса</string>
+    <string name="text_new_question">Новый вопрос</string>
+    <string name="text_to_add_question">Добавить вопрос</string>
+    <string name="text_new_answer">Новый ответ</string>
+    <string name="text_to_add_answer">Добавить ответ</string>
+    <string name="label_add_lesson">Добавить урок</string>
+    <string name="label_change_lesson">Изменить урок</string>
+    <string name="label_delete_lesson">Удалить урок</string>
 
 </resources>

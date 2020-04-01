@@ -69,10 +69,14 @@ class SignUpActivity : AppCompatActivity() {
         passwordTIL = findViewById(R.id.sign_up_til_password)
         passwordRepeatTIL = findViewById(R.id.sign_up_til_password_repeat)
         progressBar = findViewById(R.id.sign_up_pb)
-        findViewById<Button>(R.id.sign_up_btn).setOnClickListener { startMainActivity() }
+        findViewById<Button>(R.id.sign_up_btn).setOnClickListener {
+            if (Utils.isInternetConnection(this))
+                signUp()
+            else Utils.showToast(this, R.string.text_no_internet, Toast.LENGTH_LONG)
+        }
     }
 
-    private fun startMainActivity() {
+    private fun signUp() {
         progressBar.visibility = View.VISIBLE
         val name = nameTIL.editText!!.text.toString().trim()
         val email = emailTIL.editText!!.text.toString().trim()

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ru.l4gunner4l.javalearn">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,40 +15,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.admin.AdminActivity"></activity>
+        <activity android:name=".ui.admin.addlesson.AddQuestionActivity" />
+        <activity android:name=".ui.admin.addlesson.AddLessonActivity" />
         <activity
             android:name=".ui.settingsscreen.SettingsActivity"
-            android:parentActivityName=".ui.mainscreen.MainActivity">
-        </activity>
-
+            android:parentActivityName=".ui.mainscreen.MainActivity" />
         <activity android:name=".ui.testscreen.TestActivity" />
-
         <activity
             android:name=".ui.lessonscreen.LessonActivity"
             android:parentActivityName=".ui.mainscreen.MainActivity" />
-
         <activity
             android:name=".ui.signscreens.SignActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.signscreens.SignUpActivity"
             android:parentActivityName=".ui.signscreens.SignActivity"
             android:windowSoftInputMode="stateVisible" /> <!-- Открытие клавы сразу при открытии -->
-
         <activity
             android:name=".ui.signscreens.SignInActivity"
             android:parentActivityName=".ui.signscreens.SignActivity"
             android:windowSoftInputMode="stateVisible" /> <!-- Открытие клавы сразу при открытии -->
-
         <activity
             android:name=".ui.mainscreen.MainActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>

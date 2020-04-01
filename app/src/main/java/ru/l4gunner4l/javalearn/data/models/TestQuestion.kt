@@ -1,8 +1,10 @@
 package ru.l4gunner4l.javalearn.data.models
 
-data class TestQuestion(
-        val question: String,
-        val code: String?,
-        val answers: MutableList<String>,
-        val rightAnswer: Int
-)
+import java.io.Serializable
+
+class TestQuestion(
+        var text: String,
+        var code: String?,
+        var answers: MutableList<String>,
+        var rightAnswer: Int
+) : Serializable

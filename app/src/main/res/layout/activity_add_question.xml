@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/add_question_toolbar"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="@color/colorBackgroundDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/add_question_toolbar_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/margin_8dp"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/ic_close_light_32dp"/>
+
+        <TextView
+            android:id="@+id/add_question_toolbar_tv_title"
+            style="@style/TextView.Toolbar.Light"
+            android:layout_gravity="center"
+            android:text="@string/text_new_question"/>
+
+        <ImageView
+            android:id="@+id/add_question_toolbar_iv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/margin_8dp"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/ic_done_light_32dp"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_question_toolbar">
+        <EditText
+            android:id="@+id/add_question_et_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:padding="@dimen/padding_4dp"
+            android:minHeight="48dp"
+            android:background="@android:color/white"
+            android:textAppearance="@style/Text.Small"
+            android:textColor="@color/colorTextDark"
+            android:textColorHint="@color/colorTextGrey"
+            android:hint="@string/hint_question"/>
+        <EditText
+            android:id="@+id/add_question_et_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:padding="@dimen/padding_4dp"
+            android:minHeight="48dp"
+            android:background="@android:color/white"
+            android:textAppearance="@style/Text.Small"
+            android:textColor="@color/colorTextDark"
+            android:textColorHint="@color/colorTextGrey"
+            android:hint="@string/hint_code_for_question"/>
+        <TextView
+            android:id="@+id/add_question_tv_label_empty_ans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="@style/Text.Medium"
+            android:textColor="@color/colorTextDark"
+            android:text="@string/text_answers_empty"/>
+        <TextView
+            android:id="@+id/add_question_tv_label_qns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_8dp"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="@style/Text.Medium"
+            android:textColor="@color/colorTextDark"
+            android:text="@string/label_answers"
+            android:visibility="gone"/>
+        <ListView
+            android:id="@+id/add_question_list_answers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/add_question_btn_add_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_margin="@dimen/margin_8dp"
+            android:padding="@dimen/padding_8dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btn_orange"
+            android:drawableStart="@drawable/ic_add_light_32dp"
+            android:text="@string/text_to_add_answer"
+            android:textAlignment="center"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextDark"
+                android:textAppearance="@style/Text.Medium"
+                android:text="@string/text_right_answer"/>
+            <TextView
+                android:id="@+id/add_question_tv_right_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:textColor="@color/colorAccent"
+                android:textAppearance="@style/Text.Big"
+                android:text="@string/text_not_selected"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
