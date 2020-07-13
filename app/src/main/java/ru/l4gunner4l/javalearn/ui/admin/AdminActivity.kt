@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_admin.*
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.ui.admin.addlesson.AddLessonActivity
+import ru.l4gunner4l.javalearn.ui.admin.del_lesson.DelLessonActivity
 
 class AdminActivity : AppCompatActivity() {
 
@@ -22,6 +23,9 @@ class AdminActivity : AppCompatActivity() {
     private fun initUI() {
         admin_btn_add_lesson.setOnClickListener {
             startActivity(AddLessonActivity.createNewInstance(this, lessonNum))
+        }
+        admin_btn_delete_lesson.setOnClickListener {
+            startActivity(DelLessonActivity.createNewInstance(this))
         }
         admin_toolbar_iv_back.setOnClickListener { finish() }
     }

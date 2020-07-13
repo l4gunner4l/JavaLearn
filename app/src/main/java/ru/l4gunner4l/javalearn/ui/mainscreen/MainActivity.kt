@@ -24,41 +24,50 @@ import ru.l4gunner4l.javalearn.utils.Utils
  * Экран с нижней навигацией (профилем, уроками, магазином).
  * Является хостом для фрагментов
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HostActivity {
+
+    companion object {
+        const val EXTRA_IS_ADMIN = "EXTRA_IS_ADMIN"
+
+        fun createNewInstance(context: Context, isAdmin: Boolean): Intent {
+            val intent = Intent(context, MainActivity::class.java)
+            // all previous activities will be finished
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra(EXTRA_IS_ADMIN, isAdmin)
+            return intent
+        }
+    }
 
     private lateinit var lessonsFragment: LessonsFragment
     private lateinit var shopFragment: ShopFragment
     private lateinit var profileFragment: ProfileFragment
     private lateinit var activeFragment: Fragment
-
     private lateinit var nav: BottomNavigationView
+    private var isAdmin: Boolean = false
 
-    var isAdmin: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        isAdmin = intent.getBooleanExtra(EXTRA_IS_ADMIN, false)
 
         if (Utils.isInternetConnection(this))
             initView()
         else Utils.showToast(this, R.string.text_no_internet, Toast.LENGTH_LONG)
 
-        isAdmin = intent.getBooleanExtra(EXTRA_IS_ADMIN, false)
     }
 
 
     private fun initView() {
-        profileFragment = ProfileFragment()
-        profileFragment.ctx = this
-        lessonsFragment = LessonsFragment()
-        lessonsFragment.ctx = this
-        shopFragment = ShopFragment()
+        profileFragment = ProfileFragment.createInstance()
+        lessonsFragment = LessonsFragment.createInstance(isAdmin)
+        shopFragment = ShopFragment.createInstance()
         activeFragment = lessonsFragment
 
         val fm = supportFragmentManager
         nav = findViewById(R.id.main_nav_view_main)
         nav.setOnNavigationItemSelectedListener {
-            when (it.itemId){
+            when (it.itemId) {
                 R.id.nav_lessons -> {
                     changeFragment(fm, lessonsFragment)
                     return@setOnNavigationItemSelectedListener true
@@ -95,9 +104,7 @@ class MainActivity : AppCompatActivity() {
         //changeFragment(supportFragmentManager, lessonsFragment)
     }
 
-
-    fun endLoading() {
-        lessonsFragment.isAdmin = isAdmin
+    override fun endLoading() {
         lessonsFragment.updateUI()
         findViewById<ProgressBar>(R.id.main_pb_progress).visibility = GONE
         findViewById<ImageView>(R.id.main_iv_splash).visibility = GONE
@@ -111,18 +118,13 @@ class MainActivity : AppCompatActivity() {
         activeFragment = fragment
     }
 
-    companion object {
-        const val EXTRA_IS_ADMIN = "EXTRA_IS_ADMIN"
-
-        fun createNewInstance(context: Context, isAdmin: Boolean): Intent {
-            val intent = Intent(context, MainActivity::class.java)
-
-            // all previous activities will be finished
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-
-            intent.putExtra(EXTRA_IS_ADMIN, isAdmin)
-            return intent
-        }
+    override fun finishActivity() {
+        finish()
     }
 
+}
+
+interface HostActivity {
+    fun endLoading()
+    fun finishActivity()
 }

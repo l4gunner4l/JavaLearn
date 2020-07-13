@@ -32,14 +32,15 @@ import ru.l4gunner4l.javalearn.utils.Utils
 
 class ProfileFragment : Fragment() {
 
-    lateinit var ctx: Context
-
     private lateinit var nameTIL: TextInputLayout
     private lateinit var emailTIL: TextInputLayout
     private lateinit var avatarIV: ImageView
 
-    lateinit var user: User
+    private lateinit var user: User
 
+    companion object {
+        fun createInstance() = ProfileFragment()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +56,7 @@ class ProfileFragment : Fragment() {
         val toolbar = view.findViewById<Toolbar>(R.id.profile_toolbar)
         toolbar.findViewById<ImageView>(R.id.profile_toolbar_iv_settings)
                 .setOnClickListener{
-                    startActivity(SettingsActivity.createNewInstance(ctx, user))
+                    startActivity(SettingsActivity.createNewInstance(activity as Context, user))
                 }
         nameTIL.isEnabled = false
         emailTIL.isEnabled = false
@@ -64,17 +65,17 @@ class ProfileFragment : Fragment() {
     }
 
     private fun signOut(){
-        val sureAlert = AlertDialog.Builder(ctx)
+        val sureAlert = AlertDialog.Builder(activity as Context)
         sureAlert.setTitle(getString(R.string.label_exit))
                 .setMessage(getString(R.string.text_question_sure_sign_out))
                 .setCancelable(true)
                 .setPositiveButton(getString(R.string.label_yes_sure)){ dialog, which ->
                     FirebaseAuth.getInstance().signOut()
-                    startActivity(Intent(ctx, SignActivity::class.java))
-                    (ctx as MainActivity).finish()
+                    startActivity(Intent(activity as Context, SignActivity::class.java))
+                    (activity as MainActivity).finish()
                 }
                 .setNegativeButton(getString(R.string.label_cancel)){ dialog, which ->
-                    Utils.showToast(ctx,
+                    Utils.showToast(activity as Context,
                             getString(R.string.text_you_stayed), Toast.LENGTH_SHORT)
                 }
         sureAlert.create().show()

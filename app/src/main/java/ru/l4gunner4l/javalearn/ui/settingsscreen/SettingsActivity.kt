@@ -53,8 +53,9 @@ class SettingsActivity : AppCompatActivity() {
         nameTIL.editText!!.setText(nameOld)
         emailTIL.editText!!.setText(emailOld)
         avatarIV = settings_iv_avatar
-        settings_btn_change_photo.setOnClickListener{ chooseImage() }
+        settings_btn_change_photo.setOnClickListener { chooseImage() }
     }
+
     private fun initToolbar() {
         setSupportActionBar(findViewById(R.id.settings_toolbar))
         supportActionBar!!.title = null
@@ -76,6 +77,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun chooseImage() {
+
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
@@ -85,9 +87,9 @@ class SettingsActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, imageReturnedIntent: Intent?) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent)
         if (requestCode == PICK_IMAGE_REQUEST &&
-            resultCode == Activity.RESULT_OK &&
-            imageReturnedIntent != null
-        ){
+                resultCode == Activity.RESULT_OK &&
+                imageReturnedIntent != null
+        ) {
             val selectedImageUri: Uri? = imageReturnedIntent.data
             avatarNew = MediaStore.Images.Media.getBitmap(contentResolver, selectedImageUri)
             avatarIV.setImageBitmap(avatarNew)
@@ -106,6 +108,7 @@ class SettingsActivity : AppCompatActivity() {
             true
         }
     }
+
     private fun isValidName(nameInput: String): Boolean {
         return when {
             nameInput.isEmpty() -> {
@@ -134,7 +137,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
 
-    inner class SaveData : AsyncTask<Void, Void, Void>(){
+    inner class SaveData : AsyncTask<Void, Void, Void>() {
         override fun doInBackground(vararg params: Void?): Void? {
             saveProfileData()
             return null
@@ -142,8 +145,8 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun saveProfileData() {
-        if (avatarNew != null){
-            val fileName = System.currentTimeMillis().toString()+".png"
+        if (avatarNew != null) {
+            val fileName = System.currentTimeMillis().toString() + ".png"
             val stream = ByteArrayOutputStream()
             avatarNew!!.compress(Bitmap.CompressFormat.PNG, 100, stream)
             FirebaseStorage.getInstance()
@@ -158,7 +161,7 @@ class SettingsActivity : AppCompatActivity() {
                                 .setValue(fileName)
                         Utils.showToast(this@SettingsActivity, getString(R.string.text_avatar_updated), Toast.LENGTH_LONG)
                     }
-                    .addOnFailureListener{
+                    .addOnFailureListener {
                         Log.i("M_MAIN", "saveProfileData: $it")
                         Utils.showToast(this@SettingsActivity, getString(R.string.text_avatar_updated), Toast.LENGTH_LONG)
                     }
@@ -169,15 +172,16 @@ class SettingsActivity : AppCompatActivity() {
                     override fun onCancelled(p0: DatabaseError) {
                         Log.i("M_MAIN", "saveProfileData:$p0")
                     }
+
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         val nameNew = nameTIL.editText!!.text.toString().trim()
-                        if (isValidName(nameNew) && nameOld != nameNew){
+                        if (isValidName(nameNew) && nameOld != nameNew) {
                             dataSnapshot.child("name").ref.setValue(nameNew)
                             nameOld = nameNew
                             Utils.showToast(this@SettingsActivity, getString(R.string.text_name_updated), Toast.LENGTH_LONG)
                         }
                         val emailNew = emailTIL.editText!!.text.toString().trim()
-                        if (isValidEmail(emailNew) && emailOld != emailNew){
+                        if (isValidEmail(emailNew) && emailOld != emailNew) {
                             dataSnapshot.child("email").ref.setValue(emailNew)
                             emailOld = emailNew
                             Utils.showToast(this@SettingsActivity, getString(R.string.text_email_updated), Toast.LENGTH_LONG)

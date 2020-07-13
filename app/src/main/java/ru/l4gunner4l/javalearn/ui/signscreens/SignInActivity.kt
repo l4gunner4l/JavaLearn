@@ -42,13 +42,16 @@ class SignInActivity : AppCompatActivity() {
         outState.putString(EXTRA_EMAIL, emailTIL.editText!!.text.toString())
         outState.putString(EXTRA_PASSWORD, passwordTIL.editText!!.text.toString())
     }
+
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         emailTIL.editText!!.setText(savedInstanceState?.getString(EXTRA_EMAIL))
         passwordTIL.editText!!.setText(savedInstanceState?.getString(EXTRA_PASSWORD))
     }
 
-    fun endSignInActivity(view: View?) { finish() }
+    fun endSignInActivity(view: View?) {
+        finish()
+    }
 
 
     private fun initViews() {
@@ -69,7 +72,7 @@ class SignInActivity : AppCompatActivity() {
         changePassDialog.setTitle("Введите почту для сброса пароля")
                 .setView(view)
                 .setCancelable(true)
-                .setPositiveButton("Сбросить"){ dialog, which ->
+                .setPositiveButton("Сбросить") { dialog, which ->
                     val email = view.findViewById<TextInputLayout>(R.id.dialog_forgot_email_til).editText!!.text
                     if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                         auth.sendPasswordResetEmail(email.toString()).addOnCompleteListener { task ->
@@ -79,7 +82,7 @@ class SignInActivity : AppCompatActivity() {
                         }
                     } else Utils.showToast(this@SignInActivity, R.string.text_error_valid, Toast.LENGTH_SHORT)
                 }
-                .setNegativeButton("Отмена"){ dialog, which -> }
+                .setNegativeButton("Отмена") { dialog, which -> }
         changePassDialog.create().show()
     }
 
@@ -93,13 +96,17 @@ class SignInActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         progressBar.visibility = View.GONE
                         if (task.isSuccessful) {
-                            if (FirebaseAuth.getInstance().currentUser!!.isEmailVerified){
+                            if (FirebaseAuth.getInstance().currentUser!!.isEmailVerified) {
                                 var isAdmin = false
                                 if (email == Utils.ADMIN_EMAIL) isAdmin = true
                                 startActivity(MainActivity.createNewInstance(this, isAdmin))
                                 finish()
-                            } else { Utils.showToast(this@SignInActivity, getString(R.string.text_go_verificate), Toast.LENGTH_SHORT) }
-                        } else { Utils.showToast(this@SignInActivity, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT) }
+                            } else {
+                                Utils.showToast(this@SignInActivity, getString(R.string.text_go_verificate), Toast.LENGTH_SHORT)
+                            }
+                        } else {
+                            Utils.showToast(this@SignInActivity, R.string.text_error_wrong_auth, Toast.LENGTH_SHORT)
+                        }
                     }
         } else {
             progressBar.visibility = View.GONE
@@ -108,7 +115,8 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    private fun isValidInput(email:String, password:String) = isValidEmail(email) && isValidPassword(password)
+    private fun isValidInput(email: String, password: String) = isValidEmail(email) && isValidPassword(password)
+
     private fun isValidEmail(emailInput: String): Boolean {
         return if (emailInput.isEmpty()) {
             emailTIL.error = "Заполните поле"
@@ -121,6 +129,7 @@ class SignInActivity : AppCompatActivity() {
             true
         }
     }
+
     private fun isValidPassword(passwordInput: String): Boolean {
         return if (passwordInput.isEmpty()) {
             passwordTIL.error = "Заполните поле"

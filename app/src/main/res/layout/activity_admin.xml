@@ -44,14 +44,6 @@
             android:layout_marginBottom="@dimen/margin_16dp"/>
 
         <Button
-            android:id="@+id/admin_btn_change_lesson"
-            style="@style/BtnAccent.BtnLesson"
-            android:text="@string/label_change_lesson"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:layout_marginBottom="@dimen/margin_16dp"/>
-
-        <Button
             android:id="@+id/admin_btn_delete_lesson"
             style="@style/BtnAccent.BtnLesson"
             android:text="@string/label_delete_lesson"

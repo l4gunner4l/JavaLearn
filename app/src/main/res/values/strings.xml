@@ -34,6 +34,7 @@
 
     <string name="text_question_sure_sign_out">Вы уверены, что хотите выйти?</string>
     <string name="text_question_sure_exit_from_test">Результат не сохранится! Вы уверены, что хотите выйти из теста?</string>
+    <string name="text_question_sure_deleting_lesson">Вы уверены, что хотите удалить урок "%1$s"?</string>
     <string name="text_you_stayed">Мы рады, что вы остались!</string>
     <string name="text_lets_continue">Продолжаем!</string>
     <string name="text_saving_results">Ваш результат сохранён!</string>
@@ -48,6 +49,7 @@
     <string name="label_yes_sure">Да, уверен</string>
     <string name="label_exit">Выход</string>
     <string name="label_exit_from_test">Выход из теста</string>
+    <string name="label_deleting_lesson">Удаление урока</string>
     <string name="label_go_test">Пройти тест</string>
     <string name="label_check">Проверить</string>
     <string name="label_forgot_pass"><u>Забыли пароль?</u></string>

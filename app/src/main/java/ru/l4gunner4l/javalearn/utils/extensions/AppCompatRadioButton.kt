@@ -1,11 +1,13 @@
 package ru.l4gunner4l.javalearn.utils.extensions
 
 import android.R
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.view.setPadding
 
+@SuppressLint("RestrictedApi")
 fun AppCompatRadioButton.setMyStyle() {
     val colorStateList = ColorStateList(
             arrayOf(intArrayOf(-R.attr.state_checked), intArrayOf(R.attr.state_checked)),

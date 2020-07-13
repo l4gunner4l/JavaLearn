@@ -28,14 +28,12 @@ import com.google.firebase.database.ValueEventListener
 import ru.l4gunner4l.javalearn.R
 import ru.l4gunner4l.javalearn.ui.admin.AdminActivity
 import ru.l4gunner4l.javalearn.ui.lessonscreen.LessonActivity
-import ru.l4gunner4l.javalearn.ui.mainscreen.MainActivity
+import ru.l4gunner4l.javalearn.ui.mainscreen.HostActivity
 import ru.l4gunner4l.javalearn.ui.mainscreen.adapters.LessonsAdapter
 import ru.l4gunner4l.javalearn.ui.mainscreen.adapters.LessonsAdapter.ItemClickListener
 import ru.l4gunner4l.javalearn.utils.Utils
 
 class LessonsFragment : Fragment(){
-
-    lateinit var ctx: Context
 
     private lateinit var lvlTV: TextView
     private lateinit var addLesson: ImageView
@@ -45,46 +43,63 @@ class LessonsFragment : Fragment(){
 
     private var lessonsNames: MutableList<String> = mutableListOf()
 
-    var isAdmin = false
+    private var isAdmin = false
+
+    companion object {
+        private const val EXTRA_IS_ADMIN = "isAdmin"
+
+        fun createInstance(isAdmin: Boolean) = LessonsFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean(EXTRA_IS_ADMIN, isAdmin)
+            }
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         LoadData().execute()
+        isAdmin = arguments?.getBoolean(EXTRA_IS_ADMIN) ?: false
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_lessons, container, false)
+        return inflater.inflate(R.layout.fragment_lessons, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         rvLessons = view.findViewById(R.id.rv_lessons)
-        rvLessons.layoutManager = GridLayoutManager(ctx, 2)
+        rvLessons.layoutManager = GridLayoutManager(activity, 2)
         lvlTV = view.findViewById(R.id.lessons_toolbar_tv_title)
         addLesson = view.findViewById(R.id.lessons_toolbar_add_lesson)
 
-        rvAdapter = LessonsAdapter(ctx)
+        rvAdapter = LessonsAdapter(activity as Context)
         rvAdapter.setOnItemClickListener(object : ItemClickListener {
             override fun onItemClick(view: View?, position: Int) {
                 openLessonClick(position)
             }
         })
         rvLessons.adapter = rvAdapter
-        return view
     }
 
     fun updateUI() {
         rvAdapter.notifyDataSetChanged()
         lvlTV.text = makeLevelText(rvAdapter.getUsersLvl().toString())
+
+        Log.i("M_MAIN", "starsList=${rvAdapter.starsList}")
+        Log.i("M_MAIN", "lessonsCount=${rvAdapter.lessonsCount}")
         if (isAdmin) {
             addLesson.visibility = View.VISIBLE
             addLesson.findViewById<ImageView>(R.id.lessons_toolbar_add_lesson)
                     .setOnClickListener {
-                        startActivity(AdminActivity.createNewInstance(ctx, lessonsNames.size))
+                        startActivity(AdminActivity.createNewInstance(activity as Context, lessonsNames.size))
                     }
         }
     }
 
     private fun openLessonClick(position: Int) {
         if (position>rvAdapter.getUsersLvl()){
-            Utils.showToast(ctx, R.string.text_error_not_available_lesson, Toast.LENGTH_LONG)
+            Utils.showToast(activity as Context, R.string.text_error_not_available_lesson, Toast.LENGTH_LONG)
             return
         }
         val view = this.layoutInflater.inflate(R.layout.dialog_start_lesson, null)
@@ -130,9 +145,18 @@ class LessonsFragment : Fragment(){
 
     inner class LoadData : AsyncTask<Void, Void, Void>(){
         override fun doInBackground(vararg params: Void?): Void? {
+            Log.i("M_MAIN", "doInBackground")
             loadStars()
             loadLessonsNames()
             return null
+        }
+
+        override fun onPostExecute(result: Void?) {
+            super.onPostExecute(result)
+            updateUI()
+            (activity as HostActivity).endLoading()
+            Log.i("M_MAIN", "onPostExecute")
+
         }
     }
     private fun loadStars() {
@@ -144,8 +168,8 @@ class LessonsFragment : Fragment(){
                         for (ds in dataSnapshot.children){
                             rvAdapter.starsList[ds.key!!.toInt()] = ds.getValue(Int::class.java)!!
                         }
+                        updateUI()
 
-                        (ctx as MainActivity).endLoading()
                     }
                     override fun onCancelled(error: DatabaseError) {
                         Log.i("M_MAIN", "Failed to read value.", error.toException())
@@ -160,8 +184,9 @@ class LessonsFragment : Fragment(){
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         for (ds in dataSnapshot.children){
                             lessonsNames.add(ds.child("name").getValue(String::class.java)!!)
-                            rvAdapter.lessonsCount = rvAdapter.lessonsCount+1
+                            rvAdapter.lessonsCount++
                         }
+                        updateUI()
 
                     }
                     override fun onCancelled(error: DatabaseError) {

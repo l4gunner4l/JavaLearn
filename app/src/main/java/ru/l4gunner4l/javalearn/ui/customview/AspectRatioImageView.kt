@@ -1,10 +1,12 @@
 package ru.l4gunner4l.javalearn.ui.customview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.ImageView
 import ru.l4gunner4l.javalearn.R
 
+@SuppressLint("AppCompatCustomView")
 class AspectRatioImageView @JvmOverloads constructor(
     context: Context,
     attributes: AttributeSet? = null,
